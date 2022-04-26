@@ -1,0 +1,12 @@
+{
+    "defaultLocale": "ko-KR",
+    "locales": [
+        "ko-KR"
+    ],
+    "localePath": "i18n",
+    "generatedPath": "lib/generated",
+    "ltr": [
+        "ko-KR"
+    ],
+    "rtl": []
+}
