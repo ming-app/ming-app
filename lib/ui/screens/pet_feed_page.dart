@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ming/blocs/bloc/pet_feed_bloc.dart';
 
 import '../../entities/pet.dart';
+import '../../generated/l10n.dart';
 
 class PetFeedItem extends StatelessWidget {
   final Pet pet;
@@ -33,7 +34,7 @@ class PetFeedListView extends StatelessWidget {
     return BlocBuilder<PetFeedBloc, PetFeedState>(
       builder: (context, state) {
         if (state is PetFeedInitial) {
-          return const Text("Initial state, try click refresh button.");
+          return Text(S.of(context).initialStateTryClickRefreshButton);
         } else if (state is PetFeedFetched) {
           return ListView.builder(
             itemCount: state.pets.length,

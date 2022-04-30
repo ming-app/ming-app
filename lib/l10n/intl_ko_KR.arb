@@ -1,4 +1,5 @@
 {
   "appTitle": "Ming",
-  "test": "Flutter Demo Home Page"
+  "test": "Flutter Demo Home Page",
+  "initialStateTryClickRefreshButton": "Initial state, try click refresh button."
 }

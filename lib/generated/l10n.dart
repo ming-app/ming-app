@@ -69,6 +69,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Initial state, try click refresh button.`
+  String get initialStateTryClickRefreshButton {
+    return Intl.message(
+      'Initial state, try click refresh button.',
+      name: 'initialStateTryClickRefreshButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
