@@ -1,5 +1,7 @@
 # ming
 
+![Basic build](https://github.com/ming-app/ming/actions/workflows/basic_build_test.yaml/badge.svg)
+
 Application for abandoned pets.
 
 ## Getting Started
