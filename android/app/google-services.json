@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "712319796217",
+    "firebase_url": "https://ming-6dd75-default-rtdb.firebaseio.com",
+    "project_id": "ming-6dd75",
+    "storage_bucket": "ming-6dd75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712319796217:android:3f292fede346fdbd0fb328",
+        "android_client_info": {
+          "package_name": "com.example.ming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712319796217-ak8g2moheuds8sh2geu24qt3sdlmcqsg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0nDOvyZT9jOTkXdMlsdSODipzY4qnG6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712319796217-ak8g2moheuds8sh2geu24qt3sdlmcqsg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
