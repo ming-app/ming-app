@@ -1,13 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ming/di/di.dart';
+import 'package:ming/firebase_options.dart';
 
 import 'generated/l10n.dart';
 import 'routes.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // note: this can be used when testing auth emulation.
+  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+
   // todo: add firebase setting for crashlytics and auth., analytics, etc.
   runApp(const Ming());
 }
@@ -38,7 +50,7 @@ class Ming extends StatelessWidget {
           theme: ThemeData(),
 
           // for named routing pages
-          initialRoute: '/',
+          initialRoute: kDebugMode ? '/debug_root' : '/feed',
           routes: routes,
         ),
       ),

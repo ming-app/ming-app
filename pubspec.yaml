@@ -19,6 +19,8 @@ dependencies:
   flutter_bloc: ^8.0.1
   json_serializable: ^6.1.6
   extended_image: ^6.0.2+1
+  firebase_auth: ^3.3.17
+  firebase_core: ^1.16.0
 
 dev_dependencies:
   flutter_test:
