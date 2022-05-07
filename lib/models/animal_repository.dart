@@ -1,7 +1,5 @@
 import 'package:ming/entities/animal.dart';
 
-import '../entities/pet.dart';
-
 /**
  * 보호동물 관련 repository
  */
@@ -12,4 +10,6 @@ abstract class AnimalRepository {
    * 데이터만 보여주고 그 외 데이터는 개별 animal을 가지고 오는 method로 처리할 필요 없는지 확인
    */
   Future<List<Animal>> getAnimals(String shelterId);
+
+  void registerAnimal(Animal animal);
 }
