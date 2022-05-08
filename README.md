@@ -1,7 +1,5 @@
 # ming
 
-![Basic build](https://github.com/ming-app/ming/actions/workflows/basic_build_test.yaml/badge.svg)
-
 Application for abandoned pets.
 
 ## Getting Started
@@ -37,3 +35,6 @@ Application for abandoned pets.
 
 
 ### [bloc pattern](https://bloclibrary.dev/#/coreconcepts)
+
+### [Auth plan](docs/auth/auth_plan.md)
+

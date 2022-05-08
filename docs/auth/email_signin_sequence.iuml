@@ -1,0 +1,65 @@
+@startuml
+
+actor user
+participant "Sign In View" as signin
+participant "Register View" as register
+participant "Auth server" as server
+
+user -> signin : Click Register Button
+signin -> register : navigate to register view
+loop Until user email is unique
+user -> register : Enter email address
+register -> register : check it is \nvalid email address
+activate register
+register -> server : Check the email is \nalready registered or not.
+activate server
+return
+deactivate server
+deactivate register
+end loop
+
+loop password is valid
+
+user -> register : insert password
+register -> register : is password safe?
+user -> register : insert cofirm password
+register -> register : password sets are same?
+
+end loop
+
+user -> register : confirm registration
+activate register
+register -> server : create account
+activate server
+
+alt Success on creating account
+
+server -> server : send verification mail
+server --> register
+
+register --> user : tell user to confirm email
+
+
+else failure
+server --> register
+deactivate server
+register --> user : report account registeration failure
+deactivate register
+end
+
+opt if register success
+
+user -> user : confirm email
+
+user -> signin : signin using email
+activate signin
+
+signin -> server : signin using email
+activate server
+return
+deactivate server
+signin --> user
+
+deactivate signin
+end
+@enduml
