@@ -49,7 +49,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC0nDOvyZT9jOTkXdMlsdSODipzY4qnG6E',
-    appId: '1:712319796217:android:3f292fede346fdbd0fb328',
+    appId: '1:712319796217:android:77e990c2cd4cc4020fb328',
     messagingSenderId: '712319796217',
     projectId: 'ming-6dd75',
     databaseURL: 'https://ming-6dd75-default-rtdb.firebaseio.com',
@@ -58,12 +58,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCrX0Vt4q9Nqq-5GsJeX1RRHxoQHXMY8LE',
-    appId: '1:712319796217:ios:d45e4daba69997890fb328',
+    appId: '1:712319796217:ios:6ec7e1e27dfc24e00fb328',
     messagingSenderId: '712319796217',
     projectId: 'ming-6dd75',
     databaseURL: 'https://ming-6dd75-default-rtdb.firebaseio.com',
     storageBucket: 'ming-6dd75.appspot.com',
-    iosClientId: '712319796217-1rdjhf7pe4tleiodefvscpm4l99525l8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ming',
+    iosClientId: '712319796217-viqi1s7iaugee9frg2afe64onr5nijeo.apps.googleusercontent.com',
+    iosBundleId: 'com.ming.ming',
   );
 }
