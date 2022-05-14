@@ -30,6 +30,49 @@
             {
               "client_id": "712319796217-ak8g2moheuds8sh2geu24qt3sdlmcqsg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "712319796217-1rdjhf7pe4tleiodefvscpm4l99525l8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ming"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712319796217:android:77e990c2cd4cc4020fb328",
+        "android_client_info": {
+          "package_name": "com.ming.ming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712319796217-ak8g2moheuds8sh2geu24qt3sdlmcqsg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0nDOvyZT9jOTkXdMlsdSODipzY4qnG6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712319796217-ak8g2moheuds8sh2geu24qt3sdlmcqsg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "712319796217-1rdjhf7pe4tleiodefvscpm4l99525l8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ming"
+              }
             }
           ]
         }
