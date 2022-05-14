@@ -33,8 +33,20 @@ Application for abandoned pets.
 - u can easily extract string resource to .arb file using vscode action.
   - https://twitter.com/localizely/status/1255175275454881793
 
-
 ### [bloc pattern](https://bloclibrary.dev/#/coreconcepts)
 
 ### [Auth plan](docs/auth/auth_plan.md)
 
+## Testing
+
+### Integration_test
+
+#### Firebase Emulation
+
+- Firebase auth emulation test sequence.
+  - firebase emulator를 시작한다.
+  `firebase emulators:start --import="./integration_test/resources/emulator_dump"`
+  - test를 진행한다.
+- 새로운 emulation setting을 만들고 싶을 때
+  - firebase emulator를 export option으로 시작한다.
+  `firebase emulators:start --export-on-exit="./integration_test/resources/emulator_dump"`
