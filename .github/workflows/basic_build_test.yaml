@@ -38,8 +38,15 @@ jobs:
           flutter-version: '3.0.0'
           cache: true
           architecture: x64
+      - name: Launch ios simulator
+        uses: futureware-tech/simulator-action@v1
+        with:
+          model: 'iPhone 8'
+          os: 'iOS'
+          os_version: '15.2'
       - run: flutter pub get
       - run: flutter test
+      - run: flutter test integration_test
       - run: flutter build ios --release --no-codesign
 
   web_build:
