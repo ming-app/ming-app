@@ -1,0 +1,13 @@
+name: signin_form
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  email_validator: ^2.0.1
+  formz: ^0.4.1
+
+dev_dependencies:
+  very_good_analysis: ^3.0.0

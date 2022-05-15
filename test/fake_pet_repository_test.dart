@@ -1,11 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ming/adapters/fake_pet_repository.dart';
-import 'package:ming/models/pet_repository.dart';
+import 'package:ming/feed/feed.dart';
 
 void main() {
   group('Fake Pet Repository Test', () {
     test('Fetch pet list test', () async {
-      PetRepository repository = FakePetRepository();
+      PetRepository repository = petRepository;
 
       var pets = await repository.fetchPetList();
       expect(pets.length, 2);
