@@ -1,0 +1,78 @@
+@startuml
+
+left to right direction
+
+actor :User: << user >> as user
+actor :Shelter Manager: << user >> as shelter_user
+actor :Normal user: << user >> as customer
+actor :Admin: << admin >> as admin
+
+shelter_user -left-|> user
+customer -left-|> user
+
+package UserProfile {
+    usecase "유저 프로필 작성" as user_profile
+    usecase "자원봉사 자격 인증" as create_volunteer_resume
+    usecase "입양/임보 자격 인증" as create_adoption_resume
+    usecase "자기 소개 입력" as self_introduction
+    usecase "SNS 계정 연결" as link_sns
+    usecase "활동(봉사, 임보 등) 통계 확인" as read_history
+    usecase "유저 프로필 열람" as read_user_profile
+
+    note "인증 방법 고민 필요. 지역인증, 본인인증, \n질문에 대한 객관식/주관식 답변 등이 필요할 수도" as note2
+
+    create_volunteer_resume .right. note2
+    create_adoption_resume .left. note2
+
+    customer -- user_profile
+    user_profile .> self_introduction : <include>
+    user_profile <.. create_volunteer_resume : <extends>
+    user_profile <.. create_adoption_resume : <extends>
+    user_profile <.. link_sns : <extends>
+    customer -- read_history
+    user -- read_user_profile
+}
+
+package ShelterProfile {
+    usecase "쉼터 계정 생성" as signup_shelter
+    usecase "쉼터 계정 삭제" as delete_shelter
+    usecase "쉼터 계정 권한 부여" as auth_shelter
+    usecase "쉼터 계정 권한 삭제" as deauth_shelter
+    usecase "쉼터 프로필 작성" as shelter_profile
+    usecase "쉼터 SNS 계정 연결" as link_shelter_sns
+    usecase "동물 프로필 작성" as animal_profile
+    usecase "동물 사진 등록" as register_animal_photo
+    usecase "임보 기준 등록" as create_protection_rule
+    usecase "입양 기준 등록" as create_adoption_rule
+    usecase "쉼터 계정 열람" as read_shelter_profile
+    usecase "동물 프로필 열람" as read_animal_profile
+
+    usecase "입양 기록 열람" as read_adoption_history
+    usecase "임보 기록 열람" as read_protection_history
+
+    note "쉼터 입장에서 이 서비스가 ERP같은 \n서비스 역할을 하기를 기대해도 \n그걸 다 support 할 순 없지 않을까." as note4
+    note4 . read_adoption_history
+    note4 . read_protection_history
+
+    admin -up- signup_shelter
+    admin -up- delete_shelter
+
+    admin -up- auth_shelter
+    shelter_user -up- auth_shelter
+    admin -up- deauth_shelter
+    shelter_user -up- deauth_shelter
+
+    shelter_user -up- shelter_profile
+    shelter_profile <.left. link_shelter_sns : <extends>
+    shelter_user -up- animal_profile
+    user -- register_animal_photo
+    shelter_user -up- create_protection_rule
+    shelter_user -up- create_adoption_rule
+    user -- read_shelter_profile
+    user -- read_animal_profile
+
+    shelter_user -up- read_protection_history
+    shelter_user -up- read_adoption_history
+}
+
+@enduml
