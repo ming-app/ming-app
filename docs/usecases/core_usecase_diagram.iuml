@@ -1,0 +1,83 @@
+@startuml
+left to right direction
+
+actor :User: << user >> as user
+actor :Shelter Manager: << user >> as shelter_user
+actor :Normal user: << user >> as customer
+actor :Ming: << System >> as ming
+
+shelter_user -left-|> user
+customer -left-|> user
+
+package Volunteer {
+    usecase "봉사 이벤트 개설" as create_volunteer_session
+    usecase "봉사 이벤트 취소" as cancel_volunteer_session
+    usecase "봉사 정보 확인" as read_volunteer_session
+    usecase "봉사 신청" as apply_volunteer
+    usecase "봉사 신청 최소" as cancel_apply_volunteer
+    usecase "봉사 신청 현황 확인" as read_apply_volunteer
+    usecase "쉼터 봉사 일정 확인" as read_shelter_schedule
+    usecase "봉사자에게 동물 사진 \n업로드 권한 부여" as temp_auth_animal_photo
+    usecase "봉사 일정 완료 상태로 변경" as change_to_complete
+    usecase "봉사자에게 봉사 후기 \n댓글 권한 부여" as temp_auth_reply_volunteer_session
+    usecase "봉사 후기 댓글 달기" as reply_volunteer_session
+    usecase "봉사 활동 인증 뱃지 부여" as certified_volunteer
+
+    shelter_user -- create_volunteer_session
+    shelter_user -- cancel_volunteer_session
+    user -- read_volunteer_session
+    customer -- apply_volunteer
+    customer -- cancel_apply_volunteer
+    user -- read_apply_volunteer
+    user -- read_shelter_schedule
+    ming -- temp_auth_animal_photo
+    shelter_user -- change_to_complete
+    ming  -- temp_auth_reply_volunteer_session
+    user -- reply_volunteer_session
+    ming -- certified_volunteer
+
+}
+
+package Protection {
+    usecase "임보 신청" as apply_protection
+    usecase "임보 신청 취소" as cancel_apply_protection
+    usecase "임보 신청 현황 확인" as read_apply_protection
+    usecase "임보 신청 답변" as reply_application_of_protection
+    usecase "임보 신청 결과 확인" as read_result_protection
+    usecase "임보 채팅방 연결" as connect_chat_room_for_protection
+    usecase "임보 과정 시작" as start_protection_process
+    usecase "임보 과정 종료" as complete_protection_process
+    usecase "임보 인증 뱃지 부여" as certified_protector
+
+    customer -up- apply_protection
+    customer -up- cancel_apply_protection
+    user -up- read_apply_protection
+    shelter_user -up- reply_application_of_protection
+    customer -up- read_result_protection
+    user -up- connect_chat_room_for_protection
+    shelter_user -up- start_protection_process
+    shelter_user -up- complete_protection_process
+    ming -up- certified_protector
+}
+
+package Adoption {
+    usecase "입양 신청" as apply_adoption
+    usecase "입양 신청 취소" as cancel_apply_adoption
+    usecase "입양 신청 현황 확인" as read_apply_adoption
+    usecase "입양 신청 답변" as reply_application_of_adoption
+    usecase "입양 신청 결과 확인" as read_result_adoption
+    usecase "입양 채팅방 연결" as connect_chat_room_for_adoption
+    usecase "입양 인계 종료" as complete_adoption_process
+    usecase "입양 인증 뱃지 부여" as certified_adoption
+
+    customer -left- apply_adoption
+    customer -left- cancel_apply_adoption
+    user -left- read_apply_adoption
+    shelter_user -left- reply_application_of_adoption
+    customer -left- read_result_adoption
+    user -left- connect_chat_room_for_adoption
+    shelter_user -left- complete_adoption_process
+    ming -left- certified_adoption
+}
+
+@enduml

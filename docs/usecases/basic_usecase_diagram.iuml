@@ -1,0 +1,48 @@
+@startuml Basic Functionality
+left to right direction
+
+actor :User: << user >> as user
+
+
+package Auth {
+    usecase "로그인" as login
+    usecase "일반 사용자 계정 생성" as signup
+    usecase "이메일 로그인" as email_login
+    usecase "Anonymous 로그인" as anonymous_login
+    usecase "Password 변경" as modify_pwd
+    usecase "Password reset" as reset_pwd
+    usecase "계정 삭제" as delete_account
+    usecase "verification email 전송" as verification_email
+
+    login <.. email_login: <extends>
+    login <.. anonymous_login: <extends>
+
+    note "Anonymous login을 지원하면,\n 사용해보기가 가능해짐." as note1
+    note1 .right. anonymous_login
+    note "사용자 삭제 시에도 입양/임보를 하였을 경우 사용자 정보가 1년간 남아있을 수 있어야 함" as note3
+    delete_account .. note3
+
+    user -- login
+    user -- signup
+    user -- modify_pwd
+    user -- reset_pwd
+    user -- delete_account
+
+    signup <.. verification_email : <extends>
+}
+
+package Setting {
+    usecase "푸쉬 알람 설정" as setup_push
+    usecase "앱 정보 보기" as app_info
+    usecase "Ming 인스타그램" as go_insta
+    usecase "Help desk" as help_desk
+    usecase "튜토리얼 보기" as tutorial
+
+    user -up- setup_push
+    user -up- app_info
+    user -up- go_insta
+    user -up- help_desk
+    user -up- tutorial
+}
+
+@enduml
