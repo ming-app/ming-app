@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "initialStateTryClickRefreshButton":
             MessageLookupByLibrary.simpleMessage(
                 "Initial state, try click refresh button."),
+        "ming": MessageLookupByLibrary.simpleMessage("Ming"),
         "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page")
       };
 }
