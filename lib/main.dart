@@ -36,7 +36,7 @@ class Ming extends StatelessWidget {
         // bloc di
         providers: blocProviders,
         child: MaterialApp(
-          title: "Ming",
+          title: "ming",
           // for string resource localization
           localizationsDelegates: const [
             S.delegate,
