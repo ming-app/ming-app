@@ -15,18 +15,27 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-  flutter_bloc: ^8.0.1
-  json_serializable: ^6.1.6
-  extended_image: ^6.0.2+1
-  firebase_core: ^1.17.0
+  # Internal Packages for ming
   authentication_repository:
     path: packages/authentication_repository
   signin_form:
     path: packages/signin_form
+  log:
+    path: packages/log
+
+  # For pretty & generalized logging
+  loggy: ^2.0.1+1
+
+  # Bloc pattern support
+  flutter_bloc: ^8.0.1
+  cupertino_icons: ^1.0.2
+  json_serializable: ^6.1.6
+  extended_image: ^6.0.2+1
+  firebase_core: ^1.17.0
   formz: ^0.4.0
   google_fonts: ^2.3.2
   font_awesome_flutter: ^9.1.0
+  firebase_crashlytics: ^2.8.0
 
 dev_dependencies:
   flutter_test:
