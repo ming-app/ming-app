@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:log/log.dart';
 import 'package:meta/meta.dart';
 
 /// {@template sign_up_with_email_and_password_failure}
@@ -161,6 +162,8 @@ class AuthenticationRepository {
         _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
 
+  final TAG = 'Auth';
+
   final CacheClient _cache;
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
@@ -208,6 +211,8 @@ class AuthenticationRepository {
     } catch (_) {
       throw const SignUpWithEmailAndPasswordFailure();
     }
+
+    Log.i('$TAG: Successfully signed up.');
   }
 
   /// Starts the Sign In with Google Flow.
@@ -256,6 +261,8 @@ class AuthenticationRepository {
     } catch (_) {
       throw const LogInWithEmailAndPasswordFailure();
     }
+
+    Log.i('$TAG: Successfully Logged in.');
   }
 
   /// Signs out the current user which will emit
@@ -271,6 +278,8 @@ class AuthenticationRepository {
     } catch (_) {
       throw LogOutFailure();
     }
+
+    Log.i('$TAG: Successfully Logged out.');
   }
 }
 
