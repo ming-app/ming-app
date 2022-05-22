@@ -23,10 +23,22 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("Ming"),
+        "errorMessage": MessageLookupByLibrary.simpleMessage("에러가 발생했어요."),
+        "homePageTitle": MessageLookupByLibrary.simpleMessage("홈페이지"),
         "initialStateTryClickRefreshButton":
             MessageLookupByLibrary.simpleMessage(
                 "Initial state, try click refresh button."),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
-        "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page")
+        "onTheConstruction":
+            MessageLookupByLibrary.simpleMessage("이 페이지는 아직 제작 중입니다."),
+        "onTheConstructionTitle":
+            MessageLookupByLibrary.simpleMessage("준비 중입니다."),
+        "petPageTitle": MessageLookupByLibrary.simpleMessage("동물 페이지"),
+        "settingPageTitle": MessageLookupByLibrary.simpleMessage("세팅 페이지"),
+        "shelterPageTitle": MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
+        "shelterSinglePageTitle":
+            MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
+        "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page"),
+        "userProfileTitle": MessageLookupByLibrary.simpleMessage("프로필 페이지")
       };
 }

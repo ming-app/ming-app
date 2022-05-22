@@ -2,5 +2,14 @@
   "appTitle": "Ming",
   "test": "Flutter Demo Home Page",
   "initialStateTryClickRefreshButton": "Initial state, try click refresh button.",
-  "ming": "Ming"
+  "ming": "Ming",
+  "onTheConstruction": "이 페이지는 아직 제작 중입니다.",
+  "errorMessage": "에러가 발생했어요.",
+  "onTheConstructionTitle": "준비 중입니다.",
+  "petPageTitle": "동물 페이지",
+  "shelterPageTitle": "쉼터 페이지",
+  "userProfileTitle": "프로필 페이지",
+  "homePageTitle": "홈페이지",
+  "settingPageTitle": "세팅 페이지",
+  "shelterSinglePageTitle": "쉼터 페이지"
 }
