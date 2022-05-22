@@ -89,6 +89,96 @@ class S {
       args: [],
     );
   }
+
+  /// `이 페이지는 아직 제작 중입니다.`
+  String get onTheConstruction {
+    return Intl.message(
+      '이 페이지는 아직 제작 중입니다.',
+      name: 'onTheConstruction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `에러가 발생했어요.`
+  String get errorMessage {
+    return Intl.message(
+      '에러가 발생했어요.',
+      name: 'errorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `준비 중입니다.`
+  String get onTheConstructionTitle {
+    return Intl.message(
+      '준비 중입니다.',
+      name: 'onTheConstructionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `동물 페이지`
+  String get petPageTitle {
+    return Intl.message(
+      '동물 페이지',
+      name: 'petPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `쉼터 페이지`
+  String get shelterPageTitle {
+    return Intl.message(
+      '쉼터 페이지',
+      name: 'shelterPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `프로필 페이지`
+  String get userProfileTitle {
+    return Intl.message(
+      '프로필 페이지',
+      name: 'userProfileTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `홈페이지`
+  String get homePageTitle {
+    return Intl.message(
+      '홈페이지',
+      name: 'homePageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `세팅 페이지`
+  String get settingPageTitle {
+    return Intl.message(
+      '세팅 페이지',
+      name: 'settingPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `쉼터 페이지`
+  String get shelterSinglePageTitle {
+    return Intl.message(
+      '쉼터 페이지',
+      name: 'shelterSinglePageTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
