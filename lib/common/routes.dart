@@ -36,7 +36,6 @@ final router = GoRouter(
     GoRoute(
       path: '/login',
       pageBuilder: (context, state) => const MaterialPage<void>(
-        key: _pageKey,
         child: LoginPage(),
       ),
     ),
@@ -45,7 +44,6 @@ final router = GoRouter(
     GoRoute(
       path: '/signup',
       pageBuilder: (context, state) => const MaterialPage<void>(
-        key: _pageKey,
         child: SignUpPage(),
       ),
     ),

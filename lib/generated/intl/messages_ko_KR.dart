@@ -28,6 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "initialStateTryClickRefreshButton":
             MessageLookupByLibrary.simpleMessage(
                 "Initial state, try click refresh button."),
+        "loginFailedMessage":
+            MessageLookupByLibrary.simpleMessage("로그인에 실패하였습니다."),
+        "loginSuccessMessage":
+            MessageLookupByLibrary.simpleMessage("로그인에 성공하였습니다."),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
         "onTheConstruction":
             MessageLookupByLibrary.simpleMessage("이 페이지는 아직 제작 중입니다."),

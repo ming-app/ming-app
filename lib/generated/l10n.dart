@@ -179,6 +179,26 @@ class S {
       args: [],
     );
   }
+
+  /// `로그인에 실패하였습니다.`
+  String get loginFailedMessage {
+    return Intl.message(
+      '로그인에 실패하였습니다.',
+      name: 'loginFailedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `로그인에 성공하였습니다.`
+  String get loginSuccessMessage {
+    return Intl.message(
+      '로그인에 성공하였습니다.',
+      name: 'loginSuccessMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
