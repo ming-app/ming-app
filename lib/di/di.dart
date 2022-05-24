@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ming/auth/bloc/auth_bloc.dart';
 
 import '../feed/feed.dart';
 import '../login/login.dart';
@@ -17,6 +18,10 @@ List<BlocProvider> blocProviders = [
   BlocProvider<LoginCubit>(
     create: (context) => LoginCubit(context.read<AuthenticationRepository>()),
   ),
+  BlocProvider<AuthBloc>(
+    create: (context) =>
+        AuthBloc(repository: context.read<AuthenticationRepository>()),
+  )
 ];
 
 List<RepositoryProvider> repositoryProviers = [

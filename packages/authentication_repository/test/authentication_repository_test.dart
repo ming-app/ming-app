@@ -76,7 +76,7 @@ void main() {
 
   const email = 'test@gmail.com';
   const password = 't0ps3cret42';
-  const user = User(
+  const user = AuthInfo(
     id: _mockFirebaseUserUid,
     email: _mockFirebaseUserEmail,
   );
@@ -296,7 +296,7 @@ void main() {
             .thenAnswer((_) => Stream.value(null));
         await expectLater(
           authenticationRepository.user,
-          emitsInOrder(const <User>[User.empty]),
+          emitsInOrder(const <AuthInfo>[AuthInfo.empty]),
         );
       });
 
@@ -309,7 +309,7 @@ void main() {
             .thenAnswer((_) => Stream.value(firebaseUser));
         await expectLater(
           authenticationRepository.user,
-          emitsInOrder(const <User>[user]),
+          emitsInOrder(const <AuthInfo>[user]),
         );
         verify(
           () => cache.write(
@@ -327,7 +327,7 @@ void main() {
         ).thenReturn(null);
         expect(
           authenticationRepository.currentUser,
-          equals(User.empty),
+          equals(AuthInfo.empty),
         );
       });
 
