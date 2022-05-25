@@ -291,6 +291,16 @@ class AuthenticationRepository {
 
     Log.i('Successfully Logged out.');
   }
+
+  /// Delete current user if user exists
+  Future<void> delete() async {
+    try {
+      await _firebaseAuth.currentUser!.delete();
+    } catch (e) {
+      Log.e('Failed to delete firebase user', e);
+      throw Exception('Deletion of uesr failed');
+    }
+  }
 }
 
 extension on firebase_auth.User {

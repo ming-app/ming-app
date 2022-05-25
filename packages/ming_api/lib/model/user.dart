@@ -14,6 +14,9 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  factory User.empty() => User("", "");
+  bool isEmpty() => uid == User.empty().uid && email == User.empty().email;
 }
 
 @JsonSerializable()

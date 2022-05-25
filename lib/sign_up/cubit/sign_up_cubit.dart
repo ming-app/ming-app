@@ -2,14 +2,19 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:ming_api/repository/ming_api_repository.dart';
 import 'package:signin_form/signin_form.dart';
 
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit(this._authenticationRepository) : super(const SignUpState());
+  SignUpCubit(
+    this._authenticationRepository,
+    this._apiRepository,
+  ) : super(const SignUpState());
 
   final AuthenticationRepository _authenticationRepository;
+  final MingApiRepository _apiRepository;
 
   void emailChanged(String value) {
     final email = Email.dirty(value);
@@ -69,7 +74,6 @@ class SignUpCubit extends Cubit<SignUpState> {
         email: state.email.value,
         password: state.password.value,
       );
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(
         state.copyWith(
@@ -78,6 +82,16 @@ class SignUpCubit extends Cubit<SignUpState> {
         ),
       );
     } catch (_) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+    }
+
+    try {
+      var token = await _authenticationRepository.idToken;
+      await _apiRepository.registerUser(token);
+      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+    } catch (e) {
+      // if register failed, delete user from firebase too.
+      await _authenticationRepository.delete();
       emit(state.copyWith(status: FormzStatus.submissionFailure));
     }
   }
