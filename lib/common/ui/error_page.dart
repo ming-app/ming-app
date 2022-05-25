@@ -4,7 +4,8 @@ import '../../generated/l10n.dart';
 
 // todo: beautify this.
 class ErrorPage extends StatelessWidget {
-  const ErrorPage({Key? key}) : super(key: key);
+  const ErrorPage({Key? key, this.message}) : super(key: key);
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,12 @@ class ErrorPage extends StatelessWidget {
         title: const Text("Error Page"),
       ),
       body: Center(
-        child: Text(S.of(context).errorMessage),
+        child: Column(
+          children: [
+            Text(S.of(context).errorMessage),
+            message != null ? Text(message!) : Container(),
+          ],
+        ),
       ),
     );
   }

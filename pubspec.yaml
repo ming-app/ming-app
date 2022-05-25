@@ -22,6 +22,8 @@ dependencies:
     path: packages/signin_form
   log:
     path: packages/log
+  ming_api:
+    path: packages/ming_api
 
   # For pretty & generalized logging
   loggy: ^2.0.1+1

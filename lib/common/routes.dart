@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ming/common/ui/on_the_construction.dart';
+import 'package:ming/user_profile/view/user_profile_page.dart';
 
 import '../generated/l10n.dart';
 import '../login/login.dart';
@@ -67,7 +68,7 @@ final router = GoRouter(
         child: RootLayout(
           key: _scaffoldKey,
           currentIndex: MingNavigator.profile.offset(),
-          child: OntheConstructionPage(title: S.of(context).userProfileTitle),
+          child: const UserProfilePage(),
         ),
       ),
     ),
