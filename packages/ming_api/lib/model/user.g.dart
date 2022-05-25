@@ -6,10 +6,26 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      json['uid'] as String,
+      json['email'] as String,
+      name: json['name'] as String?,
+      introduction: json['introduction'] as String?,
+      snsUrl: json['snsUrl'] as String?,
+    );
+
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+      'uid': instance.uid,
+      'email': instance.email,
+      'name': instance.name,
+      'introduction': instance.introduction,
+      'snsUrl': instance.snsUrl,
+    };
+
 UserRequest _$UserRequestFromJson(Map<String, dynamic> json) => UserRequest(
-      json['introduction'] as String,
-      json['name'] as String,
-      json['snsUrl'] as String,
+      introduction: json['introduction'] as String?,
+      name: json['name'] as String?,
+      snsUrl: json['snsUrl'] as String?,
     );
 
 Map<String, dynamic> _$UserRequestToJson(UserRequest instance) =>
@@ -20,11 +36,11 @@ Map<String, dynamic> _$UserRequestToJson(UserRequest instance) =>
     };
 
 UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
-      json['introduction'] as String,
-      json['name'] as String,
-      json['email'] as String,
-      json['snsUrl'] as String,
-      json['uid'] as String,
+      introduction: json['introduction'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String,
+      snsUrl: json['snsUrl'] as String?,
+      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>

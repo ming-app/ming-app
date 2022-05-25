@@ -25,5 +25,7 @@ dev_dependencies:
   json_serializable: any
   build_runner: any
   retrofit_generator: any
+  mockito: any
+  mock_web_server: 5.0.0-nullsafety.1
 
 flutter:

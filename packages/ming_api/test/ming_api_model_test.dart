@@ -82,20 +82,31 @@ void main() {
       expect(result.result, isA<UserResponse>());
       expect(result.resultCode, "OK");
     });
+
+    test("Test null result of ApiResponse<UserResponse>", () {
+      const json = '''
+      {
+        "resultCode": "OK",
+        "resultMessage": "OK"
+      }
+      ''';
+
+      final result = ApiResponse<UserResponse>.fromJson(jsonDecode(json));
+      expect(result.result, isA<UserResponse?>());
+      expect(result.resultCode, "OK");
+    });
   });
 
   group("Test Model for shelter Controller", () {
     test("Test ShelterRegisterRequest", () {
       const json = '''
       {
-        "name": "nameText",
-        "shelterAdminUid": "uidblabla"
+        "name": "nameText"
       }
       ''';
 
       final result = ShelterRegisterRequest.fromJson(jsonDecode(json));
       expect(result.name, "nameText");
-      expect(result.shelterAdminUid, "uidblabla");
     });
 
     test("Test ShelterResponse", () {
@@ -142,7 +153,21 @@ void main() {
       final result =
           ApiResponse<List<ShelterResponse>>.fromJson(jsonDecode(json));
       expect(result.result, isA<List<ShelterResponse>>());
-      expect(result.result.length, 2);
+      expect(result.result!.length, 2);
+      expect(result.resultCode, "OK");
+    });
+
+    test("Test null result with ApiResponse<List<ShelterResponse>>", () {
+      const json = '''
+      {
+        "resultCode": "OK",
+        "resultMessage": "OK"
+      }
+      ''';
+
+      final result =
+          ApiResponse<List<ShelterResponse>>.fromJson(jsonDecode(json));
+      expect(result.result, isA<List<ShelterResponse>?>());
       expect(result.resultCode, "OK");
     });
   });
