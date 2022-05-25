@@ -8,14 +8,14 @@ part of 'ming_api_client.dart';
 
 ApiResponse<T> _$ApiResponseFromJson<T>(Map<String, dynamic> json) =>
     ApiResponse<T>(
-      _Converter<T>().fromJson(json['result'] as Object),
-      json['resultCode'] as String,
-      json['resultMessage'] as String,
+      result: _Converter<T?>().fromJson(json['result']),
+      resultCode: json['resultCode'] as String,
+      resultMessage: json['resultMessage'] as String?,
     );
 
 Map<String, dynamic> _$ApiResponseToJson<T>(ApiResponse<T> instance) =>
     <String, dynamic>{
-      'result': _Converter<T>().toJson(instance.result),
+      'result': _Converter<T?>().toJson(instance.result),
       'resultCode': instance.resultCode,
       'resultMessage': instance.resultMessage,
     };
@@ -28,7 +28,7 @@ Map<String, dynamic> _$ApiResponseToJson<T>(ApiResponse<T> instance) =>
 
 class _MingApiClient implements MingApiClient {
   _MingApiClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://ming-server.herokuapp.com/api/v1/';
+    baseUrl ??= 'https://ming-server.herokuapp.com/api/';
   }
 
   final Dio _dio;
@@ -36,7 +36,7 @@ class _MingApiClient implements MingApiClient {
   String? baseUrl;
 
   @override
-  Future<void> updaetUser(token, request) async {
+  Future<void> updateUser(token, request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -45,7 +45,7 @@ class _MingApiClient implements MingApiClient {
     _data.addAll(request.toJson());
     await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'PUT', headers: _headers, extra: _extra)
-            .compose(_dio.options, 'users',
+            .compose(_dio.options, 'v1/users',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
@@ -61,7 +61,7 @@ class _MingApiClient implements MingApiClient {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse<UserResponse>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, 'users/me',
+                .compose(_dio.options, 'v1/users/me',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse<UserResponse>.fromJson(_result.data!);
@@ -77,14 +77,15 @@ class _MingApiClient implements MingApiClient {
     final _data = <String, dynamic>{};
     await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, 'users/register',
+            .compose(_dio.options, 'v1/users/register',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 
   @override
-  Future<ApiResponse<List<ShelterResponse>>> getShelters(token) async {
+  Future<ApiResponse<List<ShelterResponse>>> getAuthorizedShelters(
+      token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -93,11 +94,75 @@ class _MingApiClient implements MingApiClient {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse<List<ShelterResponse>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, 'shelters',
+                .compose(_dio.options, 'v1/shelters',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse<List<ShelterResponse>>.fromJson(_result.data!);
     return value;
+  }
+
+  @override
+  Future<void> updateShelterInfo(token, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'PUT', headers: _headers, extra: _extra)
+            .compose(_dio.options, 'v1/shelters',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
+  Future<ApiResponse<List<AnimalResponse>>> getAnimalsInShelter(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<List<AnimalResponse>>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, 'v1/shelters/${id}/animals',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ApiResponse<List<AnimalResponse>>.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> authenticateUserToShelter(token, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, 'v1/shelters/register-user',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
+  Future<void> registerAnimal(token, request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, 'v1/animals/register',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

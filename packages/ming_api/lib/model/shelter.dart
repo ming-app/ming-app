@@ -5,11 +5,26 @@ import 'package:json_annotation/json_annotation.dart';
 part 'shelter.g.dart';
 
 @JsonSerializable()
+class Shelter {
+  final int id;
+  final String name;
+  final String? introduction;
+  final String? phoneNumber;
+  final String? snsUrl;
+
+  Shelter(this.id, this.name,
+      {this.introduction, this.phoneNumber, this.snsUrl});
+
+  factory Shelter.fromJson(Map<String, dynamic> json) =>
+      _$ShelterFromJson(json);
+  Map<String, dynamic> toJson() => _$ShelterToJson(this);
+}
+
+@JsonSerializable()
 class ShelterRegisterRequest {
   final String name;
-  final String shelterAdminUid;
 
-  ShelterRegisterRequest(this.name, this.shelterAdminUid);
+  ShelterRegisterRequest(this.name);
 
   factory ShelterRegisterRequest.fromJson(Map<String, dynamic> json) =>
       _$ShelterRegisterRequestFromJson(json);
@@ -17,19 +32,58 @@ class ShelterRegisterRequest {
 }
 
 @JsonSerializable()
+class ShelterUpdateRequest {
+  final int shelterId;
+  final String? introduction;
+  final String? phoneNumber;
+  final String? snsUrl;
+
+  ShelterUpdateRequest(
+    this.shelterId, {
+    this.introduction,
+    this.phoneNumber,
+    this.snsUrl,
+  });
+
+  factory ShelterUpdateRequest.fromJson(Map<String, dynamic> json) =>
+      _$ShelterUpdateRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$ShelterUpdateRequestToJson(this);
+
+  factory ShelterUpdateRequest.fromShelter(Shelter shelter) =>
+      ShelterUpdateRequest(
+        shelter.id,
+        introduction: shelter.introduction,
+        phoneNumber: shelter.phoneNumber,
+        snsUrl: shelter.snsUrl,
+      );
+}
+
+@JsonSerializable()
 class ShelterResponse {
   final int id;
-  final String introduction;
   final String name;
-  final String phoneNumber;
-  final String snsUrl;
+  final String? introduction;
+  final String? phoneNumber;
+  final String? snsUrl;
 
   ShelterResponse(
-      this.id, this.introduction, this.name, this.phoneNumber, this.snsUrl);
+      {required this.id,
+      this.introduction,
+      required this.name,
+      this.phoneNumber,
+      this.snsUrl});
 
   factory ShelterResponse.fromJson(Map<String, dynamic> json) =>
       _$ShelterResponseFromJson(json);
   Map<String, dynamic> toJson() => _$ShelterResponseToJson(this);
+
+  Shelter toShelter() => Shelter(
+        id,
+        name,
+        introduction: introduction,
+        phoneNumber: phoneNumber,
+        snsUrl: snsUrl,
+      );
 }
 
 class ShelterResponseListTypeConverter
@@ -48,6 +102,13 @@ class ShelterResponseListTypeConverter
   }
 }
 
-// todo: implement this after api changed into email-based
 @JsonSerializable()
-class RegisterUserToShelterRequest {}
+class RegisterUserToShelterRequest {
+  final int shelterId;
+  final String userEmail;
+
+  RegisterUserToShelterRequest(this.shelterId, this.userEmail);
+  factory RegisterUserToShelterRequest.fromJson(Map<String, dynamic> json) =>
+      _$RegisterUserToShelterRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$RegisterUserToShelterRequestToJson(this);
+}

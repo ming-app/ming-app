@@ -7,16 +7,16 @@ part of 'timestamp.dart';
 // **************************************************************************
 
 TimeStamp _$TimeStampFromJson(Map<String, dynamic> json) => TimeStamp(
-      json['year'] as int,
-      json['month'] as int,
-      json['day'] as int,
-      json['date'] as int,
-      json['hours'] as int,
-      json['minutes'] as int,
-      json['seconds'] as int,
-      json['nanos'] as int,
-      json['time'] as int,
-      json['timezoneOffset'] as int,
+      year: json['year'] as int?,
+      month: json['month'] as int?,
+      day: json['day'] as int?,
+      date: json['date'] as int?,
+      hours: json['hours'] as int?,
+      minutes: json['minutes'] as int?,
+      seconds: json['seconds'] as int?,
+      nanos: json['nanos'] as int?,
+      time: json['time'] as int?,
+      timezoneOffset: json['timezoneOffset'] as int?,
     );
 
 Map<String, dynamic> _$TimeStampToJson(TimeStamp instance) => <String, dynamic>{
