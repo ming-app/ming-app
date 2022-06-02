@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+**/build
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -51,3 +52,6 @@ app.*.map.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Coverage
+coverage_report/

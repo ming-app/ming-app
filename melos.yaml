@@ -1,0 +1,30 @@
+name: Ming
+
+packages:
+  - packages/**
+  - ./*
+
+scripts:
+  postbootstrap: melos run generate --no-select
+  test:selective_unit_test:
+    run: melos exec --dir-exists="test" --ignore="*example" --fail-fast -- flutter test --no-pub --coverage
+    description: Run Flutter tests for a specific package in this project.
+    select-package:
+      flutter: true
+      dir-exists: test
+  test:
+    run: |
+      melos run test:selective_unit_test --no-select && melos run gen_coverage
+    description: Run all Flutter tests in this project.
+  analyze:
+    run: melos exec -- dart analyze lib/
+    description: Run `dart analyze` in all packages.
+  generate:
+    run: melos exec --depends-on="build_runner" -- "flutter packages pub run build_runner build --delete-conflicting-outputs"
+  upgrade:
+    run: melos exec --file-exists="pubspec.yaml" -- flutter packages upgrade
+  gen_coverage:
+    run: |
+      rm -rf "\$MELOS_ROOT_PATH/coverage_report"
+      melos exec -c 1 -- "\$MELOS_ROOT_PATH/combine_coverage.sh"
+      genhtml coverage_report/lcov.info -o coverage_report/html
