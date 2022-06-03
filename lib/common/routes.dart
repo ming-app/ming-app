@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/common/ui/on_the_construction.dart';
-import 'package:ming/user_profile/view/user_profile_page.dart';
 
 import '../generated/l10n.dart';
 import '../login/login.dart';
+import '../shelters/shelters.dart';
+import '../shelters/view/shelters_page.dart';
 import '../sign_up/sign_up.dart';
+import '../user_profile/view/user_profile_page.dart';
+import 'ui/on_the_construction.dart';
 import 'ui/root_layout.dart';
 
 // to maintain the status of page and scaffold status.
@@ -88,14 +91,25 @@ final router = GoRouter(
     // Shelter page
     GoRoute(
       path: '/shelters',
-      pageBuilder: (context, state) => MaterialPage<void>(
-        key: _pageKey,
-        child: RootLayout(
-          key: _scaffoldKey,
-          currentIndex: MingNavigator.shelter.offset(),
-          child: OntheConstructionPage(title: S.of(context).shelterPageTitle),
-        ),
-      ),
+      pageBuilder: (context, state) {
+        final onlyAuthenticated =
+            (state.queryParams['auth'] ?? "false") == "true";
+
+        context.read<SheltersBloc>().add(
+              SheltersFetch(onlyAuthenticated: onlyAuthenticated),
+            );
+
+        return MaterialPage<void>(
+          key: _pageKey,
+          child: RootLayout(
+            key: _scaffoldKey,
+            currentIndex: MingNavigator.shelter.offset(),
+            child: SheltersPage(
+              onlyAuthenticated: onlyAuthenticated,
+            ),
+          ),
+        );
+      },
       routes: [
         GoRoute(
           path: ':shelterId',

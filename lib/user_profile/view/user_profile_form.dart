@@ -91,6 +91,9 @@ class UserProfileForm extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () => context.go("/login"),
                     child: const Text("Logout")),
+                ElevatedButton(
+                    onPressed: () => context.go("/shelters?auth=true"),
+                    child: const Text("My shelters")),
               ],
             ),
           ],

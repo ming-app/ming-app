@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/common/routes.dart';
+import '../routes.dart';
 
 import 'adaptive_navigation.dart';
 
