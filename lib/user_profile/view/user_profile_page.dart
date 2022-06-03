@@ -19,11 +19,14 @@ class UserProfilePage extends StatelessWidget {
       body: BlocBuilder<UserProfileCubit, UserProfileState>(
         builder: (context, state) {
           if (state is UserProfileError) {
+            context.loaderOverlay.hide();
             return ErrorPage(message: state.message);
           }
 
           if (state is UserProfileInitial) {
             context.read<UserProfileCubit>().getUserProfile();
+            context.loaderOverlay.show();
+            return UserProfileForm(state.user);
           }
 
           if (state is UserProfileUpdating) {

@@ -202,6 +202,8 @@ class AuthenticationRepository {
   /// get id token for the user, if token is expired, then refresh it.
   /// Throws a [UserIsNotLoggedInFailure] if user is not logged in before.
   Future<String> get idToken async {
+    // we need to wait fir userChanges to ensure login status at refresh.
+    await _firebaseAuth.userChanges().first;
     if (_firebaseAuth.currentUser == null) throw UserIsNotLoggedInFailure();
 
     return _firebaseAuth.currentUser!.getIdToken();
