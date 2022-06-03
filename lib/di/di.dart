@@ -1,4 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ming_api/repository/ming_api_repository.dart';
 
@@ -41,5 +42,8 @@ List<RepositoryProvider> repositoryProviers = [
   RepositoryProvider<AuthenticationRepository>(
       create: (context) => AuthenticationRepository()),
   RepositoryProvider<MingApiRepository>(
-      create: (context) => MingApiRepository(baseUrl: mingServerUrl)),
+      create: (context) => MingApiRepository(
+            baseUrl: mingServerUrl,
+            logging: kDebugMode ? true : false, // logging if debug mode
+          )),
 ];

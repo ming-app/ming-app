@@ -37,7 +37,7 @@ void main() {
       server.enqueue();
       await repository.updateUserInfo(
         token,
-        User("TEST", "test@test.com", name: "TEST_NAME"),
+        User(uid: "TEST", email: "test@test.com", name: "TEST_NAME"),
       );
 
       var request = server.takeRequest();
@@ -79,7 +79,7 @@ void main() {
       server.enqueue();
 
       await repository.updateShelterInfo(
-          token, Shelter(123, "TEST_SHELTER", introduction: "HI"));
+          token, Shelter(id: 123, name: "TEST_SHELTER", introduction: "HI"));
       var request = server.takeRequest();
 
       expect(request.body!.contains("HI"), true);
@@ -98,8 +98,8 @@ void main() {
         httpCode: 201,
       );
 
-      var list =
-          await repository.getAnimalsInShelter(Shelter(124, "TEST_NAME"));
+      var list = await repository
+          .getAnimalsInShelter(Shelter(id: 124, name: "TEST_NAME"));
 
       var request = server.takeRequest();
 
@@ -112,7 +112,7 @@ void main() {
       server.enqueue();
 
       await repository.authenticateUserToShelter(
-          token, "test@test.com", Shelter(124, "TEST_NAME"));
+          token, "test@test.com", Shelter(id: 124, name: "TEST_NAME"));
 
       var request = server.takeRequest();
 
@@ -122,8 +122,17 @@ void main() {
     test("Test registering animal", () async {
       server.enqueue();
 
-      await repository.registerAnimal(token,
-          Animal(123, 124, "TEST_NAME", "TEST_INTRO", "2022", "TEST_URL"));
+      await repository.registerAnimal(
+        token,
+        Animal(
+          id: 123,
+          shelterId: 124,
+          name: "TEST_NAME",
+          introduction: "TEST_INTRO",
+          birthYear: "2022",
+          imageUrl: "TEST_URL",
+        ),
+      );
 
       var request = server.takeRequest();
 

@@ -1,12 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:log/log.dart';
 import 'package:ming_api/repository/ming_api_client.dart';
 
 import '../model/model.dart';
 import 'ming_api_repository_impl.dart';
 
 abstract class MingApiRepository {
-  factory MingApiRepository({Dio? dio, String? baseUrl}) {
-    return MingApiRepositoryImpl(MingApiClient(dio ?? Dio(), baseUrl: baseUrl));
+  factory MingApiRepository({Dio? dio, String? baseUrl, bool logging = false}) {
+    var dioInternal = dio ?? Dio();
+    if (logging) {
+      dioInternal.interceptors.add(Log.dioInterceptor);
+    }
+
+    return MingApiRepositoryImpl(MingApiClient(dioInternal, baseUrl: baseUrl));
   }
 
   // User info.

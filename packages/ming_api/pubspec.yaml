@@ -17,6 +17,7 @@ dependencies:
   retrofit: ^3.0.1
   dio: ^4.0.6
   json_annotation: ^4.5.0
+  copy_with_extension: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -27,5 +28,6 @@ dev_dependencies:
   retrofit_generator: any
   mockito: any
   mock_web_server: 5.0.0-nullsafety.1
+  copy_with_extension_gen: ^4.0.2
 
 flutter:

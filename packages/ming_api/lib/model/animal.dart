@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'animal.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class Animal {
   final int id;
@@ -13,14 +15,14 @@ class Animal {
   final String birthYear;
   final String imageUrl;
 
-  Animal(
-    this.id,
-    this.shelterId,
-    this.name,
-    this.introduction,
-    this.birthYear,
-    this.imageUrl,
-  );
+  Animal({
+    required this.id,
+    required this.shelterId,
+    required this.name,
+    required this.introduction,
+    required this.birthYear,
+    required this.imageUrl,
+  });
 
   factory Animal.fromJson(Map<String, dynamic> json) => _$AnimalFromJson(json);
   Map<String, dynamic> toJson() => _$AnimalToJson(this);
@@ -85,8 +87,14 @@ class AnimalResponse {
       _$AnimalResponseFromJson(json);
   Map<String, dynamic> toJson() => _$AnimalResponseToJson(this);
 
-  Animal toAnimal() =>
-      Animal(id, shelterId, name, introduction, birthYear, imageUrl);
+  Animal toAnimal() => Animal(
+        id: id,
+        shelterId: shelterId,
+        name: name,
+        introduction: introduction,
+        birthYear: birthYear,
+        imageUrl: imageUrl,
+      );
 }
 
 class AnimalResponseListTypeConverter

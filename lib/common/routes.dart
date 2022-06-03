@@ -14,7 +14,7 @@ const _scaffoldKey = ValueKey('_scaffoldKey');
 
 enum MingNavigator {
   home('/home', "Home", Icon(Icons.home_filled)),
-  shelter('/shelter', "Shelter", Icon(Icons.pets)),
+  shelter('/shelters', "Shelter", Icon(Icons.pets)),
   profile('/profile', "Profile", Icon(Icons.person)),
   setting('/setting', "Setting", Icon(Icons.settings));
 
@@ -87,7 +87,7 @@ final router = GoRouter(
 
     // Shelter page
     GoRoute(
-      path: '/shelter',
+      path: '/shelters',
       pageBuilder: (context, state) => MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
