@@ -7,6 +7,7 @@ import '../auth/bloc/auth_bloc.dart';
 import '../common/constants.dart';
 import '../feed/feed.dart';
 import '../login/login.dart';
+import '../shelters/bloc/shelters_bloc.dart';
 import '../sign_up/sign_up.dart';
 import '../user_profile/cubit/user_profile_cubit.dart';
 
@@ -35,6 +36,12 @@ List<BlocProvider> blocProviders = [
       context.read<MingApiRepository>(),
     ),
   ),
+  BlocProvider<SheltersBloc>(
+    create: (context) => SheltersBloc(
+      context.read<AuthenticationRepository>(),
+      context.read<MingApiRepository>(),
+    ),
+  )
 ];
 
 List<RepositoryProvider> repositoryProviers = [

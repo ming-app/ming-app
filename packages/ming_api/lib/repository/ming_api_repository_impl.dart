@@ -74,4 +74,16 @@ class MingApiRepositoryImpl implements MingApiRepository {
       throw MingApiException("$response");
     }
   }
+
+  @override
+  Future<Shelter> getShelterById(String id, {String? token}) {
+    // TODO: implement getShelterById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Shelter>> getShelters({String? token}) {
+    // TODO: implement getShelters
+    throw UnimplementedError();
+  }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:ming/common/theme.dart';
 
+import 'common/constants.dart';
 import 'common/routes.dart';
+import 'common/theme.dart';
 import 'di/di.dart';
 import 'generated/l10n.dart';
 
@@ -24,11 +24,7 @@ class Ming extends StatelessWidget {
         // Global overlay to enable loading overlay whenever required.
         child: GlobalLoaderOverlay(
           useDefaultLoading: false,
-          overlayWidget: const Center(
-            child: SpinKitWave(
-              color: Colors.white,
-            ),
-          ),
+          overlayWidget: spinLoader,
           overlayOpacity: 0.6,
           child: MaterialApp.router(
             title: "Ming",

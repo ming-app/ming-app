@@ -1,10 +1,10 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/pet_feed_bloc.dart';
 
-import '../models/pet.dart';
 import '../../generated/l10n.dart';
+import '../bloc/pet_feed_bloc.dart';
+import '../models/pet.dart';
 
 class PetFeedItem extends StatelessWidget {
   final Pet pet;
