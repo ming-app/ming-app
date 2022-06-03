@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ming_api/ming_api.dart';
 
 import '../user_profile.dart';
@@ -61,23 +62,37 @@ class UserProfileForm extends StatelessWidget {
                 ),
               ],
             ),
+            const Divider(),
             state is UserProfileEditing
-                ? Row(
+                ? Column(
                     children: [
-                      ElevatedButton(
-                        onPressed: () => context
-                            .read<UserProfileCubit>()
-                            .updateUserProfile(state.user),
-                        child: const Text("Update"),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () => context
+                                .read<UserProfileCubit>()
+                                .updateUserProfile(state.user),
+                            child: const Text("Update"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () => context
+                                .read<UserProfileCubit>()
+                                .cancelEditing(),
+                            child: const Text("Cancel"),
+                          ),
+                        ],
                       ),
-                      ElevatedButton(
-                        onPressed: () =>
-                            context.read<UserProfileCubit>().cancelEditing(),
-                        child: const Text("Cancel"),
-                      ),
+                      const Divider(),
                     ],
                   )
                 : Container(),
+            Row(
+              children: [
+                ElevatedButton(
+                    onPressed: () => context.go("/login"),
+                    child: const Text("Logout")),
+              ],
+            ),
           ],
         ),
       );
