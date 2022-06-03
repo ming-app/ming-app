@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ming_api/model/model.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../common/ui/error_page.dart';
 import '../user_profile.dart';
+import 'user_profile_form.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class UserProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("유저 정보 (추후 이쁘게 만들거심)"),
+        title: const Text("유저 정보"),
         centerTitle: false,
       ),
       body: BlocBuilder<UserProfileCubit, UserProfileState>(
@@ -25,27 +26,14 @@ class UserProfilePage extends StatelessWidget {
             context.read<UserProfileCubit>().getUserProfile();
           }
 
+          if (state is UserProfileUpdating) {
+            context.loaderOverlay.show();
+          } else {
+            context.loaderOverlay.hide();
+          }
+
           return UserProfileForm(state.user);
         },
-      ),
-    );
-  }
-}
-
-class UserProfileForm extends StatelessWidget {
-  const UserProfileForm(this.user, {Key? key}) : super(key: key);
-
-  final User user;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text(user.uid),
-          Text(user.email),
-          Text("이름: ${user.name}"),
-        ],
       ),
     );
   }

@@ -5,6 +5,7 @@ library log;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
+import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 import 'package:loggy/loggy.dart';
 
 class Log {
@@ -32,6 +33,8 @@ class Log {
   static final e = logError;
   static final w = logWarning;
   static final i = logInfo;
+
+  static final dioInterceptor = LoggyDioInterceptor();
 }
 
 String _logFormat(LogRecord record) {

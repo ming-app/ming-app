@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'shelter.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class Shelter {
   final int id;
@@ -12,8 +14,13 @@ class Shelter {
   final String? phoneNumber;
   final String? snsUrl;
 
-  Shelter(this.id, this.name,
-      {this.introduction, this.phoneNumber, this.snsUrl});
+  Shelter({
+    required this.id,
+    required this.name,
+    this.introduction,
+    this.phoneNumber,
+    this.snsUrl,
+  });
 
   factory Shelter.fromJson(Map<String, dynamic> json) =>
       _$ShelterFromJson(json);
@@ -78,8 +85,8 @@ class ShelterResponse {
   Map<String, dynamic> toJson() => _$ShelterResponseToJson(this);
 
   Shelter toShelter() => Shelter(
-        id,
-        name,
+        id: id,
+        name: name,
         introduction: introduction,
         phoneNumber: phoneNumber,
         snsUrl: snsUrl,

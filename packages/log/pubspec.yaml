@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   loggy: ^2.0.1+1
   flutter_loggy: any
+  flutter_loggy_dio: any
 
 
 dev_dependencies:

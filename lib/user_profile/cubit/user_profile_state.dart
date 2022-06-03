@@ -4,6 +4,7 @@ part of 'user_profile_cubit.dart';
 abstract class UserProfileState {
   User get user;
   String? get message;
+  String? get key;
 }
 
 class UserProfileInitial extends UserProfileState {
@@ -12,6 +13,20 @@ class UserProfileInitial extends UserProfileState {
 
   @override
   final String message = "잠시만 기다려주세요.";
+
+  @override
+  final String? key = null;
+}
+
+class UserProfileUpdating extends UserProfileState {
+  @override
+  User get user => User.empty();
+
+  @override
+  final String message = "잠시만 기다려주세요.";
+
+  @override
+  final String? key = null;
 }
 
 class UserProfileFetched extends UserProfileState {
@@ -21,7 +36,25 @@ class UserProfileFetched extends UserProfileState {
   @override
   final String? message;
 
+  @override
+  final String? key = const Uuid().v4();
+
   UserProfileFetched(this.user, {this.message});
+}
+
+class UserProfileEditing extends UserProfileState {
+  @override
+  final User user;
+
+  @override
+  final String? message;
+
+  final User original;
+
+  @override
+  final String? key;
+
+  UserProfileEditing(this.key, this.original, this.user, {this.message});
 }
 
 class UserProfileError extends UserProfileState {
@@ -30,6 +63,9 @@ class UserProfileError extends UserProfileState {
 
   @override
   final String message;
+
+  @override
+  final String? key = null;
 
   UserProfileError(this.message);
 }

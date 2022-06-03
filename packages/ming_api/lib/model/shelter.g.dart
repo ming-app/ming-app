@@ -3,12 +3,109 @@
 part of 'shelter.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$ShelterCWProxy {
+  Shelter id(int id);
+
+  Shelter introduction(String? introduction);
+
+  Shelter name(String name);
+
+  Shelter phoneNumber(String? phoneNumber);
+
+  Shelter snsUrl(String? snsUrl);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Shelter(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Shelter(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Shelter call({
+    int? id,
+    String? introduction,
+    String? name,
+    String? phoneNumber,
+    String? snsUrl,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfShelter.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfShelter.copyWith.fieldName(...)`
+class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
+  final Shelter _value;
+
+  const _$ShelterCWProxyImpl(this._value);
+
+  @override
+  Shelter id(int id) => this(id: id);
+
+  @override
+  Shelter introduction(String? introduction) =>
+      this(introduction: introduction);
+
+  @override
+  Shelter name(String name) => this(name: name);
+
+  @override
+  Shelter phoneNumber(String? phoneNumber) => this(phoneNumber: phoneNumber);
+
+  @override
+  Shelter snsUrl(String? snsUrl) => this(snsUrl: snsUrl);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Shelter(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Shelter(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Shelter call({
+    Object? id = const $CopyWithPlaceholder(),
+    Object? introduction = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
+    Object? phoneNumber = const $CopyWithPlaceholder(),
+    Object? snsUrl = const $CopyWithPlaceholder(),
+  }) {
+    return Shelter(
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      introduction: introduction == const $CopyWithPlaceholder()
+          ? _value.introduction
+          // ignore: cast_nullable_to_non_nullable
+          : introduction as String?,
+      name: name == const $CopyWithPlaceholder() || name == null
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as String,
+      phoneNumber: phoneNumber == const $CopyWithPlaceholder()
+          ? _value.phoneNumber
+          // ignore: cast_nullable_to_non_nullable
+          : phoneNumber as String?,
+      snsUrl: snsUrl == const $CopyWithPlaceholder()
+          ? _value.snsUrl
+          // ignore: cast_nullable_to_non_nullable
+          : snsUrl as String?,
+    );
+  }
+}
+
+extension $ShelterCopyWith on Shelter {
+  /// Returns a callable class that can be used as follows: `instanceOfShelter.copyWith(...)` or like so:`instanceOfShelter.copyWith.fieldName(...)`.
+  _$ShelterCWProxy get copyWith => _$ShelterCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 Shelter _$ShelterFromJson(Map<String, dynamic> json) => Shelter(
-      json['id'] as int,
-      json['name'] as String,
+      id: json['id'] as int,
+      name: json['name'] as String,
       introduction: json['introduction'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       snsUrl: json['snsUrl'] as String?,
