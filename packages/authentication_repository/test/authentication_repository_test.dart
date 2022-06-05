@@ -145,7 +145,7 @@ void main() {
         ).thenThrow(Exception());
         expect(
           authenticationRepository.signUp(email: email, password: password),
-          throwsA(isA<SignUpWithEmailAndPasswordFailure>()),
+          throwsA(isA<AuthenticateException>()),
         );
       });
     });
@@ -183,7 +183,7 @@ void main() {
         authenticationRepository.isWeb = true;
         await expectLater(
           () => authenticationRepository.logInWithGoogle(),
-          throwsA(isA<LogInWithGoogleFailure>()),
+          throwsA(isA<AuthenticateException>()),
         );
         verifyNever(() => googleSignIn.signIn());
         verify(() => firebaseAuth.signInWithPopup(any())).called(1);
@@ -215,7 +215,7 @@ void main() {
             .thenThrow(Exception());
         expect(
           authenticationRepository.logInWithGoogle(),
-          throwsA(isA<LogInWithGoogleFailure>()),
+          throwsA(isA<AuthenticateException>()),
         );
       });
     });
@@ -267,7 +267,7 @@ void main() {
             email: email,
             password: password,
           ),
-          throwsA(isA<LogInWithEmailAndPasswordFailure>()),
+          throwsA(isA<AuthenticateException>()),
         );
       });
     });
@@ -283,7 +283,7 @@ void main() {
         when(() => firebaseAuth.signOut()).thenThrow(Exception());
         expect(
           authenticationRepository.logOut(),
-          throwsA(isA<LogOutFailure>()),
+          throwsA(isA<AuthenticateException>()),
         );
       });
     });
