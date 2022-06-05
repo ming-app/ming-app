@@ -18,7 +18,7 @@ dependencies:
     sdk: flutter
   google_sign_in: ^5.3.1
   meta: ^1.7.0
-  very_good_analysis: ^3.0.0
+
 
 dev_dependencies:
   flutter_test:

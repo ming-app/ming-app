@@ -43,7 +43,7 @@ void main() {
       var wait = repository.logInWithEmailAndPassword(
           email: email, password: presetPassword);
       expect(() async => await wait,
-          throwsA(predicate((e) => e is LogInWithEmailAndPasswordFailure)));
+          throwsA(predicate((e) => e is AuthenticateException)));
     });
 
     test("Test log in failing with email and pwd by password wrong.", () async {
@@ -51,7 +51,7 @@ void main() {
       var wait = repository.logInWithEmailAndPassword(
           email: presetEmail, password: password);
       expect(() async => await wait,
-          throwsA(predicate((e) => e is LogInWithEmailAndPasswordFailure)));
+          throwsA(predicate((e) => e is AuthenticateException)));
     });
 
     test("Test account creation", () async {
@@ -72,7 +72,7 @@ void main() {
       var wait = repository.signUp(email: email, password: presetPassword);
       expect(() async => await wait, throwsA(predicate((e) {
         print(e);
-        return e is SignUpWithEmailAndPasswordFailure;
+        return e is AuthenticateException;
       })));
     });
   });

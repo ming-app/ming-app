@@ -74,7 +74,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         email: state.email.value,
         password: state.password.value,
       );
-    } on SignUpWithEmailAndPasswordFailure catch (e) {
+    } on AuthenticateException catch (e) {
       emit(
         state.copyWith(
           errorMessage: e.message,
