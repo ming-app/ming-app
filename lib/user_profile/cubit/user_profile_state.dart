@@ -4,6 +4,8 @@ part of 'user_profile_cubit.dart';
 abstract class UserProfileState {
   User get user;
   String? get message;
+
+  // for refreshing text form field.
   String? get key;
 }
 
@@ -13,6 +15,17 @@ class UserProfileInitial extends UserProfileState {
 
   @override
   final String message = "잠시만 기다려주세요.";
+
+  @override
+  final String? key = null;
+}
+
+class UserProfileNotLoggedIn extends UserProfileState {
+  @override
+  User get user => User.empty();
+
+  @override
+  final String message = "Login이 필요합니다.";
 
   @override
   final String? key = null;
