@@ -13,5 +13,6 @@
   "settingPageTitle": "세팅 페이지",
   "shelterSinglePageTitle": "쉼터 페이지",
   "loginFailedMessage": "로그인에 실패하였습니다.",
-  "loginSuccessMessage": "로그인에 성공하였습니다."
+  "loginSuccessMessage": "로그인에 성공하였습니다.",
+  "regionString": "봉사지역"
 }

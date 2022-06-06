@@ -63,6 +63,7 @@ flutter:
   uses-material-design: true
   assets:
   - assets/
+  - assets/mocks/
 
 flutter_intl:
   enabled: true

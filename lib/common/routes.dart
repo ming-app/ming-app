@@ -5,6 +5,7 @@ import 'package:ming/common/ui/error_page.dart';
 import 'package:ming/user_profile/cubit/user_profile_cubit.dart';
 
 import '../generated/l10n.dart';
+import '../home/view/home_page.dart';
 import '../login/login.dart';
 import '../shelters/shelters.dart';
 import '../shelters/view/shelters_page.dart';
@@ -110,6 +111,7 @@ final router = GoRouter(
       ),
     ),
 
+    // Home Page
     GoRoute(
       path: MingRoutingAddress.home.address,
       pageBuilder: (context, state) => MaterialPage<void>(
@@ -117,7 +119,7 @@ final router = GoRouter(
         child: RootLayout(
           key: _scaffoldKey,
           currentIndex: MingNavigator.home.offset(),
-          child: OntheConstructionPage(title: S.of(context).homePageTitle),
+          child: const HomePage(),
         ),
       ),
     ),
