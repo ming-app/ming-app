@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ming/common/ui/error_page.dart';
 
 import '../generated/l10n.dart';
 import '../login/login.dart';
@@ -15,17 +16,54 @@ import 'ui/root_layout.dart';
 const _pageKey = ValueKey('_pageKey');
 const _scaffoldKey = ValueKey('_scaffoldKey');
 
-enum MingNavigator {
-  home('/home', "Home", Icon(Icons.home_filled)),
-  shelter('/shelters', "Shelter", Icon(Icons.pets)),
-  profile('/profile', "Profile", Icon(Icons.person)),
-  setting('/setting', "Setting", Icon(Icons.settings));
+/// Routing address summary
+/// In case of param address, it should be start with ':'
+enum MingRoutingAddress {
+  home('/home'),
 
-  final String route;
+  // Shelter
+  shelters('/shelters'),
+  shelterId(':shelterId'),
+  // Pets
+  pets('/pets'),
+  petId(':petId'),
+  // User
+  myProfile('/users/me'),
+
+  // etc.
+  login('/login'),
+  signup('/signup'),
+  ;
+
+  final String address;
+
+  const MingRoutingAddress(this.address);
+
+  String getParam() {
+    if (!address.startsWith(':')) {
+      // it is not param
+      throw ArgumentError("this is not param routing string: $address");
+    }
+
+    return address.replaceFirst(':', '');
+  }
+
+  @override
+  String toString() => address;
+}
+
+enum MingNavigator {
+  home(MingRoutingAddress.home, "Home", Icon(Icons.home_filled)),
+  shelters(MingRoutingAddress.shelters, "Shelters", Icon(Icons.night_shelter)),
+  pets(MingRoutingAddress.pets, "Pets", Icon(Icons.pets)),
+  myProfile(MingRoutingAddress.myProfile, "Profile", Icon(Icons.person)),
+  ;
+
+  final MingRoutingAddress routes;
   final String label;
   final Icon icon;
 
-  const MingNavigator(this.route, this.label, this.icon);
+  const MingNavigator(this.routes, this.label, this.icon);
 
   @override
   String toString() => label;
@@ -34,11 +72,15 @@ enum MingNavigator {
 }
 
 final router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: MingRoutingAddress.home.address,
+  errorPageBuilder: (BuildContext context, GoRouterState state) =>
+      MaterialPage<void>(
+    child: ErrorPage(message: state.error.toString()),
+  ),
   routes: [
     // Login Page
     GoRoute(
-      path: '/login',
+      path: MingRoutingAddress.login.address,
       pageBuilder: (context, state) => const MaterialPage<void>(
         child: LoginPage(),
       ),
@@ -46,14 +88,14 @@ final router = GoRouter(
 
     // Sign Up Page
     GoRoute(
-      path: '/signup',
+      path: MingRoutingAddress.signup.address,
       pageBuilder: (context, state) => const MaterialPage<void>(
         child: SignUpPage(),
       ),
     ),
 
     GoRoute(
-      path: '/home',
+      path: MingRoutingAddress.home.address,
       pageBuilder: (context, state) => MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
@@ -65,32 +107,20 @@ final router = GoRouter(
     ),
 
     GoRoute(
-      path: '/profile',
+      path: MingRoutingAddress.myProfile.address,
       pageBuilder: (context, state) => MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
           key: _scaffoldKey,
-          currentIndex: MingNavigator.profile.offset(),
+          currentIndex: MingNavigator.myProfile.offset(),
           child: const UserProfilePage(),
-        ),
-      ),
-    ),
-
-    GoRoute(
-      path: '/setting',
-      pageBuilder: (context, state) => MaterialPage<void>(
-        key: _pageKey,
-        child: RootLayout(
-          key: _scaffoldKey,
-          currentIndex: MingNavigator.setting.offset(),
-          child: OntheConstructionPage(title: S.of(context).settingPageTitle),
         ),
       ),
     ),
 
     // Shelter page
     GoRoute(
-      path: '/shelters',
+      path: MingRoutingAddress.shelters.address,
       pageBuilder: (context, state) {
         final onlyAuthenticated =
             (state.queryParams['auth'] ?? "false") == "true";
@@ -103,7 +133,7 @@ final router = GoRouter(
           key: _pageKey,
           child: RootLayout(
             key: _scaffoldKey,
-            currentIndex: MingNavigator.shelter.offset(),
+            currentIndex: MingNavigator.shelters.offset(),
             child: SheltersPage(
               onlyAuthenticated: onlyAuthenticated,
             ),
@@ -112,29 +142,16 @@ final router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: ':shelterId',
+          path: MingRoutingAddress.shelterId.address,
           pageBuilder: (context, state) => MaterialPage<void>(
             key: state.pageKey,
             child: RootLayout(
               key: _scaffoldKey,
-              currentIndex: MingNavigator.shelter.offset(),
+              currentIndex: MingNavigator.shelters.offset(),
               child: OntheConstructionPage(
                   title: S.of(context).shelterSinglePageTitle),
             ),
           ),
-          routes: [
-            GoRoute(
-              path: ':petId',
-              pageBuilder: (context, state) => MaterialPage<void>(
-                key: state.pageKey,
-                child: RootLayout(
-                  child:
-                      OntheConstructionPage(title: S.of(context).petPageTitle),
-                  currentIndex: MingNavigator.shelter.offset(),
-                ),
-              ),
-            ),
-          ],
         ),
       ],
     ),
