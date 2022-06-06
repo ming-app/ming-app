@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onTheConstructionTitle":
             MessageLookupByLibrary.simpleMessage("준비 중입니다."),
         "petPageTitle": MessageLookupByLibrary.simpleMessage("동물 페이지"),
+        "regionString": MessageLookupByLibrary.simpleMessage("봉사지역"),
         "settingPageTitle": MessageLookupByLibrary.simpleMessage("세팅 페이지"),
         "shelterPageTitle": MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
         "shelterSinglePageTitle":

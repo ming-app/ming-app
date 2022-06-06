@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ming/common/routes.dart';
+import 'package:ming/common/ui/bottom_sheet.dart';
 
 import 'menu_bar.dart';
 
@@ -25,6 +26,7 @@ class AdaptiveNavigation extends StatelessWidget {
         selectedIndex: selectedIndex,
       ),
       body: child,
+      bottomSheet: const MingBottomSheet(),
     );
   }
 }

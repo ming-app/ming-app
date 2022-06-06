@@ -199,6 +199,16 @@ class S {
       args: [],
     );
   }
+
+  /// `봉사지역`
+  String get regionString {
+    return Intl.message(
+      '봉사지역',
+      name: 'regionString',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
