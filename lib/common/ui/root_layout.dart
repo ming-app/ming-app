@@ -22,7 +22,7 @@ class RootLayout extends StatelessWidget {
     return LayoutBuilder(builder: (context, dimens) {
       void onSelected(int index) {
         final destination = MingNavigator.values[index];
-        GoRouter.of(context).go(destination.route);
+        GoRouter.of(context).go(destination.routes.address);
       }
 
       return AdaptiveNavigation(
