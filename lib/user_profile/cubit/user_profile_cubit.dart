@@ -18,8 +18,17 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   final AuthenticationRepository _auth;
   final MingApiRepository _api;
 
+  void initialize() {
+    emit(UserProfileInitial());
+  }
+
   Future<void> getUserProfile() async {
     emit(UserProfileUpdating());
+
+    if ((await _auth.user.first).isEmpty) {
+      emit(UserProfileNotLoggedIn());
+      return;
+    }
 
     try {
       final token = await _auth.idToken;

@@ -27,12 +27,7 @@ class RootLayout extends StatelessWidget {
 
       return AdaptiveNavigation(
         key: _navigationRailKey,
-        destinations: MingNavigator.values
-            .map((e) => NavigationDestination(
-                  icon: e.icon,
-                  label: e.label,
-                ))
-            .toList(),
+        destinations: MingNavigator.values,
         selectedIndex: currentIndex,
         onDestinationSelected: onSelected,
         child: Column(

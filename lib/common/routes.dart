@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ming/common/ui/error_page.dart';
+import 'package:ming/user_profile/cubit/user_profile_cubit.dart';
 
 import '../generated/l10n.dart';
 import '../login/login.dart';
@@ -75,14 +76,24 @@ final router = GoRouter(
   initialLocation: MingRoutingAddress.home.address,
   errorPageBuilder: (BuildContext context, GoRouterState state) =>
       MaterialPage<void>(
-    child: ErrorPage(message: state.error.toString()),
+    key: _pageKey,
+    child: RootLayout(
+      key: _scaffoldKey,
+      currentIndex: MingNavigator.home.offset(),
+      child: ErrorPage(message: state.error.toString()),
+    ),
   ),
   routes: [
     // Login Page
     GoRoute(
       path: MingRoutingAddress.login.address,
       pageBuilder: (context, state) => const MaterialPage<void>(
-        child: LoginPage(),
+        key: _pageKey,
+        child: RootLayout(
+          key: _scaffoldKey,
+          currentIndex: -1,
+          child: LoginPage(),
+        ),
       ),
     ),
 
@@ -90,7 +101,12 @@ final router = GoRouter(
     GoRoute(
       path: MingRoutingAddress.signup.address,
       pageBuilder: (context, state) => const MaterialPage<void>(
-        child: SignUpPage(),
+        key: _pageKey,
+        child: RootLayout(
+          key: _scaffoldKey,
+          currentIndex: -1,
+          child: SignUpPage(),
+        ),
       ),
     ),
 
@@ -106,16 +122,21 @@ final router = GoRouter(
       ),
     ),
 
+    // User page
     GoRoute(
       path: MingRoutingAddress.myProfile.address,
-      pageBuilder: (context, state) => MaterialPage<void>(
-        key: _pageKey,
-        child: RootLayout(
-          key: _scaffoldKey,
-          currentIndex: MingNavigator.myProfile.offset(),
-          child: const UserProfilePage(),
-        ),
-      ),
+      pageBuilder: (context, state) {
+        context.read<UserProfileCubit>().initialize();
+
+        return MaterialPage<void>(
+          key: _pageKey,
+          child: RootLayout(
+            key: _scaffoldKey,
+            currentIndex: MingNavigator.myProfile.offset(),
+            child: const UserProfilePage(),
+          ),
+        );
+      },
     ),
 
     // Shelter page

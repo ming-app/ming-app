@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:ming/login/view/not_logged_in_form.dart';
 
 import '../../common/ui/error_page.dart';
 import '../user_profile.dart';
@@ -27,6 +28,11 @@ class UserProfilePage extends StatelessWidget {
             context.read<UserProfileCubit>().getUserProfile();
             context.loaderOverlay.show();
             return UserProfileForm(state.user);
+          }
+
+          if (state is UserProfileNotLoggedIn) {
+            context.loaderOverlay.hide();
+            return const NotLoggedInForm();
           }
 
           if (state is UserProfileUpdating) {

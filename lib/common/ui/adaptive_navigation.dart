@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ming/common/routes.dart';
+
+import 'menu_bar.dart';
 
 class AdaptiveNavigation extends StatelessWidget {
   const AdaptiveNavigation({
@@ -9,47 +12,19 @@ class AdaptiveNavigation extends StatelessWidget {
     required this.child,
   });
 
-  final List<NavigationDestination> destinations;
+  final List<MingNavigator> destinations;
   final int selectedIndex;
   final void Function(int index) onDestinationSelected;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, dimens) {
-        // Tablet Layout
-        if (dimens.maxWidth >= 600) {
-          return Scaffold(
-            body: Row(
-              children: [
-                NavigationRail(
-                  extended: dimens.maxWidth >= 800,
-                  minExtendedWidth: 180,
-                  destinations: destinations
-                      .map((e) => NavigationRailDestination(
-                            icon: e.icon,
-                            label: Text(e.label),
-                          ))
-                      .toList(),
-                  selectedIndex: selectedIndex,
-                  onDestinationSelected: onDestinationSelected,
-                ),
-                Expanded(child: child),
-              ],
-            ),
-          );
-        }
-        // Mobile Layout
-        return Scaffold(
-          body: child,
-          bottomNavigationBar: NavigationBar(
-            destinations: destinations,
-            selectedIndex: selectedIndex,
-            onDestinationSelected: onDestinationSelected,
-          ),
-        );
-      },
+    return Scaffold(
+      appBar: MenuBar(
+        destinations: destinations,
+        selectedIndex: selectedIndex,
+      ),
+      body: child,
     );
   }
 }

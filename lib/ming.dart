@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import 'common/constants.dart';
 import 'common/routes.dart';
@@ -28,6 +29,16 @@ class Ming extends StatelessWidget {
           overlayOpacity: 0.6,
           child: MaterialApp.router(
             title: "Ming",
+            builder: (context, child) => ResponsiveWrapper.builder(
+              BouncingScrollWrapper.builder(context, child!),
+              minWidth: 450,
+              defaultScale: true,
+              breakpoints: [
+                const ResponsiveBreakpoint.resize(480, name: MOBILE),
+                const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ],
+            ),
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
