@@ -14,5 +14,6 @@
   "shelterSinglePageTitle": "쉼터 페이지",
   "loginFailedMessage": "로그인에 실패하였습니다.",
   "loginSuccessMessage": "로그인에 성공하였습니다.",
-  "regionString": "봉사지역"
+  "regionString": "봉사지역",
+  "loginButtonText": "로그인 및 회원가입"
 }

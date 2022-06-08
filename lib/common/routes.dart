@@ -55,10 +55,8 @@ enum MingRoutingAddress {
 }
 
 enum MingNavigator {
-  home(MingRoutingAddress.home, "Home", Icon(Icons.home_filled)),
-  shelters(MingRoutingAddress.shelters, "Shelters", Icon(Icons.night_shelter)),
-  pets(MingRoutingAddress.pets, "Pets", Icon(Icons.pets)),
-  myProfile(MingRoutingAddress.myProfile, "Profile", Icon(Icons.person)),
+  home(MingRoutingAddress.home, "홈", Icon(Icons.home_filled)),
+  shelters(MingRoutingAddress.shelters, "보호소", Icon(Icons.night_shelter)),
   ;
 
   final MingRoutingAddress routes;
@@ -130,12 +128,12 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         context.read<UserProfileCubit>().initialize();
 
-        return MaterialPage<void>(
+        return const MaterialPage<void>(
           key: _pageKey,
           child: RootLayout(
             key: _scaffoldKey,
-            currentIndex: MingNavigator.myProfile.offset(),
-            child: const UserProfilePage(),
+            currentIndex: -1,
+            child: UserProfilePage(),
           ),
         );
       },

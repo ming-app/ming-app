@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ming/auth/bloc/auth_bloc.dart';
 import 'package:ming/common/routes.dart';
 import 'package:ming/generated/l10n.dart';
 
@@ -32,30 +34,24 @@ class MenuBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
               ),
-              Flexible(
-                flex: 8,
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  child: Wrap(
-                    children: destinations
-                        .map(
-                          (e) => MenuItem(
-                            e,
-                            destinations.indexOf(e) == selectedIndex,
-                          ),
-                        )
-                        .toList(),
-                  ),
+              const Spacer(),
+              Container(
+                alignment: Alignment.centerRight,
+                child: Wrap(
+                  children: destinations
+                      .map(
+                        (e) => MenuItem(
+                          e,
+                          destinations.indexOf(e) == selectedIndex,
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
-              Flexible(
-                flex: 1,
-                child: IconButton(
-                  onPressed: () => context.go(MingRoutingAddress.login.address),
-                  icon: const Icon(Icons.person),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                ),
+              const Spacer(),
+              const Padding(
+                padding: EdgeInsets.only(right: 15),
+                child: UserMenuItem(),
               ),
             ],
           ),
@@ -91,6 +87,29 @@ class MenuItem extends StatelessWidget {
         horizontal: 16,
         vertical: 16,
       )),
+    );
+  }
+}
+
+class UserMenuItem extends StatelessWidget {
+  const UserMenuItem({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is Authenticated) {
+          return IconButton(
+            onPressed: () => context.go(MingRoutingAddress.myProfile.address),
+            icon: const Icon(Icons.person),
+          );
+        }
+
+        return TextButton(
+          onPressed: () => context.go(MingRoutingAddress.login.address),
+          child: Text(S.of(context).loginButtonText),
+        );
+      },
     );
   }
 }
