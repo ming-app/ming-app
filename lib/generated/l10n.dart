@@ -209,6 +209,16 @@ class S {
       args: [],
     );
   }
+
+  /// `로그인 및 회원가입`
+  String get loginButtonText {
+    return Intl.message(
+      '로그인 및 회원가입',
+      name: 'loginButtonText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
