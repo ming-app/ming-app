@@ -13,6 +13,10 @@ class Shelter {
   final String? introduction;
   final String? phoneNumber;
   final String? snsUrl;
+  final String? imageUrl;
+  final int? numberOfDogs;
+  final int? numberOfCats;
+  final int? numberOfVolunteers;
 
   Shelter({
     required this.id,
@@ -20,6 +24,10 @@ class Shelter {
     this.introduction,
     this.phoneNumber,
     this.snsUrl,
+    this.imageUrl,
+    this.numberOfDogs,
+    this.numberOfCats,
+    this.numberOfVolunteers,
   });
 
   factory Shelter.fromJson(Map<String, dynamic> json) =>
