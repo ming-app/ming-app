@@ -219,6 +219,76 @@ class S {
       args: [],
     );
   }
+
+  /// `보호소`
+  String get shelter {
+    return Intl.message(
+      '보호소',
+      name: 'shelter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `개`
+  String get unitStringOfShelter {
+    return Intl.message(
+      '개',
+      name: 'unitStringOfShelter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `보호동물`
+  String get protectingPet {
+    return Intl.message(
+      '보호동물',
+      name: 'protectingPet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `마리`
+  String get unitStringOfPet {
+    return Intl.message(
+      '마리',
+      name: 'unitStringOfPet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `입양된 동물`
+  String get adoptedPet {
+    return Intl.message(
+      '입양된 동물',
+      name: 'adoptedPet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `봉사자`
+  String get volunteer {
+    return Intl.message(
+      '봉사자',
+      name: 'volunteer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `명`
+  String get unitStringOfPerson {
+    return Intl.message(
+      '명',
+      name: 'unitStringOfPerson',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

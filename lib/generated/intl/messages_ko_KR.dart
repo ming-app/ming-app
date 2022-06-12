@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "adoptedPet": MessageLookupByLibrary.simpleMessage("입양된 동물"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Ming"),
         "errorMessage": MessageLookupByLibrary.simpleMessage("에러가 발생했어요."),
         "homePageTitle": MessageLookupByLibrary.simpleMessage("홈페이지"),
@@ -39,12 +40,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "onTheConstructionTitle":
             MessageLookupByLibrary.simpleMessage("준비 중입니다."),
         "petPageTitle": MessageLookupByLibrary.simpleMessage("동물 페이지"),
+        "protectingPet": MessageLookupByLibrary.simpleMessage("보호동물"),
         "regionString": MessageLookupByLibrary.simpleMessage("봉사지역"),
         "settingPageTitle": MessageLookupByLibrary.simpleMessage("세팅 페이지"),
+        "shelter": MessageLookupByLibrary.simpleMessage("보호소"),
         "shelterPageTitle": MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
         "shelterSinglePageTitle":
             MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
         "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page"),
-        "userProfileTitle": MessageLookupByLibrary.simpleMessage("프로필 페이지")
+        "unitStringOfPerson": MessageLookupByLibrary.simpleMessage("명"),
+        "unitStringOfPet": MessageLookupByLibrary.simpleMessage("마리"),
+        "unitStringOfShelter": MessageLookupByLibrary.simpleMessage("개"),
+        "userProfileTitle": MessageLookupByLibrary.simpleMessage("프로필 페이지"),
+        "volunteer": MessageLookupByLibrary.simpleMessage("봉사자")
       };
 }

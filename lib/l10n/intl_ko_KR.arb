@@ -15,5 +15,12 @@
   "loginFailedMessage": "로그인에 실패하였습니다.",
   "loginSuccessMessage": "로그인에 성공하였습니다.",
   "regionString": "봉사지역",
-  "loginButtonText": "로그인 및 회원가입"
+  "loginButtonText": "로그인 및 회원가입",
+  "shelter": "보호소",
+  "unitStringOfShelter": "개",
+  "protectingPet": "보호동물",
+  "unitStringOfPet": "마리",
+  "adoptedPet": "입양된 동물",
+  "volunteer": "봉사자",
+  "unitStringOfPerson": "명"
 }

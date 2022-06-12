@@ -13,6 +13,12 @@ abstract class _$ShelterCWProxy {
 
   Shelter name(String name);
 
+  Shelter numberOfCats(int? numberOfCats);
+
+  Shelter numberOfDogs(int? numberOfDogs);
+
+  Shelter numberOfVolunteers(int? numberOfVolunteers);
+
   Shelter phoneNumber(String? phoneNumber);
 
   Shelter snsUrl(String? snsUrl);
@@ -27,6 +33,9 @@ abstract class _$ShelterCWProxy {
     int? id,
     String? introduction,
     String? name,
+    int? numberOfCats,
+    int? numberOfDogs,
+    int? numberOfVolunteers,
     String? phoneNumber,
     String? snsUrl,
   });
@@ -49,6 +58,16 @@ class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
   Shelter name(String name) => this(name: name);
 
   @override
+  Shelter numberOfCats(int? numberOfCats) => this(numberOfCats: numberOfCats);
+
+  @override
+  Shelter numberOfDogs(int? numberOfDogs) => this(numberOfDogs: numberOfDogs);
+
+  @override
+  Shelter numberOfVolunteers(int? numberOfVolunteers) =>
+      this(numberOfVolunteers: numberOfVolunteers);
+
+  @override
   Shelter phoneNumber(String? phoneNumber) => this(phoneNumber: phoneNumber);
 
   @override
@@ -66,6 +85,9 @@ class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
     Object? id = const $CopyWithPlaceholder(),
     Object? introduction = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
+    Object? numberOfCats = const $CopyWithPlaceholder(),
+    Object? numberOfDogs = const $CopyWithPlaceholder(),
+    Object? numberOfVolunteers = const $CopyWithPlaceholder(),
     Object? phoneNumber = const $CopyWithPlaceholder(),
     Object? snsUrl = const $CopyWithPlaceholder(),
   }) {
@@ -82,6 +104,18 @@ class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
           : name as String,
+      numberOfCats: numberOfCats == const $CopyWithPlaceholder()
+          ? _value.numberOfCats
+          // ignore: cast_nullable_to_non_nullable
+          : numberOfCats as int?,
+      numberOfDogs: numberOfDogs == const $CopyWithPlaceholder()
+          ? _value.numberOfDogs
+          // ignore: cast_nullable_to_non_nullable
+          : numberOfDogs as int?,
+      numberOfVolunteers: numberOfVolunteers == const $CopyWithPlaceholder()
+          ? _value.numberOfVolunteers
+          // ignore: cast_nullable_to_non_nullable
+          : numberOfVolunteers as int?,
       phoneNumber: phoneNumber == const $CopyWithPlaceholder()
           ? _value.phoneNumber
           // ignore: cast_nullable_to_non_nullable
@@ -109,6 +143,9 @@ Shelter _$ShelterFromJson(Map<String, dynamic> json) => Shelter(
       introduction: json['introduction'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       snsUrl: json['snsUrl'] as String?,
+      numberOfDogs: json['numberOfDogs'] as int?,
+      numberOfCats: json['numberOfCats'] as int?,
+      numberOfVolunteers: json['numberOfVolunteers'] as int?,
     );
 
 Map<String, dynamic> _$ShelterToJson(Shelter instance) => <String, dynamic>{
@@ -117,6 +154,9 @@ Map<String, dynamic> _$ShelterToJson(Shelter instance) => <String, dynamic>{
       'introduction': instance.introduction,
       'phoneNumber': instance.phoneNumber,
       'snsUrl': instance.snsUrl,
+      'numberOfDogs': instance.numberOfDogs,
+      'numberOfCats': instance.numberOfCats,
+      'numberOfVolunteers': instance.numberOfVolunteers,
     };
 
 ShelterRegisterRequest _$ShelterRegisterRequestFromJson(

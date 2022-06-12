@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ming/common/ui/thumbnail.dart';
 import 'package:ming/home/model/regional_info.dart';
 
+import '../../common/routes.dart';
 import '../../generated/l10n.dart';
 
 class ShetlerRegionInfoForm extends StatelessWidget {
@@ -44,48 +46,53 @@ class ShelterRegionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: SizedBox(
-          height: 130,
-          width: 180,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                region.name,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                '${region.shelterCount}개 보호소',
-                style: Theme.of(context).textTheme.caption,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: region.userImages
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 2,
-                          ),
-                          child: ThumbnailImage(e),
-                        ))
-                    .toList(),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text(
-                '${region.volunteerCount}명의 봉사자가 홛동하고 있어요.',
-                style: Theme.of(context).textTheme.caption,
-                textScaleFactor: 0.8,
-              ),
-            ],
+    return InkWell(
+      onTap: () {
+        context.go('${MingRoutingAddress.shelters}?region=${region.slug}');
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SizedBox(
+            height: 130,
+            width: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  region.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  '${region.shelterCount}개 보호소',
+                  style: Theme.of(context).textTheme.caption,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: region.userImages
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 2,
+                            ),
+                            child: ThumbnailImage(e),
+                          ))
+                      .toList(),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  '${region.volunteerCount}명의 봉사자가 홛동하고 있어요.',
+                  style: Theme.of(context).textTheme.caption,
+                  textScaleFactor: 0.8,
+                ),
+              ],
+            ),
           ),
         ),
       ),

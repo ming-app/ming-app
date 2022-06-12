@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:log/log.dart';
 import 'package:ming/common/ui/error_page.dart';
 import 'package:ming/user_profile/cubit/user_profile_cubit.dart';
 
@@ -111,21 +112,25 @@ final router = GoRouter(
 
     // Home Page
     GoRoute(
-      path: MingRoutingAddress.home.address,
-      pageBuilder: (context, state) => MaterialPage<void>(
-        key: _pageKey,
-        child: RootLayout(
-          key: _scaffoldKey,
-          currentIndex: MingNavigator.home.offset(),
-          child: const HomePage(),
-        ),
-      ),
-    ),
+        path: MingRoutingAddress.home.address,
+        pageBuilder: (context, state) {
+          Log.i('go to home page.');
+          return MaterialPage<void>(
+            key: _pageKey,
+            child: RootLayout(
+              key: _scaffoldKey,
+              currentIndex: MingNavigator.home.offset(),
+              child: const HomePage(),
+            ),
+          );
+        }),
 
     // User page
     GoRoute(
       path: MingRoutingAddress.myProfile.address,
       pageBuilder: (context, state) {
+        Log.i('go to user page.');
+
         context.read<UserProfileCubit>().initialize();
 
         return const MaterialPage<void>(
@@ -140,11 +145,18 @@ final router = GoRouter(
     ),
 
     // Shelter page
+    // e.g. shelters?auth=true&region=seoul
     GoRoute(
       path: MingRoutingAddress.shelters.address,
       pageBuilder: (context, state) {
         final onlyAuthenticated =
             (state.queryParams['auth'] ?? "false") == "true";
+
+        // todo: handle regional query
+        final region = state.queryParams['region'];
+
+        Log.i(
+            'go to shelters page with query auth: $onlyAuthenticated, region: $region');
 
         context.read<SheltersBloc>().add(
               SheltersFetch(onlyAuthenticated: onlyAuthenticated),
@@ -163,17 +175,22 @@ final router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: MingRoutingAddress.shelterId.address,
-          pageBuilder: (context, state) => MaterialPage<void>(
-            key: state.pageKey,
-            child: RootLayout(
-              key: _scaffoldKey,
-              currentIndex: MingNavigator.shelters.offset(),
-              child: OntheConstructionPage(
-                  title: S.of(context).shelterSinglePageTitle),
-            ),
-          ),
-        ),
+            path: MingRoutingAddress.shelterId.address,
+            pageBuilder: (context, state) {
+              final id = state.params[MingRoutingAddress.shelterId.getParam()];
+
+              Log.i('go to shelter page with id $id');
+
+              return MaterialPage<void>(
+                key: state.pageKey,
+                child: RootLayout(
+                  key: _scaffoldKey,
+                  currentIndex: MingNavigator.shelters.offset(),
+                  child: OntheConstructionPage(
+                      title: S.of(context).shelterSinglePageTitle),
+                ),
+              );
+            }),
       ],
     ),
   ],
