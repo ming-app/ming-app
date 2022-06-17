@@ -9,6 +9,8 @@ part of 'shelter.dart';
 abstract class _$ShelterCWProxy {
   Shelter id(int id);
 
+  Shelter imageUrl(String? imageUrl);
+
   Shelter introduction(String? introduction);
 
   Shelter name(String name);
@@ -31,6 +33,7 @@ abstract class _$ShelterCWProxy {
   /// ````
   Shelter call({
     int? id,
+    String? imageUrl,
     String? introduction,
     String? name,
     int? numberOfCats,
@@ -49,6 +52,9 @@ class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
 
   @override
   Shelter id(int id) => this(id: id);
+
+  @override
+  Shelter imageUrl(String? imageUrl) => this(imageUrl: imageUrl);
 
   @override
   Shelter introduction(String? introduction) =>
@@ -83,6 +89,7 @@ class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
   /// ````
   Shelter call({
     Object? id = const $CopyWithPlaceholder(),
+    Object? imageUrl = const $CopyWithPlaceholder(),
     Object? introduction = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? numberOfCats = const $CopyWithPlaceholder(),
@@ -96,6 +103,10 @@ class _$ShelterCWProxyImpl implements _$ShelterCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int,
+      imageUrl: imageUrl == const $CopyWithPlaceholder()
+          ? _value.imageUrl
+          // ignore: cast_nullable_to_non_nullable
+          : imageUrl as String?,
       introduction: introduction == const $CopyWithPlaceholder()
           ? _value.introduction
           // ignore: cast_nullable_to_non_nullable
@@ -143,6 +154,7 @@ Shelter _$ShelterFromJson(Map<String, dynamic> json) => Shelter(
       introduction: json['introduction'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       snsUrl: json['snsUrl'] as String?,
+      imageUrl: json['imageUrl'] as String?,
       numberOfDogs: json['numberOfDogs'] as int?,
       numberOfCats: json['numberOfCats'] as int?,
       numberOfVolunteers: json['numberOfVolunteers'] as int?,
@@ -154,6 +166,7 @@ Map<String, dynamic> _$ShelterToJson(Shelter instance) => <String, dynamic>{
       'introduction': instance.introduction,
       'phoneNumber': instance.phoneNumber,
       'snsUrl': instance.snsUrl,
+      'imageUrl': instance.imageUrl,
       'numberOfDogs': instance.numberOfDogs,
       'numberOfCats': instance.numberOfCats,
       'numberOfVolunteers': instance.numberOfVolunteers,

@@ -289,6 +289,196 @@ class S {
       args: [],
     );
   }
+
+  /// `살`
+  String get ageString {
+    return Intl.message(
+      '살',
+      name: 'ageString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `수컷`
+  String get maleString {
+    return Intl.message(
+      '수컷',
+      name: 'maleString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `암컷`
+  String get femaleString {
+    return Intl.message(
+      '암컷',
+      name: 'femaleString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `사진 전체보기`
+  String get showAllPhotos {
+    return Intl.message(
+      '사진 전체보기',
+      name: 'showAllPhotos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `봉사예약`
+  String get reserveVolunteer {
+    return Intl.message(
+      '봉사예약',
+      name: 'reserveVolunteer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `유기견`
+  String get anbandonedDogString {
+    return Intl.message(
+      '유기견',
+      name: 'anbandonedDogString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `유기묘`
+  String get abandonedCatString {
+    return Intl.message(
+      '유기묘',
+      name: 'abandonedCatString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `공유하기`
+  String get share {
+    return Intl.message(
+      '공유하기',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `리뷰`
+  String get review {
+    return Intl.message(
+      '리뷰',
+      name: 'review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `명의 봉사자들이 함께 하고 있어요.`
+  String get volunteerNumberSentenceString {
+    return Intl.message(
+      '명의 봉사자들이 함께 하고 있어요.',
+      name: 'volunteerNumberSentenceString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `더보기`
+  String get showMore {
+    return Intl.message(
+      '더보기',
+      name: 'showMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `축소`
+  String get showLess {
+    return Intl.message(
+      '축소',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `봉사 스케쥴`
+  String get volunteerSchedule {
+    return Intl.message(
+      '봉사 스케쥴',
+      name: 'volunteerSchedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `위치`
+  String get location {
+    return Intl.message(
+      '위치',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `대표 관리자`
+  String get shelterOwner {
+    return Intl.message(
+      '대표 관리자',
+      name: 'shelterOwner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `연락하기`
+  String get doCall {
+    return Intl.message(
+      '연락하기',
+      name: 'doCall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `날짜`
+  String get date {
+    return Intl.message(
+      '날짜',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `시간`
+  String get time {
+    return Intl.message(
+      '시간',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `봉사인원`
+  String get numberOfVolunteers {
+    return Intl.message(
+      '봉사인원',
+      name: 'numberOfVolunteers',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

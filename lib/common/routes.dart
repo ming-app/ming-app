@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:log/log.dart';
 import 'package:ming/common/ui/error_page.dart';
+import 'package:ming/shelter_profile/view/shelter_profile_page.dart';
 import 'package:ming/user_profile/cubit/user_profile_cubit.dart';
 
 import '../generated/l10n.dart';
@@ -186,8 +187,7 @@ final router = GoRouter(
                 child: RootLayout(
                   key: _scaffoldKey,
                   currentIndex: MingNavigator.shelters.offset(),
-                  child: OntheConstructionPage(
-                      title: S.of(context).shelterSinglePageTitle),
+                  child: const ShelterProfilePage(),
                 ),
               );
             }),
