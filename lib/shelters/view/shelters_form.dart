@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ming/shelters/model/shelters_info.dart';
+import '../model/shelters_info.dart';
 import 'package:ming_api/ming_api.dart';
 
 import '../../common/ui/shelter_card_content.dart';

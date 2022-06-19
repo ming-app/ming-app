@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/common/ui/thumbnail.dart';
-import 'package:ming/home/model/regional_info.dart';
+import '../../common/ui/thumbnail.dart';
+import '../model/regional_info.dart';
 
 import '../../common/routes.dart';
 import '../../generated/l10n.dart';

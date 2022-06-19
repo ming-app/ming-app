@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ming/shelter_profile/mock/mock.dart';
-import 'package:ming/shelter_profile/view/shelter_profile_form.dart';
+import '../mock/mock.dart';
+import 'shelter_profile_form.dart';
 
 class ShelterProfilePage extends StatelessWidget {
   const ShelterProfilePage({Key? key}) : super(key: key);

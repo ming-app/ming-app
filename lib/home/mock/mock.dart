@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ming/home/model/regional_info.dart';
+import '../model/regional_info.dart';
 
 // Regional information mock
 final regions = [

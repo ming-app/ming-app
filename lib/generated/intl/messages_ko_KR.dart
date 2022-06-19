@@ -50,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("준비 중입니다."),
         "petPageTitle": MessageLookupByLibrary.simpleMessage("동물 페이지"),
         "protectingPet": MessageLookupByLibrary.simpleMessage("보호동물"),
+        "protectingPets": MessageLookupByLibrary.simpleMessage("보호 중인 친구들"),
         "regionString": MessageLookupByLibrary.simpleMessage("봉사지역"),
         "reserveVolunteer": MessageLookupByLibrary.simpleMessage("봉사예약"),
         "review": MessageLookupByLibrary.simpleMessage("리뷰"),

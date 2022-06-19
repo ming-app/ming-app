@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/auth/bloc/auth_bloc.dart';
-import 'package:ming/common/routes.dart';
+import '../../auth/bloc/auth_bloc.dart';
+import '../../common/routes.dart';
 import 'package:ming_api/ming_api.dart';
 
 import '../user_profile.dart';

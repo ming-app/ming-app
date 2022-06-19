@@ -1,12 +1,14 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:ming/shelter_profile/mock/mock.dart';
-import 'package:ming/shelter_profile/model/shelter_profile.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../common/ui/photo_list_view.dart';
 import '../../common/ui/thumbnail.dart';
 import '../../generated/l10n.dart';
 import '../../home/mock/mock.dart';
+import '../../pets/view/pets_form.dart';
+import '../mock/mock.dart';
+import '../model/shelter_profile.dart';
 
 class ShelterProfileForm extends StatelessWidget {
   final ShelterProfile shelter;
@@ -18,8 +20,9 @@ class ShelterProfileForm extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ShelterPhotoSummary(shelterPhotosMock),
+            PhotoListView(shelterPhotosMock),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
@@ -42,6 +45,15 @@ class ShelterProfileForm extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            Text(
+              S.of(context).protectingPets,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            PetsForm(petsMock),
+            const Divider(),
+            const SizedBox(
+              height: 100,
             ),
           ],
         ),
@@ -305,55 +317,12 @@ class VolunteerReservationCard extends StatelessWidget {
               readOnly: true,
               initialValue: "1명",
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             ElevatedButton(
               onPressed: () {},
-              child: Center(child: Text("예약하기")),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ShelterPhotoSummary extends StatelessWidget {
-  final List<String> photos;
-
-  const ShelterPhotoSummary(this.photos, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: SizedBox(
-        height: 230,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: photos
-                    .map(
-                      (e) => Image.network(e),
-                    )
-                    .toList(),
-              ),
-            ),
-            Positioned(
-              right: 25,
-              bottom: 25,
-              child: Card(
-                child: Row(
-                  children: [
-                    const Icon(Icons.menu),
-                    Text(S.of(context).showAllPhotos),
-                  ],
-                ),
-              ),
+              child: const Center(child: Text("예약하기")),
             ),
           ],
         ),

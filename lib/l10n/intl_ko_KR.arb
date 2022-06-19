@@ -41,5 +41,6 @@
   "doCall": "연락하기",
   "date": "날짜",
   "time": "시간",
-  "numberOfVolunteers": "봉사인원"
+  "numberOfVolunteers": "봉사인원",
+  "protectingPets": "보호 중인 친구들"
 }

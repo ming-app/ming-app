@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/common/ui/thumbnail.dart';
 
 import '../../generated/l10n.dart';
 import '../../home/mock/mock.dart';
 import '../routes.dart';
+import 'thumbnail.dart';
 
 class PetCardContent extends StatelessWidget {
   final String? imageUrl;

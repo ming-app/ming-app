@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/common/ui/thumbnail.dart';
+import 'thumbnail.dart';
 import 'package:ming_api/ming_api.dart';
 
 import '../../generated/l10n.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:ming/login/view/not_logged_in_form.dart';
+import '../../login/view/not_logged_in_form.dart';
 
 import '../../common/ui/error_page.dart';
 import '../user_profile.dart';

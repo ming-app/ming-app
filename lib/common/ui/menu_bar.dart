@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/auth/bloc/auth_bloc.dart';
-import 'package:ming/common/routes.dart';
-import 'package:ming/generated/l10n.dart';
+import '../../auth/bloc/auth_bloc.dart';
+import '../routes.dart';
+import '../../generated/l10n.dart';
 
 class MenuBar extends StatelessWidget implements PreferredSizeWidget {
   const MenuBar({
