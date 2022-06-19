@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:log/log.dart';
-import 'package:ming/common/ui/error_page.dart';
-import 'package:ming/shelter_profile/view/shelter_profile_page.dart';
-import 'package:ming/user_profile/cubit/user_profile_cubit.dart';
+import 'ui/error_page.dart';
+import '../shelter_profile/view/shelter_profile_page.dart';
+import '../user_profile/cubit/user_profile_cubit.dart';
 
-import '../generated/l10n.dart';
 import '../home/view/home_page.dart';
 import '../login/login.dart';
 import '../shelters/shelters.dart';
 import '../shelters/view/shelters_page.dart';
 import '../sign_up/sign_up.dart';
 import '../user_profile/view/user_profile_page.dart';
-import 'ui/on_the_construction.dart';
 import 'ui/root_layout.dart';
 
 // to maintain the status of page and scaffold status.

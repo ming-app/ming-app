@@ -5,6 +5,7 @@ class PetProfile {
   final String? imageUrl;
   final String name;
   final bool isFemale;
+  final bool isDog;
   final int age;
   final String desc;
   final int numberOfVolunteer;
@@ -12,6 +13,7 @@ class PetProfile {
   PetProfile({
     required this.name,
     required this.isFemale,
+    required this.isDog,
     required this.age,
     required this.desc,
     required this.numberOfVolunteer,

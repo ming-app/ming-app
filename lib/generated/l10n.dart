@@ -479,6 +479,16 @@ class S {
       args: [],
     );
   }
+
+  /// `보호 중인 친구들`
+  String get protectingPets {
+    return Intl.message(
+      '보호 중인 친구들',
+      name: 'protectingPets',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

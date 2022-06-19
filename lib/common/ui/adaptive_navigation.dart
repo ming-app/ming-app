@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ming/common/routes.dart';
-import 'package:ming/common/ui/bottom_sheet.dart';
+import '../routes.dart';
+import 'bottom_sheet.dart';
 
 import 'menu_bar.dart';
 

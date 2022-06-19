@@ -1,4 +1,4 @@
-import 'package:ming/shelters/model/shelters_info.dart';
+import '../model/shelters_info.dart';
 import 'package:ming_api/ming_api.dart';
 
 final mockShelters = [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ming/shelters/mock/shelters_mock.dart';
+import '../mock/shelters_mock.dart';
 
 import 'shelters_form.dart';
 
