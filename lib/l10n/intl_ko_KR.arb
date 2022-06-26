@@ -42,5 +42,9 @@
   "date": "날짜",
   "time": "시간",
   "numberOfVolunteers": "봉사인원",
-  "protectingPets": "보호 중인 친구들"
+  "protectingPets": "보호 중인 친구들",
+  "adoptRequest": "입양 신청",
+  "adoptRequestButton": "입양 신청하기",
+  "dog": "강아지",
+  "cat": "고양이"
 }

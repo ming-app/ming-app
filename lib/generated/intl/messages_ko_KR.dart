@@ -23,12 +23,16 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "abandonedCatString": MessageLookupByLibrary.simpleMessage("유기묘"),
+        "adoptRequest": MessageLookupByLibrary.simpleMessage("입양 신청"),
+        "adoptRequestButton": MessageLookupByLibrary.simpleMessage("입양 신청하기"),
         "adoptedPet": MessageLookupByLibrary.simpleMessage("입양된 동물"),
         "ageString": MessageLookupByLibrary.simpleMessage("살"),
         "anbandonedDogString": MessageLookupByLibrary.simpleMessage("유기견"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Ming"),
+        "cat": MessageLookupByLibrary.simpleMessage("고양이"),
         "date": MessageLookupByLibrary.simpleMessage("날짜"),
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
+        "dog": MessageLookupByLibrary.simpleMessage("강아지"),
         "errorMessage": MessageLookupByLibrary.simpleMessage("에러가 발생했어요."),
         "femaleString": MessageLookupByLibrary.simpleMessage("암컷"),
         "homePageTitle": MessageLookupByLibrary.simpleMessage("홈페이지"),
