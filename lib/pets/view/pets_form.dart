@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common/ui/pet_card_content.dart';
-import '../../shelter_profile/model/pet_profile.dart';
+import '../../pet_profile/model/pet_profile.dart';
 
 class PetsForm extends StatefulWidget {
   final List<PetProfile> pets;

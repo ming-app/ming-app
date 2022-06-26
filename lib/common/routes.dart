@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:log/log.dart';
+import 'package:ming/common/ui/on_the_construction.dart';
+import 'package:ming/pet_profile/view/pet_profile_page.dart';
 import 'ui/error_page.dart';
 import '../shelter_profile/view/shelter_profile_page.dart';
 import '../user_profile/cubit/user_profile_cubit.dart';
@@ -174,21 +176,57 @@ final router = GoRouter(
       },
       routes: [
         GoRoute(
-            path: MingRoutingAddress.shelterId.address,
-            pageBuilder: (context, state) {
-              final id = state.params[MingRoutingAddress.shelterId.getParam()];
+          path: MingRoutingAddress.shelterId.address,
+          pageBuilder: (context, state) {
+            final id = state.params[MingRoutingAddress.shelterId.getParam()];
 
-              Log.i('go to shelter page with id $id');
+            Log.i('go to shelter page with id $id');
 
-              return MaterialPage<void>(
-                key: state.pageKey,
-                child: RootLayout(
-                  key: _scaffoldKey,
-                  currentIndex: MingNavigator.shelters.offset(),
-                  child: const ShelterProfilePage(),
-                ),
-              );
-            }),
+            return MaterialPage<void>(
+              key: state.pageKey,
+              child: RootLayout(
+                key: _scaffoldKey,
+                currentIndex: MingNavigator.shelters.offset(),
+                child: const ShelterProfilePage(),
+              ),
+            );
+          },
+        ),
+      ],
+    ),
+    // pet page
+    GoRoute(
+      path: MingRoutingAddress.pets.address,
+      pageBuilder: (context, state) {
+        Log.e('This page should not be routed');
+
+        return MaterialPage<void>(
+          key: state.pageKey,
+          child: RootLayout(
+            key: _scaffoldKey,
+            currentIndex: MingNavigator.shelters.offset(),
+            child: const OntheConstructionPage(),
+          ),
+        );
+      },
+      routes: [
+        GoRoute(
+          path: MingRoutingAddress.petId.address,
+          pageBuilder: (context, state) {
+            final id = state.params[MingRoutingAddress.petId.getParam()];
+
+            Log.i('goto pet page with id $id');
+
+            return MaterialPage<void>(
+              key: state.pageKey,
+              child: RootLayout(
+                key: _scaffoldKey,
+                currentIndex: MingNavigator.shelters.offset(),
+                child: const PetProfilePage(),
+              ),
+            );
+          },
+        ),
       ],
     ),
   ],

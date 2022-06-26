@@ -489,6 +489,46 @@ class S {
       args: [],
     );
   }
+
+  /// `입양 신청`
+  String get adoptRequest {
+    return Intl.message(
+      '입양 신청',
+      name: 'adoptRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `입양 신청하기`
+  String get adoptRequestButton {
+    return Intl.message(
+      '입양 신청하기',
+      name: 'adoptRequestButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `강아지`
+  String get dog {
+    return Intl.message(
+      '강아지',
+      name: 'dog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `고양이`
+  String get cat {
+    return Intl.message(
+      '고양이',
+      name: 'cat',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

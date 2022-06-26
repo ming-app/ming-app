@@ -32,7 +32,7 @@ class PetCardContent extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        context.go(MingRoutingAddress.shelters.address + "/id");
+        context.go(MingRoutingAddress.pets.address + "/id");
       },
       child: SizedBox(
         width: 230,
