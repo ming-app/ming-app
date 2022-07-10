@@ -34,17 +34,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
         "dog": MessageLookupByLibrary.simpleMessage("강아지"),
         "errorMessage": MessageLookupByLibrary.simpleMessage("에러가 발생했어요."),
+        "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "femaleString": MessageLookupByLibrary.simpleMessage("암컷"),
+        "google": MessageLookupByLibrary.simpleMessage("Google"),
         "homePageTitle": MessageLookupByLibrary.simpleMessage("홈페이지"),
         "initialStateTryClickRefreshButton":
             MessageLookupByLibrary.simpleMessage(
                 "Initial state, try click refresh button."),
+        "kakao": MessageLookupByLibrary.simpleMessage("Kakao"),
         "location": MessageLookupByLibrary.simpleMessage("위치"),
         "loginButtonText": MessageLookupByLibrary.simpleMessage("로그인 및 회원가입"),
         "loginFailedMessage":
             MessageLookupByLibrary.simpleMessage("로그인에 실패하였습니다."),
+        "loginGuide1":
+            MessageLookupByLibrary.simpleMessage("로그인을 해야 다음 단계로 넘어갈 수 있어요!"),
+        "loginGuide2": MessageLookupByLibrary.simpleMessage(
+            "로그인은 개인 보호 정책 및 서비스 약관에 동의하는 것을 의미하며, \n서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다."),
         "loginSuccessMessage":
             MessageLookupByLibrary.simpleMessage("로그인에 성공하였습니다."),
+        "loginTitle": MessageLookupByLibrary.simpleMessage("로그인 또는 회원가입"),
         "maleString": MessageLookupByLibrary.simpleMessage("수컷"),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
         "numberOfVolunteers": MessageLookupByLibrary.simpleMessage("봉사인원"),

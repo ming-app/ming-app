@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ming/login/view/login_dialog.dart';
 import '../../auth/bloc/auth_bloc.dart';
 import '../routes.dart';
 import '../../generated/l10n.dart';
@@ -106,7 +107,8 @@ class UserMenuItem extends StatelessWidget {
         }
 
         return TextButton(
-          onPressed: () => context.go(MingRoutingAddress.login.address),
+          onPressed: () =>
+              showDialog(context: context, builder: (_) => LoginDialog()),
           child: Text(S.of(context).loginButtonText),
         );
       },
