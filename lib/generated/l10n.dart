@@ -529,6 +529,66 @@ class S {
       args: [],
     );
   }
+
+  /// `로그인 또는 회원가입`
+  String get loginTitle {
+    return Intl.message(
+      '로그인 또는 회원가입',
+      name: 'loginTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `로그인을 해야 다음 단계로 넘어갈 수 있어요!`
+  String get loginGuide1 {
+    return Intl.message(
+      '로그인을 해야 다음 단계로 넘어갈 수 있어요!',
+      name: 'loginGuide1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kakao`
+  String get kakao {
+    return Intl.message(
+      'Kakao',
+      name: 'kakao',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Facebook`
+  String get facebook {
+    return Intl.message(
+      'Facebook',
+      name: 'facebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google`
+  String get google {
+    return Intl.message(
+      'Google',
+      name: 'google',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `로그인은 개인 보호 정책 및 서비스 약관에 동의하는 것을 의미하며, \n서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다.`
+  String get loginGuide2 {
+    return Intl.message(
+      '로그인은 개인 보호 정책 및 서비스 약관에 동의하는 것을 의미하며, \n서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다.',
+      name: 'loginGuide2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

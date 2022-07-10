@@ -46,5 +46,11 @@
   "adoptRequest": "입양 신청",
   "adoptRequestButton": "입양 신청하기",
   "dog": "강아지",
-  "cat": "고양이"
+  "cat": "고양이",
+  "loginTitle": "로그인 또는 회원가입",
+  "loginGuide1": "로그인을 해야 다음 단계로 넘어갈 수 있어요!",
+  "kakao": "Kakao",
+  "facebook": "Facebook",
+  "google": "Google",
+  "loginGuide2": "로그인은 개인 보호 정책 및 서비스 약관에 동의하는 것을 의미하며, \n서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다."
 }
