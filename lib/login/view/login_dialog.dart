@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:ming/login/login.dart';
 
 import '../../generated/l10n.dart';
 
@@ -7,11 +12,42 @@ class LoginDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AlertDialog(
-      insetPadding: EdgeInsets.all(15),
-      content: LoginPopupForm(),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state.status.isSubmissionFailure) {
+          context.loaderOverlay.hide();
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(
+                    state.errorMessage ?? S.of(context).loginFailedMessage),
+              ),
+            );
+
+          Navigator.pop(context);
+        } else if (state.status.isSubmissionSuccess) {
+          context.loaderOverlay.hide();
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(S.of(context).loginSuccessMessage),
+              ),
+            );
+          Navigator.pop(context);
+        } else if (state.status.isSubmissionInProgress) {
+          context.loaderOverlay.show();
+        } else {
+          context.loaderOverlay.hide();
+        }
+      },
+      child: const AlertDialog(
+        insetPadding: EdgeInsets.all(15),
+        content: LoginPopupForm(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
       ),
     );
   }
@@ -24,46 +60,54 @@ class LoginPopupForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).loginTitle,
-          style: theme.textTheme.titleMedium,
-        ),
-        Text(
-          S.of(context).loginGuide1,
-          style: theme.textTheme.caption,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: const [
-            Expanded(
-              child: LoginButton(LoginMethod.kakao),
+    return BlocBuilder<LoginCubit, LoginState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              S.of(context).loginTitle,
+              style: theme.textTheme.titleMedium,
             ),
-            SizedBox(
-              width: 10,
+            Text(
+              S.of(context).loginGuide1,
+              style: theme.textTheme.caption,
             ),
-            Expanded(
-              child: LoginButton(LoginMethod.facebook),
+            const SizedBox(
+              height: 10,
             ),
-            SizedBox(
-              width: 10,
+            Row(
+              children: [
+                Expanded(
+                  child: LoginButton(LoginMethod.kakao),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: LoginButton(LoginMethod.facebook),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: LoginButton(
+                    LoginMethod.google,
+                    onClick: () => context.read<LoginCubit>().logInWithGoogle(),
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: LoginButton(LoginMethod.google),
+            const Divider(),
+            Text(
+              S.of(context).loginGuide2,
+              style: Theme.of(context).textTheme.caption,
             ),
           ],
-        ),
-        const Divider(),
-        Text(
-          S.of(context).loginGuide2,
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ],
+        );
+      },
     );
   }
 }
