@@ -21,6 +21,7 @@ abstract class MingApiRepository {
   Future<User> getUserInfo(String token);
 
   // shelter info.
+  Future<List<OverviewResponse>> getShelterOverview();
   Future<List<Shelter>> getShelters({String? token});
   Future<List<Shelter>> getAuthorizedShelters(String token);
   // if token is null, then the auth will be false.

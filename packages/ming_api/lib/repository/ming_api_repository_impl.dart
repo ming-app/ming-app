@@ -86,4 +86,13 @@ class MingApiRepositoryImpl implements MingApiRepository {
     // TODO: implement getShelters
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<OverviewResponse>> getShelterOverview() async {
+    var response = await _client.getShelterOverview();
+    Log.d("$response");
+    _handleNullApiResult(response);
+
+    return response.result!;
+  }
 }

@@ -28,6 +28,9 @@ abstract class MingApiClient {
   Future<void> registerUser(@Header("Authorization") String token);
 
   // SHELTER
+  @GET("v1/shelters/overview")
+  Future<ApiResponse<List<OverviewResponse>>> getShelterOverview();
+
   @GET("v1/shelters")
   Future<ApiResponse<List<ShelterResponse>>> getAuthorizedShelters(
       @Header("Authorization") String token);
@@ -96,6 +99,9 @@ class _Converter<T> implements JsonConverter<T?, Object?> {
       return UserResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, List<AnimalResponse>?>()) {
       return AnimalResponseListTypeConverter().fromJson(jsonEncode(json)) as T;
+    } else if (typesEqual<T, List<OverviewResponse>?>()) {
+      return OverviewResponseListTypeConverter().fromJson(jsonEncode(json))
+          as T;
     }
     throw FormatException("No valid structure for json $json");
   }
