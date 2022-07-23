@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:log/log.dart';
 import 'package:meta/meta.dart';
-import 'package:ming_api/model/model.dart';
+import 'package:ming_api/entity/entity.dart';
 import 'package:ming_api/repository/ming_api_repository.dart';
 import 'package:uuid/uuid.dart';
 

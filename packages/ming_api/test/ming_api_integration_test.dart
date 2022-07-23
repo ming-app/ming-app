@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ming_api/model/model.dart';
+import 'package:ming_api/entity/entity.dart';
+
 import 'package:ming_api/repository/ming_api_repository.dart';
 
 void main() {

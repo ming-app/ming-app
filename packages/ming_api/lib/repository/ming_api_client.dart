@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ming_api/entity/entity.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-
-import '../model/model.dart';
 
 part 'ming_api_client.g.dart';
 

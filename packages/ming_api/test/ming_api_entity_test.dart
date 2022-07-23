@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ming_api/model/shelter.dart';
-import 'package:ming_api/model/user.dart';
+import 'package:ming_api/entity/entity.dart';
 import 'package:ming_api/repository/ming_api_client.dart';
 
 void main() {
