@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ming/album/bloc/album_bloc.dart';
 import 'package:ming/home/cubit/home_cubit.dart';
 import 'package:ming_api/repository/ming_api_repository.dart';
 
@@ -46,6 +47,7 @@ List<BlocProvider> blocProviders = [
   BlocProvider<HomeCubit>(
     create: (context) => HomeCubit(context.read<MingApiRepository>()),
   ),
+  BlocProvider<AlbumBloc>(create: (context) => AlbumBloc()),
 ];
 
 List<RepositoryProvider> repositoryProviers = [
