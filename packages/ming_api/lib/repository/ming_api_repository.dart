@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:log/log.dart';
+import 'package:ming_api/entity/entity.dart';
 import 'package:ming_api/repository/ming_api_client.dart';
 
-import '../model/model.dart';
 import 'ming_api_repository_impl.dart';
 
 abstract class MingApiRepository {

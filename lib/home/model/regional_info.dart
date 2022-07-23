@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ming_api/model/model.dart';
+import 'package:ming_api/entity/entity.dart';
 
 class RegionalInfo {
   final String name;
