@@ -1,8 +1,8 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:ming/album/view/album_view.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../common/ui/photo_list_view.dart';
 import '../../common/ui/thumbnail.dart';
 import '../../generated/l10n.dart';
 import '../../home/mock/mock.dart';
@@ -22,7 +22,7 @@ class ShelterProfileForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PhotoListView(shelterPhotosMock),
+            const AlbumView(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(

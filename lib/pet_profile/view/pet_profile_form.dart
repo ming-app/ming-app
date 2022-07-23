@@ -1,9 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:ming/common/ui/photo_list_view.dart';
+import 'package:ming/album/view/album_view.dart';
+import 'package:ming/album/view/photo_preview.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/model/pet_profile.dart';
-import 'package:ming/shelter_profile/mock/mock.dart';
 import 'package:ming/shelters/mock/shelters_mock.dart';
 import 'package:ming_api/ming_api.dart';
 import 'package:tuple/tuple.dart';
@@ -24,7 +24,7 @@ class PetProfileForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PhotoListView(shelterPhotosMock),
+            const AlbumView(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
