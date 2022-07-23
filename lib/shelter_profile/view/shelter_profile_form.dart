@@ -1,5 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ming/album/view/album_view.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -142,8 +143,9 @@ class ShelterLocation extends StatelessWidget {
         ),
         const SizedBox(
           height: 300,
-          child: Card(
-            child: Center(child: Text("map 위치")),
+          child: GoogleMap(
+            initialCameraPosition: CameraPosition(
+                target: LatLng(37.295254, 127.013930), zoom: 11.0),
           ),
         ),
         Padding(
