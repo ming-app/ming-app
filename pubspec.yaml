@@ -48,6 +48,8 @@ dependencies:
   share_plus: ^4.0.8
   expandable: ^5.0.1
   tuple: ^2.0.0
+  google_maps_flutter: ^2.1.9
+  google_maps_flutter_web: ^0.4.0+1
 
 
 dev_dependencies:
