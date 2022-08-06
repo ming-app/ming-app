@@ -4,6 +4,7 @@ import 'package:ming/album/view/album_view.dart';
 import 'package:ming/album/view/photo_preview.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/model/pet_profile.dart';
+import 'package:ming/shelter_profile/shelter_profile.dart';
 import 'package:ming/shelters/mock/shelters_mock.dart';
 import 'package:ming_api/ming_api.dart';
 import 'package:tuple/tuple.dart';
@@ -79,7 +80,7 @@ class PetProfileForm extends StatelessWidget {
     );
   }
 
-  Widget _shelterProfileCard(BuildContext context, Shelter shelter) {
+  Widget _shelterProfileCard(BuildContext context, ShelterProfile shelter) {
     final theme = Theme.of(context);
     final strings = S.of(context);
     return Padding(

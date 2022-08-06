@@ -1,4 +1,6 @@
 library ming_api;
 
-export 'repository/ming_api_repository.dart';
-export 'entity/entity.dart';
+export 'repository/api_repository.dart';
+export 'entities/entities.dart';
+export 'common/pagination.dart';
+export 'common/api_response.dart';

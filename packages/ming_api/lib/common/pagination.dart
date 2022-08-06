@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../entities/entities.dart';
+import 'utils.dart';
+
 part 'pagination.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -36,20 +39,30 @@ class PageImpl<T> {
   Map<String, dynamic> toJson() => _$PageImplToJson(this);
 }
 
-class _Converter<T> implements JsonConverter<T, Object?> {
+class _Converter<T> implements JsonConverter<T?, Map<String, dynamic>> {
   const _Converter();
 
   @override
-  T fromJson(Object? json) {
-    switch (T) {
-      // todo: handle converter for each corresponding generics.
-      default:
-        throw UnsupportedError('Unsupported type: $T');
+  T fromJson(Map<String, dynamic>? json) {
+    if (json == null) return null as T;
+
+    if (typesEqual<T, ShelterReviewResponse>()) {
+      return ShelterReviewResponse.fromJson(json) as T;
+    } else if (typesEqual<T, ShelterOverviewResponse>()) {
+      return ShelterOverviewResponse.fromJson(json) as T;
+    } else if (typesEqual<T, ShelterImagesResponse>()) {
+      return ShelterImagesResponse.fromJson(json) as T;
+    } else if (typesEqual<T, AnimalOverviewResponse>()) {
+      return AnimalOverviewResponse.fromJson(json) as T;
+    } else if (typesEqual<T, AnimalJournalResponse>()) {
+      return AnimalJournalResponse.fromJson(json) as T;
     }
+
+    throw FormatException("No valid structure for json $json");
   }
 
   @override
-  Object? toJson(T object) => object;
+  Map<String, dynamic> toJson(T? object) => object as Map<String, dynamic>;
 }
 
 @JsonSerializable(explicitToJson: true)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ming/shelter_profile/model/shelter_profile.dart';
 import 'thumbnail.dart';
-import 'package:ming_api/ming_api.dart';
 
 import '../../generated/l10n.dart';
 import '../../home/mock/mock.dart';
@@ -10,7 +10,7 @@ import '../routes.dart';
 class ShelterCardContent extends StatelessWidget {
   const ShelterCardContent(this.shelter, {Key? key}) : super(key: key);
 
-  final Shelter shelter;
+  final ShelterProfile shelter;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,13 @@ class ShelterCardContent extends StatelessWidget {
                 height: 130,
                 child: Stack(
                   children: [
-                    if (shelter.imageUrl != null)
-                      Positioned.fill(
-                        child: Ink.image(
-                          image: NetworkImage(shelter.imageUrl!),
-                          fit: BoxFit.cover,
-                          child: Container(),
-                        ),
+                    Positioned.fill(
+                      child: Ink.image(
+                        image: NetworkImage(shelter.thumbnailUrl),
+                        fit: BoxFit.cover,
+                        child: Container(),
                       ),
+                    ),
                   ],
                 ),
               ),

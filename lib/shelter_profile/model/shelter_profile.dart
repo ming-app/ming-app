@@ -1,4 +1,5 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:ming_api/ming_api.dart';
 
 @CopyWith()
 class ShelterProfile {
@@ -11,18 +12,36 @@ class ShelterProfile {
   final String region;
   final ShelterManagerProfile manager;
   final String desc;
+  final String thumbnailUrl;
 
   ShelterProfile({
     required this.name,
     this.numberOfCats = 0,
     this.numberOfDogs = 0,
     this.numberOfVolunteers = 0,
-    required this.averageRate,
-    required this.reviewCount,
+    this.averageRate = 5.0,
+    this.reviewCount = 0,
     required this.region,
     required this.manager,
-    required this.desc,
+    this.desc = "",
+    required this.thumbnailUrl,
   });
+
+  factory ShelterProfile.fromShelterOverviewResponse(
+      ShelterOverviewResponse response) {
+    return ShelterProfile(
+      name: response.name,
+      averageRate: 5.0,
+      reviewCount: 30,
+      region: response.location,
+      manager: ShelterManagerProfile(
+        name: response.adminName,
+        phoneNumber: response.phoneNumber,
+      ),
+      desc: response.description,
+      thumbnailUrl: response.thumbnailUrl,
+    );
+  }
 }
 
 @CopyWith()

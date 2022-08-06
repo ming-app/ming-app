@@ -1,9 +1,8 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ming/album/bloc/album_bloc.dart';
 import 'package:ming/home/cubit/home_cubit.dart';
-import 'package:ming_api/repository/ming_api_repository.dart';
+import 'package:ming_api/ming_api.dart';
 
 import '../auth/bloc/auth_bloc.dart';
 import '../common/constants.dart';
@@ -40,7 +39,6 @@ List<BlocProvider> blocProviders = [
   ),
   BlocProvider<SheltersBloc>(
     create: (context) => SheltersBloc(
-      context.read<AuthenticationRepository>(),
       context.read<MingApiRepository>(),
     ),
   ),

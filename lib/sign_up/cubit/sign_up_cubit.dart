@@ -2,7 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:ming_api/repository/ming_api_repository.dart';
+import 'package:ming_api/ming_api.dart';
 import 'package:signin_form/signin_form.dart';
 
 part 'sign_up_state.dart';
@@ -86,8 +86,6 @@ class SignUpCubit extends Cubit<SignUpState> {
     }
 
     try {
-      var token = await _authenticationRepository.idToken;
-      await _apiRepository.registerUser(token);
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } catch (e) {
       // if register failed, delete user from firebase too.

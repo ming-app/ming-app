@@ -7,7 +7,9 @@ part of 'pagination.dart';
 // **************************************************************************
 
 PageImpl<T> _$PageImplFromJson<T>(Map<String, dynamic> json) => PageImpl<T>(
-      (json['content'] as List<dynamic>).map(_Converter<T>().fromJson).toList(),
+      (json['content'] as List<dynamic>)
+          .map((e) => _Converter<T>().fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['empty'] as bool,
       json['first'] as bool,
       json['last'] as bool,

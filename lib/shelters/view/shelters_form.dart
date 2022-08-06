@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../shelter_profile/shelter_profile.dart';
 import '../model/shelters_info.dart';
-import 'package:ming_api/ming_api.dart';
 
 import '../../common/ui/shelter_card_content.dart';
 import '../../common/ui/shelter_statistics_card.dart';
@@ -43,7 +43,7 @@ class SheltersForm extends StatelessWidget {
 
 // todo: make this widget as infinete scrolling
 class SheltersListView extends StatelessWidget {
-  final List<Shelter> shelters;
+  final List<ShelterProfile> shelters;
 
   const SheltersListView(this.shelters, {Key? key}) : super(key: key);
 

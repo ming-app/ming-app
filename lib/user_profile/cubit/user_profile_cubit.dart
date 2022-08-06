@@ -3,9 +3,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:log/log.dart';
 import 'package:meta/meta.dart';
-import 'package:ming_api/entity/entity.dart';
-import 'package:ming_api/repository/ming_api_repository.dart';
+import 'package:ming_api/ming_api.dart';
 import 'package:uuid/uuid.dart';
+
+import '../model/user.dart';
 
 part 'user_profile_state.dart';
 
@@ -32,7 +33,12 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
     try {
       final token = await _auth.idToken;
-      final user = await _api.getUserInfo(token);
+      final response = (await _api.client.getUserDetailInfo(token)).result;
+
+      final user = response == null
+          ? UserProfile.empty()
+          : UserProfile.fromUserDetailInfoResponse(response);
+
       Log.d('User profile fetched');
       emit(UserProfileFetched(user));
     } catch (e) {
@@ -41,12 +47,11 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     }
   }
 
-  Future<void> updateUserProfile(User user) async {
+  Future<void> updateUserProfile(UserProfile user) async {
     emit(UserProfileUpdating());
 
     try {
-      final token = await _auth.idToken;
-      await _api.updateUserInfo(token, user);
+      // todo: handle user profile update
       Log.d('User profile updated');
       getUserProfile();
     } catch (e) {
@@ -56,7 +61,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   }
 
   void nameChanged(String value) {
-    User original;
+    UserProfile original;
 
     if (state is UserProfileEditing) {
       original = (state as UserProfileEditing).original;
@@ -72,7 +77,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   }
 
   void snsUrlChanged(String value) {
-    User original;
+    UserProfile original;
 
     if (state is UserProfileEditing) {
       original = (state as UserProfileEditing).original;

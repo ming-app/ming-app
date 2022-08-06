@@ -1,142 +1,73 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ming_api/ming_api.dart';
-import 'package:ming_api/repository/ming_api_client.dart';
-import 'package:mock_web_server/mock_web_server.dart';
-import 'package:mockito/annotations.dart';
 
-@GenerateMocks([Dio])
 void main() {
-  group('User Api Test', () {
-    const token = "TEST_TOKEN";
-    late MingApiRepository repository;
-    late MockWebServer server;
+  late MingApiRepository repository;
 
-    setUp(() async {
-      server = MockWebServer(port: 8081);
-      await server.start();
-      repository = MingApiRepository(baseUrl: server.url);
+  setUp(() {
+    repository = MingApiRepository();
+  });
+
+  group("Region API Test", () {
+    test("GET v1/meta/regions, Positive", () async {
+      var result = await repository.client.getRegionInfos();
+
+      expect(result.result!.isNotEmpty, true);
+    });
+  });
+
+  group("Animal API Test", () {
+    test("GET v1/animals/{id}, Positive", () async {
+      var result = await repository.client.getAnimalDetail("1");
+
+      expect(result.result != null, true);
     });
 
-    tearDown(() async {
-      await server.shutdown();
+    test("GET v1/animals/{id}/journals, Positive", () async {
+      var result = await repository.client.getAnimalJournals("1");
+
+      expect(result.result!.numberOfElements > 0, true);
+    });
+  });
+
+  group("Shelter API Test", () {
+    test("GET v1/shelters/overview, Positive", () async {
+      var result = await repository.client.getSheltersRegionalInfo();
+
+      expect(result.result!.isNotEmpty, true);
     });
 
-    test("Test register user with token", () async {
-      server.enqueue();
-      await repository.registerUser(token);
+    test("GET v1/shelters, Positive", () async {
+      var result = await repository.client.getSheltersOverview();
 
-      var request = server.takeRequest();
-      expect(request.headers['authorization'], "Bearer TEST_TOKEN");
+      expect(result.result!.content.isNotEmpty, true);
     });
 
-    test("Test updating user", () async {
-      server.enqueue();
-      await repository.updateUserInfo(
-        token,
-        User(uid: "TEST", email: "test@test.com", name: "TEST_NAME"),
-      );
+    test("GET v1/shelters/{id}/animals, Positive", () async {
+      var result = await repository.client.getAnimalInShelter("1");
 
-      var request = server.takeRequest();
-      expect(request.body!.contains("TEST_NAME"), true);
+      expect(result.result!.content.isNotEmpty, true);
     });
 
-    test("Test getting my user", () async {
-      server.enqueue(
-        body: jsonEncode(ApiResponse<UserResponse>(
-          resultCode: "OK",
-          result: UserResponse(uid: "TEST_UID", email: "test@test.com"),
-        ).toJson()),
-        headers: {"Content-Type": "application/json"},
-        httpCode: 201,
-      );
+    test("GET v1/shelters/{id}/images, Positive", () async {
+      var result = await repository.client.getSheltersImage("1");
 
-      var user = await repository.getUserInfo(token);
-
-      expect(user.email, "test@test.com");
-      expect(user.uid, "TEST_UID");
+      expect(result.result!.content.isNotEmpty, true);
     });
 
-    test("Test get authorized shetlers", () async {
-      server.enqueue(
-        body: jsonEncode(ApiResponse<List<ShelterResponse>>(
-                result: [ShelterResponse(id: 123, name: "TEST_SHELTER")],
-                resultCode: "OK")
-            .toJson()),
-        headers: {"Content-Type": "application/json"},
-        httpCode: 201,
-      );
+    test("GET v1/shelters/{id}/reviews, Positive", () async {
+      var result = await repository.client.getReviews("1");
 
-      var list = await repository.getAuthorizedShelters(token);
-
-      expect(list.first.id, 123);
+      expect(result.result!.content.isNotEmpty, true);
     });
+  });
 
-    test("Test updating shelter information", () async {
-      server.enqueue();
+  group("Volunteer API Test", () {
+    test("GET v1/volunteers, Positive", () async {
+      var result = await repository.client.getVolunteerActivities("2022-01");
 
-      await repository.updateShelterInfo(
-          token, Shelter(id: 123, name: "TEST_SHELTER", introduction: "HI"));
-      var request = server.takeRequest();
-
-      expect(request.body!.contains("HI"), true);
-      expect(request.headers['authorization'], "Bearer TEST_TOKEN");
-    });
-
-    test("Test get animals in the shelter", () async {
-      server.enqueue(
-        body: jsonEncode(
-          ApiResponse<List<AnimalResponse>>(resultCode: "OK", result: [
-            AnimalResponse(
-                123, "TEST_NAME", "TEST_INTRO", "2022", "TEST_URL", 124),
-          ]).toJson(),
-        ),
-        headers: {"Content-Type": "application/json"},
-        httpCode: 201,
-      );
-
-      var list = await repository
-          .getAnimalsInShelter(Shelter(id: 124, name: "TEST_NAME"));
-
-      var request = server.takeRequest();
-
-      expect(request.uri.path.contains("124"), true);
-      expect(list.length, 1);
-      expect(list.first.birthYear, "2022");
-    });
-
-    test("Test authenticate user to shelter", () async {
-      server.enqueue();
-
-      await repository.authenticateUserToShelter(
-          token, "test@test.com", Shelter(id: 124, name: "TEST_NAME"));
-
-      var request = server.takeRequest();
-
-      expect(request.body!.contains("test@test.com"), true);
-    });
-
-    test("Test registering animal", () async {
-      server.enqueue();
-
-      await repository.registerAnimal(
-        token,
-        Animal(
-          id: 123,
-          shelterId: 124,
-          name: "TEST_NAME",
-          introduction: "TEST_INTRO",
-          birthYear: "2022",
-          imageUrl: "TEST_URL",
-        ),
-      );
-
-      var request = server.takeRequest();
-
-      expect(request.body!.contains("2022"), true);
+      expect(result.result!.isNotEmpty, true);
     });
   });
 }
