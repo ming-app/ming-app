@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../auth/bloc/auth_bloc.dart';
 import '../../common/routes.dart';
-import 'package:ming_api/ming_api.dart';
 
+import '../model/user.dart';
 import '../user_profile.dart';
 
 class UserProfileForm extends StatelessWidget {
   const UserProfileForm(this.user, {Key? key}) : super(key: key);
 
-  final User user;
+  final UserProfile user;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,6 @@ class UserProfileForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(),
-            Row(
-              children: [
-                const Text("User Id: "),
-                Text(user.uid),
-              ],
-            ),
             const Divider(),
             Row(
               children: [

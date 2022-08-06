@@ -2,7 +2,7 @@ name: Ming
 
 packages:
   - packages/**
-  - ./*
+  - ./**
 
 scripts:
   postbootstrap: melos run generate --no-select

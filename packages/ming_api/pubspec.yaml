@@ -5,29 +5,25 @@ publish_to: none
 homepage:
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.6 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-  log:
-    path: ../log
-  retrofit: ^3.0.1
+  retrofit: ^3.0.1+1
   dio: ^4.0.6
-  json_annotation: ^4.5.0
+  json_annotation: ^4.6.0
   copy_with_extension: ^4.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  json_serializable: any
-  build_runner: any
-  retrofit_generator: any
-  mockito: any
+  json_serializable: ^6.3.1
+  build_runner: ^2.2.0
+  retrofit_generator: ^4.0.3
+  mockito: ^5.3.0
   mock_web_server: 5.0.0-nullsafety.1
   copy_with_extension_gen: ^4.0.2
-
 flutter:

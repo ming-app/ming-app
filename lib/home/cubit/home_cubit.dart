@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:log/log.dart';
 import 'package:meta/meta.dart';
 import 'package:ming/home/model/regional_info.dart';
 import 'package:ming_api/ming_api.dart';
@@ -13,9 +14,13 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void fetchOverview() async {
-    var regions = (await _apiRepository.getShelterOverview())
-        .map((e) => RegionalInfo.fromOverview(e))
-        .toList();
+    var response = await _apiRepository.client.getSheltersRegionalInfo();
+
+    Log.i("response = $response");
+
+    var regions =
+        response.result?.map((e) => RegionalInfo.fromOverview(e)).toList() ??
+            [];
 
     emit(HomeFetched(regions));
   }

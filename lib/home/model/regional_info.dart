@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ming_api/entity/entity.dart';
+import 'package:ming_api/ming_api.dart';
 
 class RegionalInfo {
   final String name;
@@ -16,7 +16,7 @@ class RegionalInfo {
     this.slug,
   );
 
-  factory RegionalInfo.fromOverview(OverviewResponse response) {
+  factory RegionalInfo.fromOverview(ShelterByRegionResponse response) {
     return RegionalInfo(
       response.region.fullName,
       response.count,

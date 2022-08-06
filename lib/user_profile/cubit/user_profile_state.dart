@@ -2,7 +2,7 @@ part of 'user_profile_cubit.dart';
 
 @immutable
 abstract class UserProfileState {
-  User get user;
+  UserProfile get user;
   String? get message;
 
   // for refreshing text form field.
@@ -11,7 +11,7 @@ abstract class UserProfileState {
 
 class UserProfileInitial extends UserProfileState {
   @override
-  User get user => User.empty();
+  UserProfile get user => UserProfile.empty();
 
   @override
   final String message = "잠시만 기다려주세요.";
@@ -22,7 +22,7 @@ class UserProfileInitial extends UserProfileState {
 
 class UserProfileNotLoggedIn extends UserProfileState {
   @override
-  User get user => User.empty();
+  UserProfile get user => UserProfile.empty();
 
   @override
   final String message = "Login이 필요합니다.";
@@ -33,7 +33,7 @@ class UserProfileNotLoggedIn extends UserProfileState {
 
 class UserProfileUpdating extends UserProfileState {
   @override
-  User get user => User.empty();
+  UserProfile get user => UserProfile.empty();
 
   @override
   final String message = "잠시만 기다려주세요.";
@@ -44,7 +44,7 @@ class UserProfileUpdating extends UserProfileState {
 
 class UserProfileFetched extends UserProfileState {
   @override
-  final User user;
+  final UserProfile user;
 
   @override
   final String? message;
@@ -57,12 +57,12 @@ class UserProfileFetched extends UserProfileState {
 
 class UserProfileEditing extends UserProfileState {
   @override
-  final User user;
+  final UserProfile user;
 
   @override
   final String? message;
 
-  final User original;
+  final UserProfile original;
 
   @override
   final String? key;
@@ -72,7 +72,7 @@ class UserProfileEditing extends UserProfileState {
 
 class UserProfileError extends UserProfileState {
   @override
-  User get user => User.empty();
+  UserProfile get user => UserProfile.empty();
 
   @override
   final String message;
