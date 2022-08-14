@@ -6,11 +6,13 @@ abstract class AuthState {}
 class AuthInitial extends AuthState {}
 
 class Authenticated extends AuthState {
-  final AuthInfo info;
+  final UserInfo info;
 
   Authenticated(this.info) {
     Log.d("Authenticated");
   }
 }
+
+class Authenticating extends AuthState {}
 
 class UnAuthenticated extends AuthState {}

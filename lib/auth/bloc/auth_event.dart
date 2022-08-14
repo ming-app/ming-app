@@ -6,5 +6,3 @@ abstract class AuthEvent {}
 class StartListenAuthStatus extends AuthEvent {}
 
 class LogOut extends AuthEvent {}
-
-// todo: reauth, change password

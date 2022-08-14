@@ -86,7 +86,7 @@ class UserProfileForm extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       context.read<AuthBloc>().add(LogOut());
-                      context.go(MingRoutingAddress.login.address);
+                      context.go(MingRoutingAddress.home.address);
                     },
                     child: const Text("Logout")),
                 ElevatedButton(

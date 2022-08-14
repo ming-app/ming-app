@@ -24,6 +24,8 @@ dependencies:
     path: packages/log
   ming_api:
     path: packages/ming_api
+  auth:
+    path: packages/auth
 
   # For pretty & generalized logging
   loggy: ^2.0.1+1
@@ -50,7 +52,9 @@ dependencies:
   tuple: ^2.0.0
   google_maps_flutter: ^2.1.9
   google_maps_flutter_web: ^0.4.0+1
-
+  html: ^0.15.0
+  flutter_web_auth: ^0.4.1
+  
 
 dev_dependencies:
   flutter_test:
