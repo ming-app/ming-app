@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: log,ming_api
+dependency_overrides:
+  log:
+    path: ../log
+  ming_api:
+    path: ../ming_api

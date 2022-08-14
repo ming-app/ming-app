@@ -9,10 +9,8 @@ import '../shelter_profile/view/shelter_profile_page.dart';
 import '../user_profile/cubit/user_profile_cubit.dart';
 
 import '../home/view/home_page.dart';
-import '../login/login.dart';
 import '../shelters/shelters.dart';
 import '../shelters/view/shelters_page.dart';
-import '../sign_up/sign_up.dart';
 import '../user_profile/view/user_profile_page.dart';
 import 'ui/root_layout.dart';
 
@@ -33,10 +31,6 @@ enum MingRoutingAddress {
   petId(':petId'),
   // User
   myProfile('/users/me'),
-
-  // etc.
-  login('/login'),
-  signup('/signup'),
   ;
 
   final String address;
@@ -85,32 +79,6 @@ final router = GoRouter(
     ),
   ),
   routes: [
-    // Login Page
-    GoRoute(
-      path: MingRoutingAddress.login.address,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        key: _pageKey,
-        child: RootLayout(
-          key: _scaffoldKey,
-          currentIndex: -1,
-          child: LoginPage(),
-        ),
-      ),
-    ),
-
-    // Sign Up Page
-    GoRoute(
-      path: MingRoutingAddress.signup.address,
-      pageBuilder: (context, state) => const MaterialPage<void>(
-        key: _pageKey,
-        child: RootLayout(
-          key: _scaffoldKey,
-          currentIndex: -1,
-          child: SignUpPage(),
-        ),
-      ),
-    ),
-
     // Home Page
     GoRoute(
         path: MingRoutingAddress.home.address,

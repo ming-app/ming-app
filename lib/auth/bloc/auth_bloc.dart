@@ -1,17 +1,21 @@
-import 'package:authentication_repository/authentication_repository.dart';
+import 'package:auth/auth.dart';
 import 'package:bloc/bloc.dart';
 import 'package:log/log.dart';
 import 'package:meta/meta.dart';
+import 'package:ming/auth/entities/user.dart';
+import 'package:ming_api/ming_api.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthenticationRepository _repository;
+  final MingAuth _auth;
+  final MingApiRepository _api;
   bool _isInitialized = false;
 
-  AuthBloc({required AuthenticationRepository repository})
-      : _repository = repository,
+  AuthBloc({required MingAuth auth, required MingApiRepository api})
+      : _auth = auth,
+        _api = api,
         super(AuthInitial()) {
     on<AuthEvent>(((event, emit) async {
       if (event is StartListenAuthStatus) {
@@ -24,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // 자동로그인을 할 경우 logout 필요없이 바로 auth 진행하면 됨.
     // 현재의 경우 session이 계속 유지되기 때문에 logout을 명시 해놓음.
     // todo: 대부분 앱들이 자동 로그인을 default로 제공하는 것 같으니 그냥 유지해도 될 거 같다.
-    repository.logOut().then((value) => add(StartListenAuthStatus()));
+    add(StartListenAuthStatus());
   }
 
   Future<void> _onStartListenAuthStatus(
@@ -33,11 +37,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (_isInitialized) return;
 
-    await emit.forEach(_repository.user, onData: (AuthInfo user) {
-      if (user.isNotEmpty) {
-        return Authenticated(user);
+    _auth.status.listen((status) async {
+      if (status.isLogIn) {
+        try {
+          final response =
+              await _api.client.getUserDetailInfo(withBearer(status.token));
+
+          final userInfo =
+              UserInfo.fromUserDetailInfoResponse(response.result!);
+
+          emit(Authenticated(userInfo));
+
+          return;
+        } catch (e) {
+          Log.e("Getting user detail error", e);
+        }
       }
-      return UnAuthenticated();
+
+      emit(UnAuthenticated());
+    }, onError: (e, stackTrace) {
+      Log.e("Auth handling error.", e, stackTrace);
+      emit(UnAuthenticated());
     });
 
     _isInitialized = true;
@@ -45,6 +65,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLogOut(AuthEvent event, Emitter<AuthState> emit) async {
     Log.d("start");
-    await _repository.logOut();
+    await _auth.logout();
   }
 }

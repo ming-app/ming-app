@@ -18,7 +18,7 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build web
+      - run: flutter build web --dart-define=KAKAO_NATIVE_APP_KEY=${{ secrets.KAKAO_NATIVE_APP_KEY }} --dart-define=KAKAO_RESTAPI_APP_KEY=${{ secrets.KAKAO_RESTAPI_APP_KEY }} --dart-define=AUTH_SECURE_HIVE_KEY=${{ secrets.AUTH_SECURE_HIVE_KEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
