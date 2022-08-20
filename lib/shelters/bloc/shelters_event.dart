@@ -4,7 +4,7 @@ part of 'shelters_bloc.dart';
 abstract class SheltersEvent {}
 
 class SheltersFetch extends SheltersEvent {
-  final bool onlyAuthenticated;
+  final String? regionId;
 
-  SheltersFetch({this.onlyAuthenticated = false});
+  SheltersFetch({this.regionId});
 }

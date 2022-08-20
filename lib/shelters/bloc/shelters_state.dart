@@ -11,23 +11,22 @@ class SheltersError extends SheltersState {
   SheltersError(this.message);
 }
 
+class SheltersOnLoading extends SheltersState {}
+
 class SheltersLoaded extends SheltersState {
-  final List<ShelterProfile> shelters;
-  final bool onlyAuthenticated;
+  final SheltersInfo shelters;
   // todo: infinite scrolling implementation
   // check: https://medium.com/flutter-community/flutter-infinite-list-tutorial-with-flutter-bloc-2fc7a272ec67
   final bool reachMax;
 
-  SheltersLoaded(this.shelters, this.onlyAuthenticated, this.reachMax);
+  SheltersLoaded(this.shelters, this.reachMax);
 
   SheltersLoaded copyWith({
-    List<ShelterProfile>? shelters,
-    bool? onlyAuthenticated,
+    SheltersInfo? shelters,
     bool? reachMax,
   }) {
     return SheltersLoaded(
       shelters ?? this.shelters,
-      onlyAuthenticated ?? this.onlyAuthenticated,
       reachMax ?? this.reachMax,
     );
   }
