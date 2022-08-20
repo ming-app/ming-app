@@ -118,17 +118,12 @@ final router = GoRouter(
     GoRoute(
       path: MingRoutingAddress.shelters.address,
       pageBuilder: (context, state) {
-        final onlyAuthenticated =
-            (state.queryParams['auth'] ?? "false") == "true";
+        final regionId = state.queryParams['regionId'];
 
-        // todo: handle regional query
-        final region = state.queryParams['region'];
-
-        Log.i(
-            'go to shelters page with query auth: $onlyAuthenticated, region: $region');
+        Log.i('go to shelters page with query auth: region: $regionId');
 
         context.read<SheltersBloc>().add(
-              SheltersFetch(onlyAuthenticated: onlyAuthenticated),
+              SheltersFetch(regionId: regionId),
             );
 
         return MaterialPage<void>(
@@ -136,9 +131,7 @@ final router = GoRouter(
           child: RootLayout(
             key: _scaffoldKey,
             currentIndex: MingNavigator.shelters.offset(),
-            child: SheltersPage(
-              onlyAuthenticated: onlyAuthenticated,
-            ),
+            child: const SheltersPage(),
           ),
         );
       },

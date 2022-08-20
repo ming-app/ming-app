@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:log/log.dart';
 import 'package:meta/meta.dart';
-import 'package:ming/shelter_profile/shelter_profile.dart';
+import 'package:ming/shelters/model/shelters_info.dart';
 import 'package:ming_api/ming_api.dart';
 
 part 'shelters_event.dart';
@@ -18,18 +18,30 @@ class SheltersBloc extends Bloc<SheltersEvent, SheltersState> {
     SheltersFetch event,
     Emitter<SheltersState> emit,
   ) async {
-    // todo: auth shelter인지 전체인지 구분하는 작업 api에서 필요
+    emit(SheltersOnLoading());
+
     try {
+      late SheltersInfo info;
+
+      var regions = (await _api.client.getSheltersRegionalInfo()).result!;
       var shelters =
-          (await _api.client.getSheltersOverview()).result?.content ?? [];
+          (await _api.client.getSheltersOverview(regionId: event.regionId))
+                  .result
+                  ?.content ??
+              [];
+
+      if (event.regionId != null) {
+        var region = regions
+            .where((element) => element.region.id == event.regionId)
+            .first;
+        info = SheltersInfo.fromShelterByRegionRespnose(region, shelters);
+      } else {
+        info = SheltersInfo.fromOverallResponse(regions, shelters);
+      }
+
       // todo: implement infinte scrolling.
       emit(
-        SheltersLoaded(
-            shelters
-                .map((e) => ShelterProfile.fromShelterOverviewResponse(e))
-                .toList(),
-            event.onlyAuthenticated,
-            false),
+        SheltersLoaded(info, false),
       );
     } catch (e) {
       Log.e("Error on fetching shelters", e);

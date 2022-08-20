@@ -48,7 +48,8 @@ class ShelterRegionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.go('${MingRoutingAddress.shelters}?region=${region.slug}');
+        context
+            .go('${MingRoutingAddress.shelters}?regionId=${region.regionId}');
       },
       child: Card(
         child: Padding(

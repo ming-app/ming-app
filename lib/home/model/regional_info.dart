@@ -6,14 +6,14 @@ class RegionalInfo {
   final int shelterCount;
   final List<Image> userImages;
   final int volunteerCount;
-  final String slug; // slug to route with query
+  final String regionId; // slug to route with query
 
   RegionalInfo(
     this.name,
     this.shelterCount,
     this.userImages,
     this.volunteerCount,
-    this.slug,
+    this.regionId,
   );
 
   factory RegionalInfo.fromOverview(ShelterByRegionResponse response) {
