@@ -93,7 +93,7 @@ class LoginPopupForm extends StatelessWidget {
 enum LoginMethod {
   google("assets/google_icon.png", Colors.black, Colors.white),
   facebook("assets/facebook_icon.png", Colors.white, Color(0xff4267b2)),
-  kakao("kakao_icon.png", Colors.black, Color(0xffffe812)),
+  kakao("assets/kakao_icon.png", Colors.black, Color(0xffffe812)),
   ;
 
   final String asset;
