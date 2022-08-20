@@ -1,4 +1,3 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ming/album/bloc/album_bloc.dart';
 import 'package:ming/home/cubit/home_cubit.dart';
@@ -10,19 +9,12 @@ import '../auth/bloc/auth_bloc.dart';
 import '../common/constants.dart';
 import '../feed/feed.dart';
 import '../shelters/bloc/shelters_bloc.dart';
-import '../sign_up/sign_up.dart';
 import '../user_profile/cubit/user_profile_cubit.dart';
 
 List<BlocProvider> blocProviders = [
   BlocProvider<PetFeedBloc>(
     create: (context) => PetFeedBloc(
       petRepository: context.read<PetRepository>(),
-    ),
-  ),
-  BlocProvider<SignUpCubit>(
-    create: (context) => SignUpCubit(
-      context.read<AuthenticationRepository>(),
-      context.read<MingApiRepository>(),
     ),
   ),
   BlocProvider<AuthBloc>(
@@ -33,7 +25,7 @@ List<BlocProvider> blocProviders = [
   ),
   BlocProvider<UserProfileCubit>(
     create: (context) => UserProfileCubit(
-      context.read<AuthenticationRepository>(),
+      context.read<MingAuth>(),
       context.read<MingApiRepository>(),
     ),
   ),
@@ -55,9 +47,6 @@ List<BlocProvider> blocProviders = [
 List<RepositoryProvider> repositoryProviers = [
   RepositoryProvider<PetRepository>(
     create: (context) => petRepository,
-  ),
-  RepositoryProvider<AuthenticationRepository>(
-    create: (context) => AuthenticationRepository(),
   ),
   RepositoryProvider<MingApiRepository>(
     create: (context) => MingApiRepository(

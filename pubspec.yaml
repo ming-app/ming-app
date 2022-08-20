@@ -16,8 +16,7 @@ dependencies:
     sdk: flutter
 
   # Internal Packages for ming
-  authentication_repository:
-    path: packages/authentication_repository
+  
   signin_form:
     path: packages/signin_form
   log:

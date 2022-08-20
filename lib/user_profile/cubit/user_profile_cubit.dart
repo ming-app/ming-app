@@ -1,4 +1,4 @@
-import 'package:authentication_repository/authentication_repository.dart';
+import 'package:auth/auth.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:log/log.dart';
@@ -16,7 +16,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     this._api,
   ) : super(UserProfileInitial());
 
-  final AuthenticationRepository _auth;
+  final MingAuth _auth;
   final MingApiRepository _api;
 
   void initialize() {
@@ -26,13 +26,13 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   Future<void> getUserProfile() async {
     emit(UserProfileUpdating());
 
-    if ((await _auth.user.first).isEmpty) {
+    if (!_auth.isLogIn) {
       emit(UserProfileNotLoggedIn());
       return;
     }
 
     try {
-      final token = await _auth.idToken;
+      final token = await _auth.token;
       final response = (await _api.client.getUserDetailInfo(token)).result;
 
       final user = response == null
