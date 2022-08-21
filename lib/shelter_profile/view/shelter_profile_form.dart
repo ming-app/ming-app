@@ -1,6 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/services.dart';
 import 'package:ming/album/view/album_view.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -35,7 +35,12 @@ class ShelterProfileForm extends StatelessWidget {
                       children: [
                         ShelterDescription(shelter),
                         const ShelterCalender(),
-                        ShelterLocation(shelter.manager, shelter.region),
+                        ShelterLocationView(shelter.region),
+                        ShelterManagerView(
+                          shelter.manager.name,
+                          shelter.manager.imageUrl,
+                          shelter.manager.phoneNumber,
+                        ),
                       ],
                     ),
                     flex: 2,
@@ -80,12 +85,23 @@ class ShelterCalender extends StatelessWidget {
             style: theme.textTheme.titleMedium,
           ),
         ),
-        CalendarDatePicker(
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(const Duration(days: 90)),
-          // todo: make this data change usable
-          onDateChanged: (_) {},
+        Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: VolunteerScheduleListView(),
+            ),
+            Expanded(
+              flex: 1,
+              child: CalendarDatePicker(
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(const Duration(days: 90)),
+                // todo: make this data change usable
+                onDateChanged: (_) {},
+              ),
+            ),
+          ],
         ),
         const Divider(),
       ],
@@ -93,16 +109,26 @@ class ShelterCalender extends StatelessWidget {
   }
 }
 
-class ShelterLocation extends StatelessWidget {
-  final ShelterManagerProfile manager;
+// todo
+class VolunteerScheduleListView extends StatelessWidget {
+  const VolunteerScheduleListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class ShelterLocationView extends StatelessWidget {
   final String address;
-  const ShelterLocation(this.manager, this.address, {Key? key})
-      : super(key: key);
+
+  const ShelterLocationView(this.address, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final strings = S.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -118,8 +144,64 @@ class ShelterLocation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (manager.imageUrl != null)
-                ThumbnailImage(Image.network(manager.imageUrl!)),
+              Text(
+                address,
+                style: theme.textTheme.bodyMedium,
+              ),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: address)).then((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(strings.completeCopyingAddress),
+                      ),
+                    );
+                  });
+                },
+                child: Text(strings.copyAddress),
+              ),
+            ],
+          ),
+        ),
+        const Divider(),
+      ],
+    );
+  }
+}
+
+class ShelterManagerView extends StatelessWidget {
+  final String managerName;
+  final String? photoUrl;
+  final String? phoneNumber;
+
+  const ShelterManagerView(
+    this.managerName,
+    this.photoUrl,
+    this.phoneNumber, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final strings = S.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Text(
+            strings.managerTitle,
+            style: theme.textTheme.titleMedium,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              if (photoUrl != null) ThumbnailImage(Image.network(photoUrl!)),
               const SizedBox(
                 width: 10,
               ),
@@ -130,27 +212,18 @@ class ShelterLocation extends StatelessWidget {
                     strings.shelterOwner,
                     style: theme.textTheme.caption,
                   ),
-                  Text(manager.name),
+                  Text(managerName),
                 ],
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () => launchUrlString("tel:${manager.phoneNumber}"),
+                onPressed: phoneNumber == null
+                    ? null
+                    : () => launchUrlString("tel:$phoneNumber"),
                 child: Text(strings.doCall),
               ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 300,
-          child: GoogleMap(
-            initialCameraPosition: CameraPosition(
-                target: LatLng(37.295254, 127.013930), zoom: 11.0),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text(address),
         ),
         const Divider(),
       ],

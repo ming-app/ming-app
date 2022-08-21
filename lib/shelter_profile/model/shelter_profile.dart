@@ -18,12 +18,12 @@ class ShelterProfile {
     required this.name,
     this.numberOfCats = 0,
     this.numberOfDogs = 0,
-    this.numberOfVolunteers = 0,
+    required this.numberOfVolunteers,
     this.averageRate = 5.0,
     this.reviewCount = 0,
     required this.region,
     required this.manager,
-    this.desc = "",
+    required this.desc,
     required this.thumbnailUrl,
   });
 
@@ -31,6 +31,13 @@ class ShelterProfile {
       ShelterOverviewResponse response) {
     return ShelterProfile(
       name: response.name,
+      numberOfCats: response.animalOverview
+          .firstWhere((element) => element.type == AnimalType.cat)
+          .count,
+      numberOfDogs: response.animalOverview
+          .firstWhere((element) => element.type == AnimalType.dog)
+          .count,
+      numberOfVolunteers: response.volunteerOverview.count,
       averageRate: 5.0,
       reviewCount: 30,
       region: response.location,
