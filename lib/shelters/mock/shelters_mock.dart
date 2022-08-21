@@ -12,6 +12,7 @@ final mockShelters = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
     manager: ShelterManagerProfile(name: "매니저"),
+    desc: "",
   ),
   ShelterProfile(
     name: "보호소 이름2",
@@ -22,6 +23,7 @@ final mockShelters = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
     manager: ShelterManagerProfile(name: "매니저"),
+    desc: "",
   ),
   ShelterProfile(
     name: "보호소 이름3",
@@ -31,6 +33,7 @@ final mockShelters = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
     manager: ShelterManagerProfile(name: "매니저"),
+    desc: "",
   ),
 ];
 

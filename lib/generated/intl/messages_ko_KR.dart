@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "anbandonedDogString": MessageLookupByLibrary.simpleMessage("유기견"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Ming"),
         "cat": MessageLookupByLibrary.simpleMessage("고양이"),
+        "completeCopyingAddress":
+            MessageLookupByLibrary.simpleMessage("주소 복사 완료"),
+        "copyAddress": MessageLookupByLibrary.simpleMessage("주소 복사"),
         "date": MessageLookupByLibrary.simpleMessage("날짜"),
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
         "dog": MessageLookupByLibrary.simpleMessage("강아지"),
@@ -54,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("로그인에 성공하였습니다."),
         "loginTitle": MessageLookupByLibrary.simpleMessage("로그인 또는 회원가입"),
         "maleString": MessageLookupByLibrary.simpleMessage("수컷"),
+        "managerTitle": MessageLookupByLibrary.simpleMessage("관리자"),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
         "numberOfVolunteers": MessageLookupByLibrary.simpleMessage("봉사인원"),
         "onTheConstruction":

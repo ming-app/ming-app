@@ -589,6 +589,36 @@ class S {
       args: [],
     );
   }
+
+  /// `주소 복사`
+  String get copyAddress {
+    return Intl.message(
+      '주소 복사',
+      name: 'copyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `주소 복사 완료`
+  String get completeCopyingAddress {
+    return Intl.message(
+      '주소 복사 완료',
+      name: 'completeCopyingAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `관리자`
+  String get managerTitle {
+    return Intl.message(
+      '관리자',
+      name: 'managerTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
