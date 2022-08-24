@@ -84,8 +84,15 @@ abstract class MingApiClient {
     @Header("Authorization") String token,
   );
 
-  @GET("api-internal/v1/users/token")
+  @GET("api/v1/users/token")
   Future<ApiResponse<AuthToken>> getAccessTokenFromKakaoCode(
     @Query("code") String code,
+    @Query("redirectUrl") String redirectUrl,
+  );
+
+  @GET("")
+  Future<AuthToken> refreshToken(
+    @Header("refreshToken") String token,
+    @Header("loginType") String loginType,
   );
 }

@@ -9,18 +9,17 @@ import 'package:log/log.dart';
 import 'package:ming_api/ming_api.dart';
 import 'package:universal_html/html.dart';
 
+part 'auth_impl.g.dart';
+
 class MingAuthImpl implements MingAuth {
   static const String _accessTokenKey = "ACCESS_TOKEN";
-  static const String _refreshTokenKey = "REFRESH_TOKEN";
-  static const String _accessTokenExpireKey =
-      "ACCESS_TOKEN_EXPIRE_SECOND_EPOCH";
-  static const String _refreshTokenExpireKey =
-      "REFRESH_TOKEN_EXPIRE_SECOND_EPOCH";
   static const int safeTimeForTokenInSec = 20 * 60;
 
   final String secureKey;
   final MingApiRepository api;
   final HiveInterface hive;
+
+  bool _initialized = false;
 
   MingAuthImpl(
     this.api,
@@ -54,7 +53,8 @@ class MingAuthImpl implements MingAuth {
       );
 
       final code = Uri.parse(result).queryParameters['code']!;
-      final response = await api.client.getAccessTokenFromKakaoCode(code);
+      final response =
+          await api.client.getAccessTokenFromKakaoCode(code, redirectTarget);
       final authToken = response.result!;
 
       // store token to hive
@@ -86,18 +86,32 @@ class MingAuthImpl implements MingAuth {
       throw AuthException("Currently Not logged in");
     }
 
-    String accessToken = box.get(_accessTokenKey);
-    int expireTime = box.get(_accessTokenExpireKey);
+    AuthHiveObject accessToken = box.get(_accessTokenKey);
+    int expireTime = accessToken.expiresIn;
 
     int timeDiff = expireTime - _currentTimeInSec;
 
     if (timeDiff < safeTimeForTokenInSec) {
       // todo: try to refresh token
-      logout();
-      throw AuthException("Access token expired");
+      try {
+        String refreshToken = accessToken.refreshToken;
+
+        final token = await api.client.refreshToken(
+          refreshToken,
+          "KAKAO_TALK",
+        );
+
+        _storeToken(token);
+        return token.accessToken;
+      } catch (e) {
+        Log.e("Error on getting refreshed accessToken", e);
+
+        logout();
+        throw AuthException("Access token expired");
+      }
     }
 
-    return accessToken;
+    return accessToken.accessToken;
   }
 
   @override
@@ -114,9 +128,17 @@ class MingAuthImpl implements MingAuth {
   int get _currentTimeInSec =>
       (DateTime.now().millisecondsSinceEpoch / 60) as int;
 
-  Future<Box<String>> get _box async {
-    if (Hive.isBoxOpen("AuthStore")) return Hive.box("AuthStore");
-    return Hive.openBox(
+  Future<Box<AuthHiveObject>> get _box async {
+    if (!_initialized) {
+      Hive.init(null);
+      Hive.registerAdapter(AuthHiveObjectAdapter());
+      _initialized = true;
+    }
+
+    if (Hive.isBoxOpen("AuthStore")) {
+      return Hive.box<AuthHiveObject>("AuthStore");
+    }
+    return Hive.openBox<AuthHiveObject>(
       "AuthStore",
       encryptionCipher: HiveAesCipher(base64Url.decode(secureKey)),
     );
@@ -125,11 +147,7 @@ class MingAuthImpl implements MingAuth {
   Future<void> _storeToken(AuthToken token) async {
     Box box = await _box;
 
-    await box.put(_accessTokenKey, token.accessToken);
-    await box.put(_refreshTokenKey, token.refreshToken);
-    await box.put(_accessTokenExpireKey, token.expiresIn + _currentTimeInSec);
-    await box.put(_refreshTokenExpireKey,
-        token.refreshTokenExpiresIn + _currentTimeInSec);
+    await box.put(_accessTokenKey, AuthHiveObject.fromAuth(token));
   }
 
   Future<void> _deleteToken() async {
@@ -137,7 +155,38 @@ class MingAuthImpl implements MingAuth {
 
     await box.deleteAll([
       _accessTokenKey,
-      _refreshTokenKey,
     ]);
+  }
+}
+
+@HiveType(typeId: 1)
+class AuthHiveObject {
+  @HiveField(0)
+  String accessToken;
+  @HiveField(1)
+  String refreshToken;
+  @HiveField(2)
+  String tokenType;
+  @HiveField(3)
+  int expiresIn;
+  @HiveField(4)
+  int refreshTokenExpiresIn;
+
+  AuthHiveObject({
+    required this.accessToken,
+    required this.refreshToken,
+    required this.expiresIn,
+    required this.refreshTokenExpiresIn,
+    required this.tokenType,
+  });
+
+  factory AuthHiveObject.fromAuth(AuthToken token) {
+    return AuthHiveObject(
+      accessToken: token.accessToken,
+      refreshToken: token.refreshToken,
+      expiresIn: token.expiresIn,
+      refreshTokenExpiresIn: token.refreshTokenExpiresIn,
+      tokenType: token.tokenType,
+    );
   }
 }
