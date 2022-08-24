@@ -244,18 +244,42 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<AuthToken>> getAccessTokenFromKakaoCode(code) async {
+  Future<ApiResponse<AuthToken>> getAccessTokenFromKakaoCode(
+      code, redirectUrl) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'code': code};
+    final queryParameters = <String, dynamic>{
+      r'code': code,
+      r'redirectUrl': redirectUrl
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse<AuthToken>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, 'api-internal/v1/users/token',
+                .compose(_dio.options, 'api/v1/users/token',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ApiResponse<AuthToken>.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AuthToken> refreshToken(token, loginType) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'refreshToken': token,
+      r'loginType': loginType
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AuthToken>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AuthToken.fromJson(_result.data!);
     return value;
   }
 

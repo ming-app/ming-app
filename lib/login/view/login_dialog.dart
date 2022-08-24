@@ -32,7 +32,7 @@ class LoginPopupForm extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSucess) {
-          SystemNavigator.pop();
+          Navigator.pop(context);
         } else if (state is LoginFailed) {
           // todo: make proper error page.
           context.go("error/");

@@ -54,7 +54,6 @@ dependencies:
   html: ^0.15.0
   flutter_web_auth: ^0.4.1
   
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
