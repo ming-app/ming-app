@@ -70,19 +70,22 @@ abstract class MingApiClient {
   @POST("api/v1/volunteers")
   Future<ApiResponse<String>> applyVolunteerActivity(
     @Header("Authorization") String token,
-    @Body() VolunteerRequest request,
-  );
+    @Body() VolunteerRequest request, {
+    @Header("loginType") String type = "KAKAO_TALK",
+  });
 
   // User
   @GET("api/v1/users/info")
   Future<ApiResponse<UserInfoResponse>> getUserInfo(
-    @Header("Authorization") String token,
-  );
+    @Header("Authorization") String token, {
+    @Header("loginType") String type = "KAKAO_TALK",
+  });
 
   @GET("api/v1/users/detail-info")
   Future<ApiResponse<UserDetailInfoResponse>> getUserDetailInfo(
-    @Header("Authorization") String token,
-  );
+    @Header("Authorization") String token, {
+    @Header("loginType") String type = "KAKAO_TALK",
+  });
 
   @GET("api/v1/users/token")
   Future<ApiResponse<AuthToken>> getAccessTokenFromKakaoCode(

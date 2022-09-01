@@ -192,10 +192,14 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<String>> applyVolunteerActivity(token, request) async {
+  Future<ApiResponse<String>> applyVolunteerActivity(token, request,
+      {type = "KAKAO_TALK"}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'loginType': type
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
@@ -210,10 +214,14 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<UserInfoResponse>> getUserInfo(token) async {
+  Future<ApiResponse<UserInfoResponse>> getUserInfo(token,
+      {type = "KAKAO_TALK"}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'loginType': type
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -227,10 +235,14 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<UserDetailInfoResponse>> getUserDetailInfo(token) async {
+  Future<ApiResponse<UserDetailInfoResponse>> getUserDetailInfo(token,
+      {type = "KAKAO_TALK"}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'loginType': type
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
