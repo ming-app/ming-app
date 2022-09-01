@@ -22,6 +22,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await _onStartListenAuthStatus(event, emit);
       } else if (event is LogOut) {
         await _onLogOut(event, emit);
+      } else if (event is AuthenticateEvent) {
+        _onAuthenticateEvent(event, emit);
+      } else if (event is AuthLost) {
+        emit(UnAuthenticated());
       }
     }));
 
@@ -29,6 +33,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // 현재의 경우 session이 계속 유지되기 때문에 logout을 명시 해놓음.
     // todo: 대부분 앱들이 자동 로그인을 default로 제공하는 것 같으니 그냥 유지해도 될 거 같다.
     add(StartListenAuthStatus());
+  }
+
+  void _onAuthenticateEvent(AuthenticateEvent event, Emitter<AuthState> emit) {
+    emit(Authenticated(event.userInfo));
   }
 
   Future<void> _onStartListenAuthStatus(
@@ -46,18 +54,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           final userInfo =
               UserInfo.fromUserDetailInfoResponse(response.result!);
 
-          emit(Authenticated(userInfo));
-
+          // rather than emit state, need to generate new event because listen will not be in the
+          // event handler state.
+          add(AuthenticateEvent(userInfo));
           return;
         } catch (e) {
           Log.e("Getting user detail error", e);
         }
       }
 
-      emit(UnAuthenticated());
+      add(AuthLost());
     }, onError: (e, stackTrace) {
       Log.e("Auth handling error.", e, stackTrace);
-      emit(UnAuthenticated());
+      add(AuthLost());
     });
 
     _isInitialized = true;

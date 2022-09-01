@@ -11,6 +11,8 @@ import 'package:universal_html/html.dart';
 
 part 'auth_impl.g.dart';
 
+int get _currentTimeInSec => DateTime.now().millisecondsSinceEpoch ~/ 60;
+
 class MingAuthImpl implements MingAuth {
   static const String _accessTokenKey = "ACCESS_TOKEN";
   static const int safeTimeForTokenInSec = 20 * 60;
@@ -60,6 +62,8 @@ class MingAuthImpl implements MingAuth {
       // store token to hive
       await _storeToken(authToken);
       _statusController.sink.add(AuthStatus(true, authToken.accessToken));
+
+      _isLogIn = true;
 
       return authToken.accessToken;
     } catch (e) {
@@ -125,9 +129,6 @@ class MingAuthImpl implements MingAuth {
 
   var _isLogIn = false;
 
-  int get _currentTimeInSec =>
-      (DateTime.now().millisecondsSinceEpoch / 60) as int;
-
   Future<Box<AuthHiveObject>> get _box async {
     if (!_initialized) {
       Hive.init(null);
@@ -184,8 +185,8 @@ class AuthHiveObject {
     return AuthHiveObject(
       accessToken: token.accessToken,
       refreshToken: token.refreshToken,
-      expiresIn: token.expiresIn,
-      refreshTokenExpiresIn: token.refreshTokenExpiresIn,
+      expiresIn: token.expiresIn + _currentTimeInSec,
+      refreshTokenExpiresIn: token.refreshTokenExpiresIn + _currentTimeInSec,
       tokenType: token.tokenType,
     );
   }

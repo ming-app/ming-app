@@ -33,7 +33,8 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
     try {
       final token = await _auth.token;
-      final response = (await _api.client.getUserDetailInfo(token)).result;
+      final response =
+          (await _api.client.getUserDetailInfo(withBearer(token))).result;
 
       final user = response == null
           ? UserProfile.empty()
