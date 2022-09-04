@@ -91,3 +91,29 @@ Map<String, dynamic> _$ShelterImagesResponseToJson(
       'id': instance.id,
       'thumbnailUrl': instance.thumbnailUrl,
     };
+
+ShelterDetailResponse _$ShelterDetailResponseFromJson(
+        Map<String, dynamic> json) =>
+    ShelterDetailResponse(
+      json['id'] as String,
+      json['name'] as String,
+      json['introduction'] as String,
+      json['location'] as String,
+      json['phoneNumber'] as String,
+      json['adminName'] as String,
+      json['snsUrl'] as String?,
+      ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShelterDetailResponseToJson(
+        ShelterDetailResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'introduction': instance.introduction,
+      'location': instance.location,
+      'phoneNumber': instance.phoneNumber,
+      'adminName': instance.adminName,
+      'image': instance.image,
+      'snsUrl': instance.snsUrl,
+    };
