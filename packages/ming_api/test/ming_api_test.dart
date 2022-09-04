@@ -44,6 +44,12 @@ void main() {
       expect(result.result!.content.isNotEmpty, true);
     });
 
+    test("GET v1/shelters/{id}", () async {
+      var result = await repository.client.getShelterDetail("1");
+
+      expect(result.result != null, true);
+    });
+
     test("GET v1/shelters/{id}/animals, Positive", () async {
       var result = await repository.client.getAnimalInShelter("1");
 

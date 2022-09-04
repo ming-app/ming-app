@@ -40,6 +40,11 @@ abstract class MingApiClient {
     @Query("pageSize") int? pageSize,
   });
 
+  @GET("api/v1/shelters/{id}")
+  Future<ApiResponse<ShelterDetailResponse>> getShelterDetail(
+    @Path() String id,
+  );
+
   @GET("api/v1/shelters/{id}/animals")
   Future<ApiResponse<PageImpl<AnimalOverviewResponse>>> getAnimalInShelter(
     @Path() String id,

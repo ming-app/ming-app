@@ -43,6 +43,8 @@ class _Converter<T> implements JsonConverter<T?, Object?> {
       return UserDetailInfoResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, RegionResponse?>()) {
       return RegionResponse.fromJson(json as Map<String, dynamic>) as T;
+    } else if (typesEqual<T, ShelterDetailResponse?>()) {
+      return ShelterDetailResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, AnimalDetailResponse?>()) {
       return AnimalDetailResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, List<RegionResponse>?>()) {

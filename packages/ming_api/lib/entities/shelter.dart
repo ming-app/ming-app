@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ming_api/entities/image.dart';
 
 import '../common/utils.dart';
 import 'entities.dart';
@@ -78,4 +79,31 @@ class ShelterImagesResponse {
   factory ShelterImagesResponse.fromJson(Map<String, dynamic> json) =>
       _$ShelterImagesResponseFromJson(json);
   Map<String, dynamic> toJson() => _$ShelterImagesResponseToJson(this);
+}
+
+@JsonSerializable()
+class ShelterDetailResponse {
+  final String id;
+  final String name;
+  final String introduction;
+  final String location;
+  final String phoneNumber;
+  final String adminName;
+  final ImageResponse image;
+  final String? snsUrl;
+
+  ShelterDetailResponse(
+    this.id,
+    this.name,
+    this.introduction,
+    this.location,
+    this.phoneNumber,
+    this.adminName,
+    this.snsUrl,
+    this.image,
+  );
+
+  factory ShelterDetailResponse.fromJson(Map<String, dynamic> json) =>
+      _$ShelterDetailResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ShelterDetailResponseToJson(this);
 }
