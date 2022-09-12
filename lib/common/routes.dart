@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:log/log.dart';
 import 'package:ming/common/ui/on_the_construction.dart';
+import 'package:ming/common/ui_sample_page.dart';
 import 'package:ming/pet_profile/view/pet_profile_page.dart';
 import 'ui/error_page.dart';
 import '../shelter_profile/view/shelter_profile_page.dart';
@@ -31,6 +33,9 @@ enum MingRoutingAddress {
   petId(':petId'),
   // User
   myProfile('/users/me'),
+
+  // ui sample testting
+  uiSample('/sample'),
   ;
 
   final String address;
@@ -189,6 +194,21 @@ final router = GoRouter(
           },
         ),
       ],
+    ),
+    // UI sample page
+    GoRoute(
+      path: MingRoutingAddress.uiSample.address,
+      pageBuilder: (context, state) {
+        Log.i('go to UI sample page.');
+        return MaterialPage<void>(
+          key: _pageKey,
+          child: RootLayout(
+            key: _scaffoldKey,
+            currentIndex: MingNavigator.home.offset(),
+            child: const UiSamplePage(),
+          ),
+        );
+      },
     ),
   ],
 );

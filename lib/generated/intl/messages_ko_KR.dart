@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ageString": MessageLookupByLibrary.simpleMessage("살"),
         "anbandonedDogString": MessageLookupByLibrary.simpleMessage("유기견"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Ming"),
+        "cancel": MessageLookupByLibrary.simpleMessage("취소"),
         "cat": MessageLookupByLibrary.simpleMessage("고양이"),
         "completeCopyingAddress":
             MessageLookupByLibrary.simpleMessage("주소 복사 완료"),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("날짜"),
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
         "dog": MessageLookupByLibrary.simpleMessage("강아지"),
+        "edit": MessageLookupByLibrary.simpleMessage("수정"),
         "errorMessage": MessageLookupByLibrary.simpleMessage("에러가 발생했어요."),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "femaleString": MessageLookupByLibrary.simpleMessage("암컷"),
@@ -70,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "regionString": MessageLookupByLibrary.simpleMessage("봉사지역"),
         "reserveVolunteer": MessageLookupByLibrary.simpleMessage("봉사예약"),
         "review": MessageLookupByLibrary.simpleMessage("리뷰"),
+        "save": MessageLookupByLibrary.simpleMessage("저장"),
         "settingPageTitle": MessageLookupByLibrary.simpleMessage("세팅 페이지"),
         "share": MessageLookupByLibrary.simpleMessage("공유하기"),
         "shelter": MessageLookupByLibrary.simpleMessage("보호소"),
