@@ -619,6 +619,36 @@ class S {
       args: [],
     );
   }
+
+  /// `수정`
+  String get edit {
+    return Intl.message(
+      '수정',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `취소`
+  String get cancel {
+    return Intl.message(
+      '취소',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `저장`
+  String get save {
+    return Intl.message(
+      '저장',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
