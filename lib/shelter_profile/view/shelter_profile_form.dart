@@ -23,7 +23,7 @@ class ShelterProfileForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AlbumView(),
+            AlbumView(shelter.id, true),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(

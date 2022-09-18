@@ -2,6 +2,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 
 @CopyWith()
 class PetProfile {
+  final String id;
   final String? imageUrl;
   final String name;
   final bool isFemale;
@@ -19,6 +20,7 @@ class PetProfile {
   final String shelterId;
 
   PetProfile({
+    required this.id,
     required this.name,
     required this.isFemale,
     required this.isDog,
