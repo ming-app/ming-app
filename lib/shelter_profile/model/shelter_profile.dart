@@ -13,7 +13,7 @@ class ShelterProfile {
   final String region;
   final ShelterManagerProfile manager;
   final String desc;
-  final String thumbnailUrl;
+  final String imageUrl;
 
   ShelterProfile({
     required this.id,
@@ -26,7 +26,7 @@ class ShelterProfile {
     required this.region,
     required this.manager,
     required this.desc,
-    required this.thumbnailUrl,
+    required this.imageUrl,
   });
 
   factory ShelterProfile.fromShelterOverviewResponse(
@@ -49,7 +49,7 @@ class ShelterProfile {
         phoneNumber: response.phoneNumber,
       ),
       desc: response.introduction,
-      thumbnailUrl: response.image.url,
+      imageUrl: response.image.url,
     );
   }
 }
