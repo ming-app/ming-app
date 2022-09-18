@@ -9,7 +9,7 @@ final mockShelters = [
     numberOfCats: 3,
     numberOfDogs: 20,
     numberOfVolunteers: 4,
-    thumbnailUrl:
+    imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
     manager: ShelterManagerProfile(name: "매니저"),
@@ -21,7 +21,7 @@ final mockShelters = [
     numberOfDogs: 13,
     numberOfCats: 21,
     numberOfVolunteers: 13,
-    thumbnailUrl:
+    imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
     manager: ShelterManagerProfile(name: "매니저"),
@@ -32,7 +32,7 @@ final mockShelters = [
     name: "보호소 이름3",
     numberOfDogs: 21,
     numberOfVolunteers: 31,
-    thumbnailUrl:
+    imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
     manager: ShelterManagerProfile(name: "매니저"),

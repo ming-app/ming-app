@@ -7,6 +7,25 @@ final _theme = ThemeData(
     seedColor: Colors.black,
     brightness: Brightness.light,
   ),
+  cardTheme: CardTheme(
+    surfaceTintColor: Colors.white,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+  ),
+  textTheme: const TextTheme(
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    bodySmall: TextStyle(
+      color: Colors.black,
+      fontSize: 14,
+    ),
+    labelSmall: TextStyle(
+      color: Color(0xff7a7a7a),
+      fontSize: 14,
+    ),
+  ),
 );
 
 final lightTheme = _theme.copyWith(

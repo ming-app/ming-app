@@ -59,12 +59,7 @@ class _PetsFormState extends State<PetsForm> {
                 return false;
               })
               .map((e) => PetCardContent(
-                    name: e.name,
-                    isFemale: e.isFemale,
-                    age: e.age,
-                    desc: e.desc,
-                    numberOfVolunteer: e.numberOfVolunteer,
-                    imageUrl: e.imageUrl,
+                    e,
                   ))
               .toList(),
         ),
