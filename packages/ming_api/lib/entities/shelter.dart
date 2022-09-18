@@ -11,10 +11,10 @@ class ShelterOverviewResponse {
   final String id;
   final String name;
   final String adminName;
-  final String description;
+  final String introduction;
   final String phoneNumber;
   final String location;
-  final String thumbnailUrl;
+  final ImageResponse image;
   final UserListOverviewResponse volunteerOverview;
   @ListConverter<AnimalInShelterOverview>()
   final List<AnimalInShelterOverview> animalOverview;
@@ -23,10 +23,10 @@ class ShelterOverviewResponse {
     this.id,
     this.name,
     this.adminName,
-    this.description,
+    this.introduction,
     this.phoneNumber,
     this.location,
-    this.thumbnailUrl,
+    this.image,
     this.volunteerOverview,
     this.animalOverview,
   );
