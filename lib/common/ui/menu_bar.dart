@@ -31,7 +31,7 @@ class MenuBar extends StatelessWidget implements PreferredSizeWidget {
                   onTap: () => context.go(MingRoutingAddress.home.address),
                   child: Text(
                     S.of(context).appTitle,
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.displayMedium,
                   ),
                 ),
               ),
@@ -74,20 +74,27 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => context.go(dest.routes.address),
-      child: Text(
-        dest.label,
-        style: TextStyle(
-          decoration:
-              isSelected ? TextDecoration.underline : TextDecoration.none,
+    return Padding(
+      padding: const EdgeInsets.only(right: 30),
+      child: InkWell(
+        onTap: () => context.go(dest.routes.address),
+        child: Column(
+          children: [
+            Text(
+              dest.label,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              width: (15 * dest.label.length).toDouble(),
+              height: 2,
+              color: isSelected ? Colors.black : Colors.transparent,
+            ),
+          ],
         ),
       ),
-      style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 16,
-      )),
     );
   }
 }
@@ -109,7 +116,10 @@ class UserMenuItem extends StatelessWidget {
         return TextButton(
           onPressed: () =>
               showDialog(context: context, builder: (_) => LoginDialog()),
-          child: Text(S.of(context).loginButtonText),
+          child: Text(
+            S.of(context).loginButtonText,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
         );
       },
     );

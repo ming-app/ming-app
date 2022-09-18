@@ -12,10 +12,18 @@ final _theme = ThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   ),
   textTheme: const TextTheme(
+    displayMedium: TextStyle(
+      color: Colors.black,
+      fontSize: 24,
+    ),
     titleMedium: TextStyle(
       color: Colors.black,
       fontSize: 20,
       fontWeight: FontWeight.bold,
+    ),
+    bodyMedium: TextStyle(
+      color: Colors.black,
+      fontSize: 16,
     ),
     bodySmall: TextStyle(
       color: Colors.black,
