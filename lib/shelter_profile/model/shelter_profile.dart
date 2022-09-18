@@ -48,8 +48,8 @@ class ShelterProfile {
         name: response.adminName,
         phoneNumber: response.phoneNumber,
       ),
-      desc: response.description,
-      thumbnailUrl: response.thumbnailUrl,
+      desc: response.introduction,
+      thumbnailUrl: response.image.url,
     );
   }
 }

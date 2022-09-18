@@ -12,10 +12,10 @@ ShelterOverviewResponse _$ShelterOverviewResponseFromJson(
       json['id'] as String,
       json['name'] as String,
       json['adminName'] as String,
-      json['description'] as String,
+      json['introduction'] as String,
       json['phoneNumber'] as String,
       json['location'] as String,
-      json['thumbnailUrl'] as String,
+      ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
       UserListOverviewResponse.fromJson(
           json['volunteerOverview'] as Map<String, dynamic>),
       (json['animalOverview'] as List<dynamic>)
@@ -30,10 +30,10 @@ Map<String, dynamic> _$ShelterOverviewResponseToJson(
       'id': instance.id,
       'name': instance.name,
       'adminName': instance.adminName,
-      'description': instance.description,
+      'introduction': instance.introduction,
       'phoneNumber': instance.phoneNumber,
       'location': instance.location,
-      'thumbnailUrl': instance.thumbnailUrl,
+      'image': instance.image,
       'volunteerOverview': instance.volunteerOverview,
       'animalOverview': instance.animalOverview,
     };
