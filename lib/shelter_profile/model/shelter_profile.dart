@@ -3,6 +3,7 @@ import 'package:ming_api/ming_api.dart';
 
 @CopyWith()
 class ShelterProfile {
+  final String id;
   final String name;
   final int numberOfCats;
   final int numberOfDogs;
@@ -15,6 +16,7 @@ class ShelterProfile {
   final String thumbnailUrl;
 
   ShelterProfile({
+    required this.id,
     required this.name,
     this.numberOfCats = 0,
     this.numberOfDogs = 0,
@@ -30,6 +32,7 @@ class ShelterProfile {
   factory ShelterProfile.fromShelterOverviewResponse(
       ShelterOverviewResponse response) {
     return ShelterProfile(
+      id: response.id,
       name: response.name,
       numberOfCats: response.animalOverview
           .firstWhere((element) => element.type == AnimalType.cat)

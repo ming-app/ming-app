@@ -38,7 +38,11 @@ List<BlocProvider> blocProviders = [
   BlocProvider<HomeCubit>(
     create: (context) => HomeCubit(context.read<MingApiRepository>()),
   ),
-  BlocProvider<AlbumBloc>(create: (context) => AlbumBloc()),
+  BlocProvider<AlbumBloc>(
+    create: (context) => AlbumBloc(
+      context.read<MingApiRepository>(),
+    ),
+  ),
   BlocProvider<LoginCubit>(
     create: (context) => LoginCubit(context.read<MingAuth>()),
   ),

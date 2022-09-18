@@ -25,7 +25,7 @@ class PetProfileForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AlbumView(),
+            AlbumView(pet.id, false),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(

@@ -4,6 +4,7 @@ import '../model/shelters_info.dart';
 
 final mockShelters = [
   ShelterProfile(
+    id: "1",
     name: "보호소 이름1",
     numberOfCats: 3,
     numberOfDogs: 20,
@@ -15,6 +16,7 @@ final mockShelters = [
     desc: "",
   ),
   ShelterProfile(
+    id: "2",
     name: "보호소 이름2",
     numberOfDogs: 13,
     numberOfCats: 21,
@@ -26,6 +28,7 @@ final mockShelters = [
     desc: "",
   ),
   ShelterProfile(
+    id: "3",
     name: "보호소 이름3",
     numberOfDogs: 21,
     numberOfVolunteers: 31,

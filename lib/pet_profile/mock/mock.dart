@@ -1,6 +1,7 @@
 import '../model/pet_profile.dart';
 
 final petMock = PetProfile(
+  id: "1",
   name: "가디",
   isFemale: true,
   age: 3,

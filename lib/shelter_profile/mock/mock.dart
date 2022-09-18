@@ -2,6 +2,7 @@ import '../../pet_profile/model/pet_profile.dart';
 import '../model/shelter_profile.dart';
 
 final shelterMock = ShelterProfile(
+  id: "1",
   name: "밍 보호소",
   numberOfCats: 30,
   numberOfDogs: 23,
@@ -30,6 +31,7 @@ final shelterMock = ShelterProfile(
 
 final petsMock = [
   PetProfile(
+    id: "1",
     name: "가디",
     isFemale: true,
     age: 3,
@@ -48,6 +50,7 @@ final petsMock = [
     shelterId: 'shelterId',
   ),
   PetProfile(
+    id: "2",
     name: "이브이",
     isFemale: true,
     isDog: false,
