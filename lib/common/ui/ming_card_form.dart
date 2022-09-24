@@ -1,14 +1,54 @@
 import 'package:flutter/material.dart';
 
-class MingCard extends StatefulWidget {
+class MingImageCard extends StatelessWidget {
   final ImageProvider<Object>? image;
+  final Function()? onTap;
+  final Widget? child;
+
+  const MingImageCard({
+    Key? key,
+    this.onTap,
+    this.image,
+    this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MingCard(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 197,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: image != null
+                      ? Ink.image(
+                          image: image!,
+                          fit: BoxFit.cover,
+                          child: Container(),
+                        )
+                      : Container(),
+                ),
+              ],
+            ),
+          ),
+          child ?? Container(),
+        ],
+      ),
+    );
+  }
+}
+
+class MingCard extends StatefulWidget {
   final Function()? onTap;
   final Widget? child;
 
   const MingCard({
     Key? key,
     this.onTap,
-    this.image,
     this.child,
   }) : super(key: key);
 
@@ -51,28 +91,7 @@ class _MingCardState extends State<MingCard> {
           child: Card(
             color: Colors.white,
             clipBehavior: Clip.antiAlias,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 197,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: widget.image != null
-                            ? Ink.image(
-                                image: widget.image!,
-                                fit: BoxFit.cover,
-                                child: Container(),
-                              )
-                            : Container(),
-                      ),
-                    ],
-                  ),
-                ),
-                widget.child ?? Container(),
-              ],
-            ),
+            child: widget.child ?? Container(),
           ),
         ),
       ),

@@ -97,7 +97,7 @@ class _UiSamplePageState extends State<UiSamplePage> {
           ),
           Divider(),
           Text("Card default format"),
-          MingCard(
+          MingImageCard(
             onTap: () {},
           ),
 

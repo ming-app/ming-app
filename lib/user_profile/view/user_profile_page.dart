@@ -12,38 +12,32 @@ class UserProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("유저 정보"),
-        centerTitle: false,
-      ),
-      body: BlocBuilder<UserProfileCubit, UserProfileState>(
-        builder: (context, state) {
-          if (state is UserProfileError) {
-            context.loaderOverlay.hide();
-            return ErrorPage(message: state.message);
-          }
+    return BlocBuilder<UserProfileCubit, UserProfileState>(
+      builder: (context, state) {
+        if (state is UserProfileError) {
+          context.loaderOverlay.hide();
+          return ErrorPage(message: state.message);
+        }
 
-          if (state is UserProfileInitial) {
-            context.read<UserProfileCubit>().getUserProfile();
-            context.loaderOverlay.show();
-            return UserProfileForm(state.user);
-          }
-
-          if (state is UserProfileNotLoggedIn) {
-            context.loaderOverlay.hide();
-            return const NotLoggedInForm();
-          }
-
-          if (state is UserProfileUpdating) {
-            context.loaderOverlay.show();
-          } else {
-            context.loaderOverlay.hide();
-          }
-
+        if (state is UserProfileInitial) {
+          context.read<UserProfileCubit>().getUserProfile();
+          context.loaderOverlay.show();
           return UserProfileForm(state.user);
-        },
-      ),
+        }
+
+        if (state is UserProfileNotLoggedIn) {
+          context.loaderOverlay.hide();
+          return const NotLoggedInForm();
+        }
+
+        if (state is UserProfileUpdating) {
+          context.loaderOverlay.show();
+        } else {
+          context.loaderOverlay.hide();
+        }
+
+        return UserProfileForm(state.user);
+      },
     );
   }
 }

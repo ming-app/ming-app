@@ -109,4 +109,14 @@ enum UserGender {
   @JsonValue("MALE")
   male,
   ;
+
+  @override
+  String toString() {
+    if (this == female) {
+      return "여성";
+    } else if (this == male) {
+      return "남성";
+    }
+    return "없음";
+  }
 }

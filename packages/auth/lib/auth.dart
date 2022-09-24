@@ -7,7 +7,7 @@ import 'package:ming_api/ming_api.dart';
 abstract class MingAuth {
   Stream<AuthStatus> get status;
 
-  bool get isLogIn;
+  Future<bool> get isLogIn;
   Future<String> get token;
 
   Future<String> loginUsingKakao(String key);

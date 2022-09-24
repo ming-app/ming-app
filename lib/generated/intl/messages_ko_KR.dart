@@ -23,12 +23,14 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "abandonedCatString": MessageLookupByLibrary.simpleMessage("유기묘"),
+        "address": MessageLookupByLibrary.simpleMessage("주소"),
         "adoptRequest": MessageLookupByLibrary.simpleMessage("입양 신청"),
         "adoptRequestButton": MessageLookupByLibrary.simpleMessage("입양 신청하기"),
         "adoptedPet": MessageLookupByLibrary.simpleMessage("입양된 동물"),
         "ageString": MessageLookupByLibrary.simpleMessage("살"),
         "anbandonedDogString": MessageLookupByLibrary.simpleMessage("유기견"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Ming"),
+        "birthday": MessageLookupByLibrary.simpleMessage("생년월일"),
         "cancel": MessageLookupByLibrary.simpleMessage("취소"),
         "cat": MessageLookupByLibrary.simpleMessage("고양이"),
         "completeCopyingAddress":
@@ -38,14 +40,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
         "dog": MessageLookupByLibrary.simpleMessage("강아지"),
         "edit": MessageLookupByLibrary.simpleMessage("수정"),
+        "email": MessageLookupByLibrary.simpleMessage("이메일"),
         "errorMessage": MessageLookupByLibrary.simpleMessage("에러가 발생했어요."),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "femaleString": MessageLookupByLibrary.simpleMessage("암컷"),
+        "gender": MessageLookupByLibrary.simpleMessage("성별"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "homePageTitle": MessageLookupByLibrary.simpleMessage("홈페이지"),
         "initialStateTryClickRefreshButton":
             MessageLookupByLibrary.simpleMessage(
                 "Initial state, try click refresh button."),
+        "instagram": MessageLookupByLibrary.simpleMessage("인스타그램"),
         "kakao": MessageLookupByLibrary.simpleMessage("Kakao"),
         "location": MessageLookupByLibrary.simpleMessage("위치"),
         "loginButtonText": MessageLookupByLibrary.simpleMessage("로그인 및 회원가입"),
@@ -61,18 +66,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "maleString": MessageLookupByLibrary.simpleMessage("수컷"),
         "managerTitle": MessageLookupByLibrary.simpleMessage("관리자"),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
+        "nickName": MessageLookupByLibrary.simpleMessage("닉네임"),
+        "nicknameDesc":
+            MessageLookupByLibrary.simpleMessage("불리고 싶은 이름을 입력해주세요."),
         "numberOfVolunteers": MessageLookupByLibrary.simpleMessage("봉사인원"),
         "onTheConstruction":
             MessageLookupByLibrary.simpleMessage("이 페이지는 아직 제작 중입니다."),
         "onTheConstructionTitle":
             MessageLookupByLibrary.simpleMessage("준비 중입니다."),
         "petPageTitle": MessageLookupByLibrary.simpleMessage("동물 페이지"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("전화번호"),
+        "profile": MessageLookupByLibrary.simpleMessage("프로필"),
         "protectingPet": MessageLookupByLibrary.simpleMessage("보호동물"),
         "protectingPets": MessageLookupByLibrary.simpleMessage("보호 중인 친구들"),
         "regionString": MessageLookupByLibrary.simpleMessage("봉사지역"),
         "reserveVolunteer": MessageLookupByLibrary.simpleMessage("봉사예약"),
         "review": MessageLookupByLibrary.simpleMessage("리뷰"),
         "save": MessageLookupByLibrary.simpleMessage("저장"),
+        "selfIntroduction": MessageLookupByLibrary.simpleMessage("자기소개"),
         "settingPageTitle": MessageLookupByLibrary.simpleMessage("세팅 페이지"),
         "share": MessageLookupByLibrary.simpleMessage("공유하기"),
         "shelter": MessageLookupByLibrary.simpleMessage("보호소"),
@@ -85,6 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("더보기"),
         "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page"),
         "time": MessageLookupByLibrary.simpleMessage("시간"),
+        "transform": MessageLookupByLibrary.simpleMessage("전환"),
+        "transfromToShelterAccount":
+            MessageLookupByLibrary.simpleMessage("보호소 계정으로 전환하기"),
         "unitStringOfPerson": MessageLookupByLibrary.simpleMessage("명"),
         "unitStringOfPet": MessageLookupByLibrary.simpleMessage("마리"),
         "unitStringOfShelter": MessageLookupByLibrary.simpleMessage("개"),
