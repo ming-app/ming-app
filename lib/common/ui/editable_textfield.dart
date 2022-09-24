@@ -96,37 +96,37 @@ class PreEditableTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              title,
-              style: theme.textTheme.bodyText2?.copyWith(
-                color: grayed ? Colors.grey : null,
+    return Opacity(
+      opacity: grayed ? 0.4 : 1.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.bodyMedium,
               ),
-            ),
-            const Spacer(),
-            TextButton(
-              onPressed: grayed ? null : onEdit,
-              child: Text(
-                S.of(context).edit,
-                style: theme.textTheme.bodyText2?.copyWith(
-                  decoration: TextDecoration.underline,
-                  color: grayed ? Colors.grey : null,
+              const Spacer(),
+              TextButton(
+                onPressed: grayed ? null : onEdit,
+                child: Text(
+                  S.of(context).edit,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Text(
-          content,
-          style: theme.textTheme.caption?.copyWith(
-            color: grayed ? Colors.grey : null,
+            ],
           ),
-        ),
-      ],
+          Text(
+            content,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: Color(0xff949494),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -135,6 +135,7 @@ class PostEditablePlainTextField extends StatelessWidget {
   final String title;
   final String desc;
   final String fieldTitle;
+  final String? initialText;
   final void Function()? onCancel;
   final FormFieldSetter? onSaved;
   final FormFieldValidator? validator;
@@ -145,6 +146,7 @@ class PostEditablePlainTextField extends StatelessWidget {
     required this.title,
     required this.desc,
     required this.fieldTitle,
+    this.initialText,
     this.onCancel,
     this.onSaved,
     this.validator,
@@ -162,21 +164,36 @@ class PostEditablePlainTextField extends StatelessWidget {
           children: [
             Text(
               title,
-              style: theme.textTheme.bodyText2,
+              style: theme.textTheme.bodyMedium,
             ),
             const Spacer(),
             TextButton(
               onPressed: onCancel,
               child: Text(
                 S.of(context).cancel,
-                style: theme.textTheme.bodyText2?.copyWith(
+                style: theme.textTheme.bodyMedium?.copyWith(
                   decoration: TextDecoration.underline,
                 ),
               ),
             ),
           ],
         ),
-        Card(
+        Text(
+          desc,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: Color(0xff949494),
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Color(0xffaaaaaa),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(8)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -184,12 +201,13 @@ class PostEditablePlainTextField extends StatelessWidget {
               children: [
                 Text(
                   fieldTitle,
-                  style: theme.textTheme.caption,
+                  style: theme.textTheme.labelSmall,
                 ),
                 TextFormField(
                   style: theme.textTheme.bodyText2,
                   onSaved: onSaved,
                   validator: validator,
+                  initialValue: initialText,
                   decoration: const InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.all(5),
@@ -200,7 +218,24 @@ class PostEditablePlainTextField extends StatelessWidget {
             ),
           ),
         ),
-        ElevatedButton(onPressed: onSave, child: Text(S.of(context).save)),
+        SizedBox(
+          height: 20,
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+              textStyle: theme.textTheme.bodySmall,
+              padding: EdgeInsets.symmetric(
+                vertical: 18,
+                horizontal: 18,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              )),
+          onPressed: onSave,
+          child: Text(S.of(context).save),
+        ),
       ],
     );
   }

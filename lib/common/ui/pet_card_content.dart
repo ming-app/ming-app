@@ -4,14 +4,10 @@ import 'package:ming/common/ui/ming_card_form.dart';
 import 'package:ming/pet_profile/model/pet_profile.dart';
 
 import '../../generated/l10n.dart';
-import '../../home/mock/mock.dart';
 import '../routes.dart';
-import 'thumbnail.dart';
 
 class PetCardContent extends StatelessWidget {
   final PetProfile pet;
-
-  // todo: volunteer thumnail handling.
   const PetCardContent(
     this.pet, {
     Key? key,
