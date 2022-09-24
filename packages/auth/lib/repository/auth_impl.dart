@@ -27,7 +27,9 @@ class MingAuthImpl implements MingAuth {
     this.api,
     this.hive,
     this.secureKey,
-  );
+  ) {
+    _checkInitialAuthStatus();
+  }
 
   @override
   Future<String> loginUsingKakao(
@@ -119,7 +121,10 @@ class MingAuthImpl implements MingAuth {
   }
 
   @override
-  bool get isLogIn => _isLogIn;
+  Future<bool> get isLogIn async {
+    await _checkInitialAuthStatus();
+    return _isLogIn;
+  }
 
   @override
   Stream<AuthStatus> get status => _statusController.stream;
@@ -157,6 +162,17 @@ class MingAuthImpl implements MingAuth {
     await box.deleteAll([
       _accessTokenKey,
     ]);
+  }
+
+  Future<void> _checkInitialAuthStatus() async {
+    try {
+      var authToken = await token;
+      _isLogIn = true;
+
+      _statusController.sink.add(AuthStatus(true, authToken));
+    } catch (e) {
+      Log.w("Currently not logged in.");
+    }
   }
 }
 

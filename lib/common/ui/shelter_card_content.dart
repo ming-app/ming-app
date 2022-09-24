@@ -23,7 +23,7 @@ class _ShelterCardContentState extends State<ShelterCardContent> {
     final theme = Theme.of(context);
     final descriptionStyle = theme.textTheme.subtitle1!;
 
-    return MingCard(
+    return MingImageCard(
       onTap: () {
         context.go(
           MingRoutingAddress.shelters.address + "/${widget.shelter.id}",

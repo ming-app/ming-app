@@ -649,6 +649,126 @@ class S {
       args: [],
     );
   }
+
+  /// `전환`
+  String get transform {
+    return Intl.message(
+      '전환',
+      name: 'transform',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `보호소 계정으로 전환하기`
+  String get transfromToShelterAccount {
+    return Intl.message(
+      '보호소 계정으로 전환하기',
+      name: 'transfromToShelterAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `프로필`
+  String get profile {
+    return Intl.message(
+      '프로필',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `닉네임`
+  String get nickName {
+    return Intl.message(
+      '닉네임',
+      name: 'nickName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `불리고 싶은 이름을 입력해주세요.`
+  String get nicknameDesc {
+    return Intl.message(
+      '불리고 싶은 이름을 입력해주세요.',
+      name: 'nicknameDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `성별`
+  String get gender {
+    return Intl.message(
+      '성별',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `생년월일`
+  String get birthday {
+    return Intl.message(
+      '생년월일',
+      name: 'birthday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `이메일`
+  String get email {
+    return Intl.message(
+      '이메일',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `전화번호`
+  String get phoneNumber {
+    return Intl.message(
+      '전화번호',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `자기소개`
+  String get selfIntroduction {
+    return Intl.message(
+      '자기소개',
+      name: 'selfIntroduction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `주소`
+  String get address {
+    return Intl.message(
+      '주소',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `인스타그램`
+  String get instagram {
+    return Intl.message(
+      '인스타그램',
+      name: 'instagram',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

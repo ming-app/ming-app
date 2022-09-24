@@ -58,5 +58,17 @@
   "managerTitle": "관리자",
   "edit": "수정",
   "cancel": "취소",
-  "save": "저장"
+  "save": "저장",
+  "transform": "전환",
+  "transfromToShelterAccount": "보호소 계정으로 전환하기",
+  "profile": "프로필",
+  "nickName": "닉네임",
+  "nicknameDesc": "불리고 싶은 이름을 입력해주세요.",
+  "gender": "성별",
+  "birthday": "생년월일",
+  "email": "이메일",
+  "phoneNumber": "전화번호",
+  "selfIntroduction": "자기소개",
+  "address": "주소",
+  "instagram": "인스타그램"
 }

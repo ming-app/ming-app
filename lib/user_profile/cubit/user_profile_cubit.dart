@@ -26,7 +26,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   Future<void> getUserProfile() async {
     emit(UserProfileUpdating());
 
-    if (!_auth.isLogIn) {
+    if (!(await _auth.isLogIn)) {
       emit(UserProfileNotLoggedIn());
       return;
     }

@@ -17,7 +17,7 @@ class PetCardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final descriptionStyle = theme.textTheme.subtitle1!;
-    return MingCard(
+    return MingImageCard(
       onTap: () {
         context.go(MingRoutingAddress.pets.address + "/${pet.id}");
       },
