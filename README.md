@@ -50,3 +50,11 @@ Application for abandoned pets.
 - 새로운 emulation setting을 만들고 싶을 때
   - firebase emulator를 export option으로 시작한다.
   `firebase emulators:start --export-on-exit="./integration_test/resources/emulator_dump"`
+
+## Debugging
+
+### Flutter cors
+
+fluttercors를 통해 CORS를 debugging 시에 disable해줘야 CORS error가 디버깅용 web에서 발생하지 않음.
+
+check https://pub.dev/packages/flutter_cors 
