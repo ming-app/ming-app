@@ -3,7 +3,6 @@ import '../../shelter_profile/shelter_profile.dart';
 import '../model/shelters_info.dart';
 
 import '../../common/ui/shelter_card_content.dart';
-import '../../common/ui/shelter_statistics_card.dart';
 
 class SheltersForm extends StatelessWidget {
   final SheltersInfo info;
@@ -16,19 +15,10 @@ class SheltersForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.symmetric(vertical: 25),
           child: Text(
             info.regionName,
             style: Theme.of(context).textTheme.headline5,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 15),
-          child: SheltersStatisticsInformation(
-            info.numberOfProtectingPets,
-            info.numberOfAdoptedPets,
-            info.numberOfVolunteers,
-            numberOfShelters: info.numberOfShelters,
           ),
         ),
         Expanded(

@@ -390,20 +390,20 @@ class S {
     );
   }
 
-  /// `더보기`
+  /// `show more >`
   String get showMore {
     return Intl.message(
-      '더보기',
+      'show more >',
       name: 'showMore',
       desc: '',
       args: [],
     );
   }
 
-  /// `축소`
+  /// `show less >`
   String get showLess {
     return Intl.message(
-      '축소',
+      'show less >',
       name: 'showLess',
       desc: '',
       args: [],
@@ -610,10 +610,10 @@ class S {
     );
   }
 
-  /// `관리자`
+  /// `보호소 정보 및 담당자`
   String get managerTitle {
     return Intl.message(
-      '관리자',
+      '보호소 정보 및 담당자',
       name: 'managerTitle',
       desc: '',
       args: [],
@@ -765,6 +765,26 @@ class S {
     return Intl.message(
       '인스타그램',
       name: 'instagram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `연락하기`
+  String get contact {
+    return Intl.message(
+      '연락하기',
+      name: 'contact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `보호소 연락처`
+  String get shelterContact {
+    return Intl.message(
+      '보호소 연락처',
+      name: 'shelterContact',
       desc: '',
       args: [],
     );

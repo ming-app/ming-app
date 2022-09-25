@@ -5,6 +5,7 @@ import 'package:ming/login/view/login_dialog.dart';
 import '../../auth/bloc/auth_bloc.dart';
 import '../routes.dart';
 import '../../generated/l10n.dart';
+import 'selectable_text.dart';
 
 class MenuBar extends StatelessWidget implements PreferredSizeWidget {
   const MenuBar({
@@ -78,21 +79,10 @@ class MenuItem extends StatelessWidget {
       padding: const EdgeInsets.only(right: 30),
       child: InkWell(
         onTap: () => context.go(dest.routes.address),
-        child: Column(
-          children: [
-            Text(
-              dest.label,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Container(
-              width: (15 * dest.label.length).toDouble(),
-              height: 2,
-              color: isSelected ? Colors.black : Colors.transparent,
-            ),
-          ],
+        child: SelectableUnderlineText(
+          text: dest.label,
+          isSelected: isSelected,
+          boldSelectedItem: true,
         ),
       ),
     );
