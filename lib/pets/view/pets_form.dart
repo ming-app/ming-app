@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ming/common/ui/selectable_text.dart';
 
 import '../../common/ui/pet_card_content.dart';
 import '../../pet_profile/model/pet_profile.dart';
@@ -20,7 +21,7 @@ class _PetsFormState extends State<PetsForm> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.only(bottom: 24),
           child: Row(
             children: PetsFormFilter.values.map((e) {
               return InkWell(
@@ -31,13 +32,9 @@ class _PetsFormState extends State<PetsForm> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: Text(
-                    e.menuName,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          decoration: filter == e
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
-                        ),
+                  child: SelectableUnderlineText(
+                    text: e.menuName,
+                    isSelected: filter == e,
                   ),
                 ),
               );

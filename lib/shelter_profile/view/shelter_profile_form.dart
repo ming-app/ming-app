@@ -6,7 +6,6 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../common/ui/thumbnail.dart';
 import '../../generated/l10n.dart';
-import '../../home/mock/mock.dart';
 import '../../pets/view/pets_form.dart';
 import '../mock/mock.dart';
 import '../model/shelter_profile.dart';
@@ -34,27 +33,38 @@ class ShelterProfileForm extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ShelterDescription(shelter),
-                        const ShelterCalender(),
-                        ShelterLocationView(shelter.region),
                         ShelterManagerView(
                           shelter.manager.name,
                           shelter.manager.imageUrl,
                           shelter.manager.phoneNumber,
+                          shelter.region,
                         ),
                       ],
                     ),
                     flex: 2,
                   ),
-                  const Expanded(
-                    child: VolunteerReservationCard(true),
-                    flex: 1,
+                  SizedBox(
+                    width: 50,
+                  ),
+                  ContactToShelterButton(
+                    onClick: shelter.manager.phoneNumber == null
+                        ? null
+                        : () => launchUrlString(
+                            "tel:${shelter.manager.phoneNumber}"),
                   ),
                 ],
               ),
             ),
-            Text(
-              S.of(context).protectingPets,
-              style: Theme.of(context).textTheme.titleMedium,
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 32,
+                bottom: 32,
+              ),
+              child: Text(
+                S.of(context).protectingPets,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
             ),
             PetsForm(petsMock),
             const Divider(),
@@ -68,117 +78,70 @@ class ShelterProfileForm extends StatelessWidget {
   }
 }
 
-class ShelterCalender extends StatelessWidget {
-  const ShelterCalender({Key? key}) : super(key: key);
+class ContactToShelterButton extends StatelessWidget {
+  final Function()? onClick;
+
+  const ContactToShelterButton({
+    Key? key,
+    this.onClick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final strings = S.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Text(
-            strings.volunteerSchedule,
-            style: theme.textTheme.titleMedium,
-          ),
+    return IntrinsicHeight(
+      child: Container(
+        constraints: const BoxConstraints(
+          maxWidth: 300,
         ),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: VolunteerScheduleListView(),
-            ),
-            Expanded(
-              flex: 1,
-              child: CalendarDatePicker(
-                initialDate: DateTime.now(),
-                firstDate: DateTime.now(),
-                lastDate: DateTime.now().add(const Duration(days: 90)),
-                // todo: make this data change usable
-                onDateChanged: (_) {},
-              ),
-            ),
-          ],
-        ),
-        const Divider(),
-      ],
-    );
-  }
-}
-
-// todo
-class VolunteerScheduleListView extends StatelessWidget {
-  const VolunteerScheduleListView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class ShelterLocationView extends StatelessWidget {
-  final String address;
-
-  const ShelterLocationView(this.address, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final strings = S.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Text(
-            strings.location,
-            style: theme.textTheme.titleMedium,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                address,
-                style: theme.textTheme.bodyMedium,
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: address)).then((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(strings.completeCopyingAddress),
+        child: Card(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(S.of(context).shelterContact),
+                SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity, 0),
+                      backgroundColor: Color(0xffda4d2e),
+                      foregroundColor: Colors.white,
+                      textStyle: Theme.of(context).textTheme.bodySmall,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 18,
+                        horizontal: 18,
                       ),
-                    );
-                  });
-                },
-                child: Text(strings.copyAddress),
-              ),
-            ],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      )),
+                  onPressed: onClick,
+                  child: Text(
+                    S.of(context).contact,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        const Divider(),
-      ],
+      ),
     );
   }
 }
 
 class ShelterManagerView extends StatelessWidget {
   final String managerName;
+  final String? address;
   final String? photoUrl;
   final String? phoneNumber;
 
   const ShelterManagerView(
     this.managerName,
     this.photoUrl,
-    this.phoneNumber, {
+    this.phoneNumber,
+    this.address, {
     Key? key,
   }) : super(key: key);
 
@@ -190,10 +153,10 @@ class ShelterManagerView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.symmetric(vertical: 32),
           child: Text(
             strings.managerTitle,
-            style: theme.textTheme.titleMedium,
+            style: theme.textTheme.displayMedium,
           ),
         ),
         Padding(
@@ -201,7 +164,11 @@ class ShelterManagerView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (photoUrl != null) ThumbnailImage(Image.network(photoUrl!)),
+              if (photoUrl != null)
+                ThumbnailImage(
+                  Image.network(photoUrl!),
+                  size: Size(56, 56),
+                ),
               const SizedBox(
                 width: 10,
               ),
@@ -209,23 +176,50 @@ class ShelterManagerView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    strings.shelterOwner,
-                    style: theme.textTheme.caption,
+                    managerName,
+                    style: theme.textTheme.displayMedium,
                   ),
-                  Text(managerName),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    address ?? "",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ],
               ),
               const Spacer(),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    side: BorderSide(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                    textStyle: Theme.of(context).textTheme.bodySmall,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 15,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    )),
                 onPressed: phoneNumber == null
                     ? null
                     : () => launchUrlString("tel:$phoneNumber"),
-                child: Text(strings.doCall),
+                child: Text(
+                  S.of(context).copyAddress,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
         ),
-        const Divider(),
       ],
     );
   }
@@ -245,7 +239,10 @@ class ShelterDescription extends StatelessWidget {
       children: [
         Text(
           shelter.name,
-          style: theme.textTheme.titleMedium,
+          style: theme.textTheme.displayMedium,
+        ),
+        SizedBox(
+          height: 8,
         ),
         Row(
           children: [
@@ -257,54 +254,26 @@ class ShelterDescription extends StatelessWidget {
                   strings.abandonedCatString +
                   " ${shelter.numberOfCats}" +
                   strings.unitStringOfPet,
-              style: theme.textTheme.caption,
+              style: theme.textTheme.bodySmall,
             ),
             const Spacer(),
             TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.share,
-                size: 15,
+              onPressed: () {
+                // todo: make share link
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black,
+                textStyle: theme.textTheme.bodySmall,
+              ),
+              icon: Icon(
+                Icons.launch,
+                size: 18,
               ),
               label: Text(
-                strings.share,
+                S.of(context).share,
               ),
             ),
           ],
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            "⭐ ${shelter.averageRate} · " +
-                strings.review +
-                "${shelter.reviewCount}" +
-                strings.unitStringOfShelter +
-                " · " +
-                shelter.region,
-          ),
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            children: [
-              Row(
-                children: userThumbnails
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 2,
-                          ),
-                          child: ThumbnailImage(e),
-                        ))
-                    .toList(),
-              ),
-              Text(
-                "${shelter.numberOfVolunteers}" +
-                    strings.volunteerNumberSentenceString,
-              ),
-            ],
-          ),
         ),
         const Divider(),
         ExpandableNotifier(
@@ -313,7 +282,10 @@ class ShelterDescription extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.only(
+                    top: 32,
+                    bottom: 24,
+                  ),
                   child: Text(
                     shelter.desc,
                     maxLines: 3,
@@ -323,7 +295,12 @@ class ShelterDescription extends StatelessWidget {
                   ),
                 ),
                 ExpandableButton(
-                  child: Text(strings.showMore),
+                  child: Text(
+                    strings.showMore,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -331,77 +308,31 @@ class ShelterDescription extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.only(
+                    top: 32,
+                    bottom: 24,
+                  ),
                   child: Text(
                     shelter.desc,
                   ),
                 ),
                 ExpandableButton(
-                  child: Text(strings.showLess),
+                  child: Text(
+                    strings.showLess,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
         ),
         const SizedBox(
-          height: 15,
+          height: 32,
         ),
         const Divider(),
       ],
-    );
-  }
-}
-
-class VolunteerReservationCard extends StatelessWidget {
-  final bool disabled;
-  const VolunteerReservationCard(this.disabled, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final strings = S.of(context);
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Text(
-                S.of(context).reserveVolunteer,
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: strings.date),
-              style: theme.textTheme.bodyText2,
-              readOnly: true,
-              initialValue: "6월 19일 2022년",
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: strings.time),
-              style: theme.textTheme.bodyText2,
-              readOnly: true,
-              initialValue: "12:00",
-            ),
-            TextFormField(
-              decoration:
-                  InputDecoration(labelText: strings.numberOfVolunteers),
-              style: theme.textTheme.bodyText2,
-              readOnly: true,
-              initialValue: "1명",
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Center(child: Text("예약하기")),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cat": MessageLookupByLibrary.simpleMessage("고양이"),
         "completeCopyingAddress":
             MessageLookupByLibrary.simpleMessage("주소 복사 완료"),
+        "contact": MessageLookupByLibrary.simpleMessage("연락하기"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("주소 복사"),
         "date": MessageLookupByLibrary.simpleMessage("날짜"),
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
@@ -64,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("로그인에 성공하였습니다."),
         "loginTitle": MessageLookupByLibrary.simpleMessage("로그인 또는 회원가입"),
         "maleString": MessageLookupByLibrary.simpleMessage("수컷"),
-        "managerTitle": MessageLookupByLibrary.simpleMessage("관리자"),
+        "managerTitle": MessageLookupByLibrary.simpleMessage("보호소 정보 및 담당자"),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
         "nickName": MessageLookupByLibrary.simpleMessage("닉네임"),
         "nicknameDesc":
@@ -87,13 +88,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingPageTitle": MessageLookupByLibrary.simpleMessage("세팅 페이지"),
         "share": MessageLookupByLibrary.simpleMessage("공유하기"),
         "shelter": MessageLookupByLibrary.simpleMessage("보호소"),
+        "shelterContact": MessageLookupByLibrary.simpleMessage("보호소 연락처"),
         "shelterOwner": MessageLookupByLibrary.simpleMessage("대표 관리자"),
         "shelterPageTitle": MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
         "shelterSinglePageTitle":
             MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
         "showAllPhotos": MessageLookupByLibrary.simpleMessage("사진 전체보기"),
-        "showLess": MessageLookupByLibrary.simpleMessage("축소"),
-        "showMore": MessageLookupByLibrary.simpleMessage("더보기"),
+        "showLess": MessageLookupByLibrary.simpleMessage("show less >"),
+        "showMore": MessageLookupByLibrary.simpleMessage("show more >"),
         "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page"),
         "time": MessageLookupByLibrary.simpleMessage("시간"),
         "transform": MessageLookupByLibrary.simpleMessage("전환"),
