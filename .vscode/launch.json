@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            // For kakao native app id
+            "args": [
+                "--dart-define=KAKAO_NATIVE_APP_KEY=866369d9e6898d4337bb9f9a86eaf78a",
+                "--dart-define=KAKAO_RESTAPI_APP_KEY=a77e5ce01fb922fc4f79f7437a9e846a",
+                "--dart-define=AUTH_SECURE_HIVE_KEY=2qc77ZsSaZS5QwPtnAAxu0lh5hJcDG4irNI4reb8NuY=",
+                "--web-port=51637"
+            ]
+        }
+    ]
+}
