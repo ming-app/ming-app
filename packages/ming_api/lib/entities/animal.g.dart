@@ -13,8 +13,8 @@ AnimalOverviewResponse _$AnimalOverviewResponseFromJson(
       json['name'] as String,
       $enumDecode(_$AnimalGenderEnumMap, json['gender']),
       json['age'] as int,
-      json['thumbnailUrl'] as String,
-      json['description'] as String,
+      ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
+      json['introduction'] as String,
       UserListOverviewResponse.fromJson(
           json['volunteerOverview'] as Map<String, dynamic>),
     );
@@ -26,8 +26,8 @@ Map<String, dynamic> _$AnimalOverviewResponseToJson(
       'name': instance.name,
       'gender': _$AnimalGenderEnumMap[instance.gender]!,
       'age': instance.age,
-      'thumbnailUrl': instance.thumbnailUrl,
-      'description': instance.description,
+      'image': instance.image,
+      'introduction': instance.introduction,
       'volunteerOverview': instance.volunteerOverview,
     };
 

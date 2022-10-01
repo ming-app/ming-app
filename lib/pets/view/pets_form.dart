@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ming/common/ui/pagination_bar.dart';
 import 'package:ming/common/ui/selectable_text.dart';
+import 'package:ming/pets/bloc/pets_bloc.dart';
+import 'package:ming/pets/model/pet_overview_info.dart';
+import 'package:ming_api/ming_api.dart';
 
 import '../../common/ui/pet_card_content.dart';
-import '../../pet_profile/model/pet_profile.dart';
 
 class PetsForm extends StatefulWidget {
-  final List<PetProfile> pets;
-  const PetsForm(this.pets, {Key? key}) : super(key: key);
+  final String shelterId;
+  final int pageSize;
+  final int pageNumber;
+  final int totalPageNumaber;
+  final List<PetOverviewInfo> pets;
+  const PetsForm({
+    Key? key,
+    required this.shelterId,
+    required this.pets,
+    required this.pageSize,
+    required this.pageNumber,
+    required this.totalPageNumaber,
+  }) : super(key: key);
 
   @override
   State<PetsForm> createState() => _PetsFormState();
@@ -45,20 +60,26 @@ class _PetsFormState extends State<PetsForm> {
           spacing: 5,
           children: widget.pets
               .where((e) {
-                if (filter == PetsFormFilter.all) {
-                  return true;
-                } else {
-                  var filterIsDog = filter == PetsFormFilter.dog;
-                  if (filterIsDog == e.isDog) {
-                    return true;
-                  }
-                }
-                return false;
+                return filter.checkType(e.type);
               })
               .map((e) => PetCardContent(
                     e,
                   ))
               .toList(),
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        Center(
+          child: PaginationBar(
+            pageNumber: widget.pageNumber,
+            totalPageNumber: widget.totalPageNumaber,
+            onPageChanged: (page) {
+              context
+                  .read<PetsBloc>()
+                  .add(FetchPetsList(widget.shelterId, pageNumber: page));
+            },
+          ),
         ),
       ],
     );
@@ -73,4 +94,13 @@ enum PetsFormFilter {
   final String menuName;
 
   const PetsFormFilter(this.menuName);
+
+  bool checkType(AnimalType type) {
+    if (this == all) return true;
+
+    if (this == cat && type == AnimalType.cat) return true;
+    if (this == dog && type == AnimalType.dog) return true;
+
+    return false;
+  }
 }

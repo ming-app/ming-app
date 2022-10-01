@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ming/album/view/album_view.dart';
 import 'package:ming/common/snackbar_service.dart';
+import 'package:ming/pets/view/pets_view.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -69,8 +70,7 @@ class ShelterProfileForm extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayMedium,
               ),
             ),
-            PetsForm(petsMock),
-            const Divider(),
+            PetsView(shelter.id),
             const SizedBox(
               height: 100,
             ),

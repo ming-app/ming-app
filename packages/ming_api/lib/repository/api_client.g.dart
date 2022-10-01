@@ -126,10 +126,15 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<Page<AnimalOverviewResponse>>> getAnimalInShelter(
-      id) async {
+  Future<ApiResponse<Page<AnimalOverviewResponse>>> getAnimalInShelter(id,
+      {offset, pageNumber, pageSize}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'offset': offset,
+      r'pageNumber': pageNumber,
+      r'pageSize': pageSize
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
