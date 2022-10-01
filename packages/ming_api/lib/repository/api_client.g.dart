@@ -51,20 +51,19 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<PageImpl<AnimalJournalResponse>>> getAnimalJournals(
-      id) async {
+  Future<ApiResponse<Page<AnimalJournalResponse>>> getAnimalJournals(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<PageImpl<AnimalJournalResponse>>>(
+        _setStreamType<ApiResponse<Page<AnimalJournalResponse>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'api/v1/animals/${id}/journals',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        ApiResponse<PageImpl<AnimalJournalResponse>>.fromJson(_result.data!);
+        ApiResponse<Page<AnimalJournalResponse>>.fromJson(_result.data!);
     return value;
   }
 
@@ -87,7 +86,7 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<PageImpl<ShelterOverviewResponse>>> getSheltersOverview(
+  Future<ApiResponse<Page<ShelterOverviewResponse>>> getSheltersOverview(
       {regionId, offset, pageNumber, pageSize}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -100,13 +99,13 @@ class _MingApiClient implements MingApiClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<PageImpl<ShelterOverviewResponse>>>(
+        _setStreamType<ApiResponse<Page<ShelterOverviewResponse>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'api/v1/shelters',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        ApiResponse<PageImpl<ShelterOverviewResponse>>.fromJson(_result.data!);
+        ApiResponse<Page<ShelterOverviewResponse>>.fromJson(_result.data!);
     return value;
   }
 
@@ -127,25 +126,25 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
-  Future<ApiResponse<PageImpl<AnimalOverviewResponse>>> getAnimalInShelter(
+  Future<ApiResponse<Page<AnimalOverviewResponse>>> getAnimalInShelter(
       id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<PageImpl<AnimalOverviewResponse>>>(
+        _setStreamType<ApiResponse<Page<AnimalOverviewResponse>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'api/v1/shelters/${id}/animals',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        ApiResponse<PageImpl<AnimalOverviewResponse>>.fromJson(_result.data!);
+        ApiResponse<Page<AnimalOverviewResponse>>.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<ApiResponse<PageImpl<ShelterImagesResponse>>> getSheltersImage(id,
+  Future<ApiResponse<Page<ShelterImagesResponse>>> getSheltersImage(id,
       {offset, pageNumber, pageSize}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -157,18 +156,18 @@ class _MingApiClient implements MingApiClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<PageImpl<ShelterImagesResponse>>>(
+        _setStreamType<ApiResponse<Page<ShelterImagesResponse>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'api/v1/shelters/${id}/images',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        ApiResponse<PageImpl<ShelterImagesResponse>>.fromJson(_result.data!);
+        ApiResponse<Page<ShelterImagesResponse>>.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<ApiResponse<PageImpl<ShelterReviewResponse>>> getReviews(id,
+  Future<ApiResponse<Page<ShelterReviewResponse>>> getReviews(id,
       {offset, pageNumber, pageSize}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -180,13 +179,13 @@ class _MingApiClient implements MingApiClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<PageImpl<ShelterReviewResponse>>>(
+        _setStreamType<ApiResponse<Page<ShelterReviewResponse>>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'api/v1/shelters/${id}/reviews',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        ApiResponse<PageImpl<ShelterReviewResponse>>.fromJson(_result.data!);
+        ApiResponse<Page<ShelterReviewResponse>>.fromJson(_result.data!);
     return value;
   }
 

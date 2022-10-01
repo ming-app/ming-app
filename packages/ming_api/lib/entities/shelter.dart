@@ -91,6 +91,10 @@ class ShelterDetailResponse {
   final String adminName;
   final ImageResponse image;
   final String? snsUrl;
+  final UserListOverviewResponse volunteerOverview;
+  @ListConverter<AnimalInShelterOverview>()
+  final List<AnimalInShelterOverview> animalOverview;
+  final RegionResponse region;
 
   ShelterDetailResponse(
     this.id,
@@ -101,6 +105,9 @@ class ShelterDetailResponse {
     this.adminName,
     this.snsUrl,
     this.image,
+    this.volunteerOverview,
+    this.animalOverview,
+    this.region,
   );
 
   factory ShelterDetailResponse.fromJson(Map<String, dynamic> json) =>

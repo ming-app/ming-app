@@ -53,6 +53,8 @@ dependencies:
   google_maps_flutter_web: ^0.4.0+1
   html: ^0.15.0
   flutter_web_auth: ^0.4.1
+  universal_html: ^2.0.8
+
   
 dev_dependencies:
   flutter_test:

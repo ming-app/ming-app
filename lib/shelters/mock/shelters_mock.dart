@@ -1,9 +1,10 @@
 import 'package:ming/shelter_profile/model/shelter_profile.dart';
+import 'package:ming/shelters/model/shelter_overview_info.dart';
 
 import '../model/shelters_info.dart';
 
 final mockShelters = [
-  ShelterProfile(
+  ShelterOverviewInfo(
     id: "1",
     name: "보호소 이름1",
     numberOfCats: 3,
@@ -12,10 +13,8 @@ final mockShelters = [
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
-    manager: ShelterManagerProfile(name: "매니저"),
-    desc: "",
   ),
-  ShelterProfile(
+  ShelterOverviewInfo(
     id: "2",
     name: "보호소 이름2",
     numberOfDogs: 13,
@@ -24,10 +23,8 @@ final mockShelters = [
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
-    manager: ShelterManagerProfile(name: "매니저"),
-    desc: "",
   ),
-  ShelterProfile(
+  ShelterOverviewInfo(
     id: "3",
     name: "보호소 이름3",
     numberOfDogs: 21,
@@ -35,8 +32,6 @@ final mockShelters = [
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
-    manager: ShelterManagerProfile(name: "매니저"),
-    desc: "",
   ),
 ];
 

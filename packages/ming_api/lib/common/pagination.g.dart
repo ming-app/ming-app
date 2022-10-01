@@ -6,7 +6,7 @@ part of 'pagination.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PageImpl<T> _$PageImplFromJson<T>(Map<String, dynamic> json) => PageImpl<T>(
+Page<T> _$PageFromJson<T>(Map<String, dynamic> json) => Page<T>(
       (json['content'] as List<dynamic>)
           .map((e) => _Converter<T>().fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -22,8 +22,7 @@ PageImpl<T> _$PageImplFromJson<T>(Map<String, dynamic> json) => PageImpl<T>(
       Sort.fromJson(json['sort'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$PageImplToJson<T>(PageImpl<T> instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PageToJson<T>(Page<T> instance) => <String, dynamic>{
       'content': instance.content.map(_Converter<T>().toJson).toList(),
       'empty': instance.empty,
       'first': instance.first,

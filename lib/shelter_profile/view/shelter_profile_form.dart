@@ -1,8 +1,11 @@
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ming/album/view/album_view.dart';
+import 'package:ming/common/snackbar_service.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../../common/ui/thumbnail.dart';
 import '../../generated/l10n.dart';
@@ -207,9 +210,11 @@ class ShelterManagerView extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     )),
-                onPressed: phoneNumber == null
-                    ? null
-                    : () => launchUrlString("tel:$phoneNumber"),
+                onPressed: () async {
+                  await Clipboard.setData(ClipboardData(text: address));
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("주소가 클립보드에 복사되었습니다.");
+                },
                 child: Text(
                   S.of(context).copyAddress,
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -258,8 +263,13 @@ class ShelterDescription extends StatelessWidget {
             ),
             const Spacer(),
             TextButton.icon(
-              onPressed: () {
-                // todo: make share link
+              onPressed: () async {
+                if (kIsWeb) {
+                  var url = html.window.location.href;
+                  await Clipboard.setData(ClipboardData(text: url));
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("주소가 클립보드에 복사되었습니다.");
+                }
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,

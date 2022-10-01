@@ -1,6 +1,5 @@
+import 'package:ming/shelters/model/shelter_overview_info.dart';
 import 'package:ming_api/ming_api.dart';
-
-import '../../shelter_profile/model/shelter_profile.dart';
 
 class SheltersInfo {
   final String regionName;
@@ -8,7 +7,7 @@ class SheltersInfo {
   final int numberOfProtectingPets;
   final int numberOfAdoptedPets;
   final int numberOfVolunteers;
-  final List<ShelterProfile> shelters;
+  final List<ShelterOverviewInfo> shelters;
 
   SheltersInfo(
     this.regionName,
@@ -30,7 +29,7 @@ class SheltersInfo {
       response.adoptedAnimalCount,
       response.volunteerOverview.count,
       shelterResponse
-          .map((e) => ShelterProfile.fromShelterOverviewResponse(e))
+          .map((e) => ShelterOverviewInfo.fromShelterOverviewResponse(e))
           .toList(),
     );
   }
@@ -47,7 +46,7 @@ class SheltersInfo {
       response.fold(
           0, (prev, element) => prev + element.volunteerOverview.count),
       shelterResponse
-          .map((e) => ShelterProfile.fromShelterOverviewResponse(e))
+          .map((e) => ShelterOverviewInfo.fromShelterOverviewResponse(e))
           .toList(),
     );
   }

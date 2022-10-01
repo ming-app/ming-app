@@ -103,6 +103,13 @@ ShelterDetailResponse _$ShelterDetailResponseFromJson(
       json['adminName'] as String,
       json['snsUrl'] as String?,
       ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
+      UserListOverviewResponse.fromJson(
+          json['volunteerOverview'] as Map<String, dynamic>),
+      (json['animalOverview'] as List<dynamic>)
+          .map((e) =>
+              AnimalInShelterOverview.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      RegionResponse.fromJson(json['region'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ShelterDetailResponseToJson(
@@ -116,4 +123,7 @@ Map<String, dynamic> _$ShelterDetailResponseToJson(
       'adminName': instance.adminName,
       'image': instance.image,
       'snsUrl': instance.snsUrl,
+      'volunteerOverview': instance.volunteerOverview,
+      'animalOverview': instance.animalOverview,
+      'region': instance.region,
     };

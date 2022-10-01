@@ -8,7 +8,10 @@ class SnackbarService {
   void showPlainTextSnackbar(String text) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(text)),
+      SnackBar(
+        content: Text(text),
+        backgroundColor: Colors.grey,
+      ),
     );
   }
 }

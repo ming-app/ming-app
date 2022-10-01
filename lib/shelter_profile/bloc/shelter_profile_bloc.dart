@@ -23,9 +23,16 @@ class ShelterProfileBloc
     emit(ShelterProfileOnLoading());
 
     try {
-      // todo
+      var response = await _api.client.getShelterDetail(event.shelterId);
+
+      emit(
+        ShelterProfileFetched(
+          ShelterProfile.fromShelterDetailResponse(response.result!),
+        ),
+      );
     } catch (e) {
-      Log.e("Error on fetching shelter profile.");
+      Log.e("Error on fetching shelter profile.", e);
+      emit(ShelterProfileError());
     }
   }
 }

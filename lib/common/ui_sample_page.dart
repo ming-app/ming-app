@@ -8,6 +8,7 @@ import 'package:ming/common/ui/pet_card_content.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/mock/mock.dart';
 import 'package:ming/shelter_profile/mock/mock.dart';
+import 'package:ming/shelters/mock/shelters_mock.dart';
 
 class UiSamplePage extends StatefulWidget {
   const UiSamplePage({Key? key}) : super(key: key);
@@ -103,7 +104,7 @@ class _UiSamplePageState extends State<UiSamplePage> {
 
           Divider(),
           Text("Shelter Profile Card GUI"),
-          ShelterCardContent(shelterMock),
+          ShelterCardContent(mockShelters.first),
           Divider(),
           Text("Pet Profile Card GUI"),
           PetCardContent(

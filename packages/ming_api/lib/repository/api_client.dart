@@ -24,7 +24,7 @@ abstract class MingApiClient {
   );
 
   @GET("api/v1/animals/{id}/journals")
-  Future<ApiResponse<PageImpl<AnimalJournalResponse>>> getAnimalJournals(
+  Future<ApiResponse<Page<AnimalJournalResponse>>> getAnimalJournals(
     @Path() String id,
   );
 
@@ -33,7 +33,7 @@ abstract class MingApiClient {
   Future<ApiResponse<List<ShelterByRegionResponse>>> getSheltersRegionalInfo();
 
   @GET("api/v1/shelters")
-  Future<ApiResponse<PageImpl<ShelterOverviewResponse>>> getSheltersOverview({
+  Future<ApiResponse<Page<ShelterOverviewResponse>>> getSheltersOverview({
     @Query("regionId") String? regionId,
     @Query("offset") int? offset,
     @Query("pageNumber") int? pageNumber,
@@ -46,12 +46,12 @@ abstract class MingApiClient {
   );
 
   @GET("api/v1/shelters/{id}/animals")
-  Future<ApiResponse<PageImpl<AnimalOverviewResponse>>> getAnimalInShelter(
+  Future<ApiResponse<Page<AnimalOverviewResponse>>> getAnimalInShelter(
     @Path() String id,
   );
 
   @GET("api/v1/shelters/{id}/images")
-  Future<ApiResponse<PageImpl<ShelterImagesResponse>>> getSheltersImage(
+  Future<ApiResponse<Page<ShelterImagesResponse>>> getSheltersImage(
     @Path() String id, {
     @Query("offset") int? offset,
     @Query("pageNumber") int? pageNumber,
@@ -59,7 +59,7 @@ abstract class MingApiClient {
   });
 
   @GET("api/v1/shelters/{id}/reviews")
-  Future<ApiResponse<PageImpl<ShelterReviewResponse>>> getReviews(
+  Future<ApiResponse<Page<ShelterReviewResponse>>> getReviews(
     @Path() String id, {
     @Query("offset") int? offset,
     @Query("pageNumber") int? pageNumber,
