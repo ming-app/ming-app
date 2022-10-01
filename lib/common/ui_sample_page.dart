@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:ming/common/snackbar_service.dart';
 import 'package:ming/common/ui/editable_textfield.dart';
 import 'package:ming/common/ui/ming_card_form.dart';
+import 'package:ming/common/ui/pagination_bar.dart';
 import 'package:ming/common/ui/pet_card_content.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/mock/mock.dart';
+import 'package:ming/pets/model/pet_overview_info.dart';
 import 'package:ming/shelter_profile/mock/mock.dart';
 import 'package:ming/shelters/mock/shelters_mock.dart';
 
@@ -21,6 +23,8 @@ class _UiSamplePageState extends State<UiSamplePage> {
   final postEditableFormKey = GlobalKey<FormState>();
   final editableFormKey = GlobalKey<FormState>();
   var editableTextContent = "컨텐츠";
+  int largePagesNumber = 0;
+  int smallPagesNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +112,31 @@ class _UiSamplePageState extends State<UiSamplePage> {
           Divider(),
           Text("Pet Profile Card GUI"),
           PetCardContent(
-            petMock,
+            PetOverviewInfo.mock(),
           ),
+          Divider(),
+          Text("Pagination GUI with large pages"),
+          PaginationBar(
+            pageNumber: largePagesNumber,
+            totalPageNumber: 20,
+            onPageChanged: (page) {
+              setState(() {
+                largePagesNumber = page;
+              });
+            },
+          ),
+          Divider(),
+          Text("Pagination GUI with small pages"),
+          PaginationBar(
+            pageNumber: smallPagesNumber,
+            totalPageNumber: 6,
+            onPageChanged: (page) {
+              setState(() {
+                smallPagesNumber = page;
+              });
+            },
+          ),
+
           SizedBox(
             height: 200,
           )

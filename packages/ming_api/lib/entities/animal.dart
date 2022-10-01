@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ming_api/entities/image.dart';
 
 import 'entities.dart';
 
@@ -10,8 +11,8 @@ class AnimalOverviewResponse {
   final String name;
   final AnimalGender gender;
   final int age;
-  final String thumbnailUrl;
-  final String description;
+  final ImageResponse image;
+  final String introduction;
   final UserListOverviewResponse volunteerOverview;
 
   AnimalOverviewResponse(
@@ -19,8 +20,8 @@ class AnimalOverviewResponse {
     this.name,
     this.gender,
     this.age,
-    this.thumbnailUrl,
-    this.description,
+    this.image,
+    this.introduction,
     this.volunteerOverview,
   );
 

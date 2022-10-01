@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ming/common/ui/ming_card_form.dart';
-import 'package:ming/pet_profile/model/pet_profile.dart';
+import 'package:ming/pets/model/pet_overview_info.dart';
+import 'package:ming_api/entities/animal.dart';
 
 import '../../generated/l10n.dart';
 import '../routes.dart';
 
 class PetCardContent extends StatelessWidget {
-  final PetProfile pet;
+  final PetOverviewInfo pet;
   const PetCardContent(
     this.pet, {
     Key? key,
@@ -21,7 +22,7 @@ class PetCardContent extends StatelessWidget {
       onTap: () {
         context.go(MingRoutingAddress.pets.address + "/${pet.id}");
       },
-      image: pet.imageUrl != null ? NetworkImage(pet.imageUrl!) : null,
+      image: NetworkImage(pet.imageUrl),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         child: DefaultTextStyle(
@@ -36,7 +37,7 @@ class PetCardContent extends StatelessWidget {
                 style: theme.textTheme.titleMedium,
               ),
               Text(
-                pet.isFemale
+                pet.gender == AnimalGender.female
                     ? S.of(context).femaleString +
                         " · " +
                         "${pet.age}" +
@@ -52,7 +53,7 @@ class PetCardContent extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                pet.desc,
+                pet.introduction,
                 style: theme.textTheme.labelSmall,
                 softWrap: true,
               ),
