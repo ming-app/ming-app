@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ming/common/ming_icons.dart';
 
 import '../../generated/l10n.dart';
 
@@ -27,17 +28,7 @@ class MingBottomSheet extends StatelessWidget {
               const Text('Sitemap'),
               const Spacer(),
               const Icon(
-                Icons.facebook,
-                size: 20,
-              ),
-              const SizedBox(width: 8),
-              const Icon(
-                FontAwesomeIcons.twitter,
-                size: 20,
-              ),
-              const SizedBox(width: 8),
-              const Icon(
-                FontAwesomeIcons.instagram,
+                MingIcons.instagram,
                 size: 20,
               ),
             ],
