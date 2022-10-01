@@ -6,7 +6,7 @@ import 'utils.dart';
 part 'pagination.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PageImpl<T> {
+class Page<T> {
   @_Converter()
   final List<T> content;
   final bool empty;
@@ -20,7 +20,7 @@ class PageImpl<T> {
   final Pageable pageable;
   final Sort sort;
 
-  PageImpl(
+  Page(
     this.content,
     this.empty,
     this.first,
@@ -34,9 +34,8 @@ class PageImpl<T> {
     this.sort,
   );
 
-  factory PageImpl.fromJson(Map<String, dynamic> json) =>
-      _$PageImplFromJson(json);
-  Map<String, dynamic> toJson() => _$PageImplToJson(this);
+  factory Page.fromJson(Map<String, dynamic> json) => _$PageFromJson(json);
+  Map<String, dynamic> toJson() => _$PageToJson(this);
 }
 
 class _Converter<T> implements JsonConverter<T?, Map<String, dynamic>> {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ming/common/ui/ming_card_form.dart';
 import 'package:ming/shelter_profile/model/shelter_profile.dart';
+import 'package:ming/shelters/model/shelter_overview_info.dart';
 
 import '../../generated/l10n.dart';
 import '../routes.dart';
@@ -9,7 +10,7 @@ import '../routes.dart';
 class ShelterCardContent extends StatefulWidget {
   const ShelterCardContent(this.shelter, {Key? key}) : super(key: key);
 
-  final ShelterProfile shelter;
+  final ShelterOverviewInfo shelter;
 
   @override
   State<ShelterCardContent> createState() => _ShelterCardContentState();

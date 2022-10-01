@@ -17,8 +17,8 @@ void main() {
     });
 
     test("Valid ApiResponse<PageImpl<ShelterReviewResponse>>", () {
-      ApiResponse<PageImpl<ShelterReviewResponse>> result =
-          ApiResponse<PageImpl<ShelterReviewResponse>>.fromJson(
+      ApiResponse<Page<ShelterReviewResponse>> result =
+          ApiResponse<Page<ShelterReviewResponse>>.fromJson(
               jsonDecode(shelterReviewResponseValid));
 
       expect(result.result!.content[0].comment, "string");

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:log/log.dart';
@@ -27,7 +28,7 @@ Future<void> main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
     Log.i("Hello Ming App!");
-
+    usePathUrlStrategy();
     runApp(const Ming());
   }, (error, stack) {
     if (!kIsWeb) {

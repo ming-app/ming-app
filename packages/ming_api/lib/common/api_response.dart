@@ -53,24 +53,24 @@ class _Converter<T> implements JsonConverter<T?, Object?> {
       return const ListConverter<ShelterByRegionResponse>().fromJson(json) as T;
     } else if (typesEqual<T, List<VolunteerResponse>?>()) {
       return const ListConverter<VolunteerResponse>().fromJson(json) as T;
-    } else if (typesEqual<T, PageImpl<ShelterReviewResponse>?>()) {
-      return PageImpl<ShelterReviewResponse>.fromJson(
+    } else if (typesEqual<T, Page<ShelterReviewResponse>?>()) {
+      return Page<ShelterReviewResponse>.fromJson(json as Map<String, dynamic>)
+          as T;
+    } else if (typesEqual<T, Page<AnimalOverviewResponse>?>()) {
+      return Page<AnimalOverviewResponse>.fromJson(json as Map<String, dynamic>)
+          as T;
+    } else if (typesEqual<T, Page<ShelterImagesResponse>?>()) {
+      return Page<ShelterImagesResponse>.fromJson(json as Map<String, dynamic>)
+          as T;
+    } else if (typesEqual<T, Page<ShelterOverviewResponse>?>()) {
+      return Page<ShelterOverviewResponse>.fromJson(
           json as Map<String, dynamic>) as T;
-    } else if (typesEqual<T, PageImpl<AnimalOverviewResponse>?>()) {
-      return PageImpl<AnimalOverviewResponse>.fromJson(
-          json as Map<String, dynamic>) as T;
-    } else if (typesEqual<T, PageImpl<ShelterImagesResponse>?>()) {
-      return PageImpl<ShelterImagesResponse>.fromJson(
-          json as Map<String, dynamic>) as T;
-    } else if (typesEqual<T, PageImpl<ShelterOverviewResponse>?>()) {
-      return PageImpl<ShelterOverviewResponse>.fromJson(
-          json as Map<String, dynamic>) as T;
-    } else if (typesEqual<T, PageImpl<ShelterReviewResponse>?>()) {
-      return PageImpl<ShelterReviewResponse>.fromJson(
-          json as Map<String, dynamic>) as T;
-    } else if (typesEqual<T, PageImpl<AnimalJournalResponse>?>()) {
-      return PageImpl<AnimalJournalResponse>.fromJson(
-          json as Map<String, dynamic>) as T;
+    } else if (typesEqual<T, Page<ShelterReviewResponse>?>()) {
+      return Page<ShelterReviewResponse>.fromJson(json as Map<String, dynamic>)
+          as T;
+    } else if (typesEqual<T, Page<AnimalJournalResponse>?>()) {
+      return Page<AnimalJournalResponse>.fromJson(json as Map<String, dynamic>)
+          as T;
     }
 
     // note : currently dart does not support generic type checking without explicit definition of generic type.

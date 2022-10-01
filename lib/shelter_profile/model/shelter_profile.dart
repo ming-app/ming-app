@@ -29,8 +29,8 @@ class ShelterProfile {
     required this.imageUrl,
   });
 
-  factory ShelterProfile.fromShelterOverviewResponse(
-      ShelterOverviewResponse response) {
+  factory ShelterProfile.fromShelterDetailResponse(
+      ShelterDetailResponse response) {
     return ShelterProfile(
       id: response.id,
       name: response.name,
