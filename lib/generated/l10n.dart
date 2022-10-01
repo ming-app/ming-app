@@ -320,10 +320,10 @@ class S {
     );
   }
 
-  /// `사진 전체보기`
+  /// `Show all photos`
   String get showAllPhotos {
     return Intl.message(
-      '사진 전체보기',
+      'Show all photos',
       name: 'showAllPhotos',
       desc: '',
       args: [],

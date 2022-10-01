@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ming/common/ming_icons.dart';
 
 import '../../generated/l10n.dart';
 
@@ -23,12 +24,23 @@ class PhotoPreview extends StatelessWidget {
               Positioned(
                 right: 25,
                 bottom: 25,
-                child: Card(
-                  child: Row(
-                    children: [
-                      const Icon(Icons.menu),
-                      Text(S.of(context).showAllPhotos),
-                    ],
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    width: 167,
+                    height: 36,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(MingIcons.menu),
+                        Text(S.of(context).showAllPhotos),
+                      ],
+                    ),
                   ),
                 ),
               ),

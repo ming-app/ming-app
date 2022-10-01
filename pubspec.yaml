@@ -69,6 +69,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: MingIcons
+      fonts:
+        - asset: fonts/ming_icons/MingIcons.ttf
   assets:
   - assets/
   - assets/mocks/

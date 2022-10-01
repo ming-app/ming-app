@@ -25,7 +25,12 @@ class AdaptiveNavigation extends StatelessWidget {
         destinations: destinations,
         selectedIndex: selectedIndex,
       ),
-      body: child,
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 1200),
+          child: child,
+        ),
+      ),
       bottomSheet: const MingBottomSheet(),
     );
   }

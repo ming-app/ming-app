@@ -93,7 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shelterPageTitle": MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
         "shelterSinglePageTitle":
             MessageLookupByLibrary.simpleMessage("쉼터 페이지"),
-        "showAllPhotos": MessageLookupByLibrary.simpleMessage("사진 전체보기"),
+        "showAllPhotos":
+            MessageLookupByLibrary.simpleMessage("Show all photos"),
         "showLess": MessageLookupByLibrary.simpleMessage("show less >"),
         "showMore": MessageLookupByLibrary.simpleMessage("show more >"),
         "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page"),
