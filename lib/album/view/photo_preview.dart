@@ -11,8 +11,9 @@ class PhotoPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      child: SizedBox(
-        height: 230,
+      child: Container(
+        height: 400,
+        constraints: BoxConstraints(maxWidth: 1200),
         child: Stack(
           children: [
             Positioned.fill(
@@ -39,6 +40,7 @@ class PhotoPreview extends StatelessWidget {
 }
 
 class PhotoPreviewForm extends StatelessWidget {
+  final double margin = 8;
   final List<Image> photos;
 
   const PhotoPreviewForm(this.photos, {Key? key}) : super(key: key);
@@ -61,8 +63,12 @@ class PhotoPreviewForm extends StatelessWidget {
         {
           return Row(
             children: photos
-                .map((e) => Expanded(
-                      flex: 1,
+                .map(
+                  (e) => Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(right: photos.last == e ? 0 : margin),
                       child: SizedBox.expand(
                         child: FittedBox(
                           fit: BoxFit.cover,
@@ -70,7 +76,9 @@ class PhotoPreviewForm extends StatelessWidget {
                           child: e,
                         ),
                       ),
-                    ))
+                    ),
+                  ),
+                )
                 .toList(),
           );
         }
@@ -83,8 +91,12 @@ class PhotoPreviewForm extends StatelessWidget {
                 child: Row(
                   children: photos
                       .sublist(0, 2)
-                      .map((e) => Expanded(
-                            flex: 1,
+                      .map(
+                        (e) => Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                right: e == photos.first ? margin : 0),
                             child: SizedBox.expand(
                               child: FittedBox(
                                 fit: BoxFit.cover,
@@ -92,17 +104,26 @@ class PhotoPreviewForm extends StatelessWidget {
                                 child: e,
                               ),
                             ),
-                          ))
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
+              ),
+              SizedBox(
+                height: margin,
               ),
               Expanded(
                 flex: 1,
                 child: Row(
                   children: photos
                       .sublist(2, 4)
-                      .map((e) => Expanded(
-                            flex: 1,
+                      .map(
+                        (e) => Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                right: e == photos.last ? 0 : margin),
                             child: SizedBox.expand(
                               child: FittedBox(
                                 fit: BoxFit.cover,
@@ -110,7 +131,9 @@ class PhotoPreviewForm extends StatelessWidget {
                                 child: e,
                               ),
                             ),
-                          ))
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               )
@@ -131,6 +154,9 @@ class PhotoPreviewForm extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                width: margin,
+              ),
               Expanded(
                 flex: 1,
                 child: Column(
@@ -142,16 +168,23 @@ class PhotoPreviewForm extends StatelessWidget {
                             .sublist(1, 3)
                             .map((e) => Expanded(
                                   flex: 1,
-                                  child: SizedBox.expand(
-                                    child: FittedBox(
-                                      fit: BoxFit.cover,
-                                      clipBehavior: Clip.hardEdge,
-                                      child: e,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        right: e == photos[1] ? margin : 0),
+                                    child: SizedBox.expand(
+                                      child: FittedBox(
+                                        fit: BoxFit.cover,
+                                        clipBehavior: Clip.hardEdge,
+                                        child: e,
+                                      ),
                                     ),
                                   ),
                                 ))
                             .toList(),
                       ),
+                    ),
+                    SizedBox(
+                      height: margin,
                     ),
                     Expanded(
                       flex: 1,
@@ -160,11 +193,15 @@ class PhotoPreviewForm extends StatelessWidget {
                             .sublist(3, 5)
                             .map((e) => Expanded(
                                   flex: 1,
-                                  child: SizedBox.expand(
-                                    child: FittedBox(
-                                      fit: BoxFit.cover,
-                                      clipBehavior: Clip.hardEdge,
-                                      child: e,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        right: e == photos[3] ? margin : 0),
+                                    child: SizedBox.expand(
+                                      child: FittedBox(
+                                        fit: BoxFit.cover,
+                                        clipBehavior: Clip.hardEdge,
+                                        child: e,
+                                      ),
                                     ),
                                   ),
                                 ))
