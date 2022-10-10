@@ -87,13 +87,12 @@ class _MingApiClient implements MingApiClient {
 
   @override
   Future<ApiResponse<Page<ShelterOverviewResponse>>> getSheltersOverview(
-      {regionId, offset, pageNumber, pageSize}) async {
+      {regionId, size, page}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'regionId': regionId,
-      r'offset': offset,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize
+      r'size': size,
+      r'page': page
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -127,13 +126,9 @@ class _MingApiClient implements MingApiClient {
 
   @override
   Future<ApiResponse<Page<AnimalOverviewResponse>>> getAnimalInShelter(id,
-      {offset, pageNumber, pageSize}) async {
+      {size, page}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'offset': offset,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize
-    };
+    final queryParameters = <String, dynamic>{r'size': size, r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -150,13 +145,9 @@ class _MingApiClient implements MingApiClient {
 
   @override
   Future<ApiResponse<Page<ShelterImagesResponse>>> getSheltersImage(id,
-      {offset, pageNumber, pageSize}) async {
+      {size, page}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'offset': offset,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize
-    };
+    final queryParameters = <String, dynamic>{r'size': size, r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -173,13 +164,9 @@ class _MingApiClient implements MingApiClient {
 
   @override
   Future<ApiResponse<Page<ShelterReviewResponse>>> getReviews(id,
-      {offset, pageNumber, pageSize}) async {
+      {size, page}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'offset': offset,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize
-    };
+    final queryParameters = <String, dynamic>{r'size': size, r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
