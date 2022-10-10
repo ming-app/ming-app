@@ -5,25 +5,27 @@ abstract class AlbumState {}
 
 class AlbumUninitialized implements AlbumState {}
 
+class ImageOnLoading implements AlbumState {}
+
 class AlbumError implements AlbumState {}
 
 class ImageLoaded implements AlbumState {
   final String id;
-  final bool isShelter;
+  final ImageType type;
   final List<Image> images;
   final bool maxReached;
 
-  ImageLoaded(this.id, this.isShelter, this.images, this.maxReached);
+  ImageLoaded(this.id, this.type, this.images, this.maxReached);
 
   ImageLoaded copyWith({
     String? id,
-    bool? isShelter,
+    ImageType? type,
     List<Image>? images,
     bool? maxReached,
   }) {
     return ImageLoaded(
       id ?? this.id,
-      isShelter ?? this.isShelter,
+      type ?? this.type,
       images ?? this.images,
       maxReached ?? this.maxReached,
     );

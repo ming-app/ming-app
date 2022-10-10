@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ming_api/entities/image.dart';
 
 import '../entities/entities.dart';
 import 'utils.dart';
@@ -55,6 +56,8 @@ class _Converter<T> implements JsonConverter<T?, Map<String, dynamic>> {
       return AnimalOverviewResponse.fromJson(json) as T;
     } else if (typesEqual<T, AnimalJournalResponse>()) {
       return AnimalJournalResponse.fromJson(json) as T;
+    } else if (typesEqual<T, ImageResponse>()) {
+      return ImageResponse.fromJson(json) as T;
     }
 
     throw FormatException("No valid structure for json $json");

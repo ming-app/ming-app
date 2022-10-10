@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ming_api/entities/image.dart';
 
 import 'package:ming_api/ming_api.dart';
 
@@ -74,6 +75,14 @@ void main() {
       var result = await repository.client.getVolunteerActivities("2022-01");
 
       expect(result.result!.isNotEmpty, true);
+    });
+  });
+
+  group("Image API Test", () {
+    test("GET v1/images, positive", () async {
+      var result = await repository.client.getImages();
+
+      expect(result.result!.content.isNotEmpty, true);
     });
   });
 }

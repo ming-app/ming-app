@@ -3,10 +3,16 @@ part of 'album_bloc.dart';
 @immutable
 abstract class AlbumEvent {}
 
-class FetchShelterImages extends AlbumEvent {
-  final String shelterId;
+class FetchImages extends AlbumEvent {
+  final ImageType type;
+  final String id;
+  final bool initialize;
 
-  FetchShelterImages(this.shelterId);
+  FetchImages(
+    this.type,
+    this.id, {
+    this.initialize = false,
+  });
 }
 
 class FetchAnimalImages extends AlbumEvent {

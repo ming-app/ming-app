@@ -13,3 +13,15 @@ class ImageResponse {
       _$ImageResponseFromJson(json);
   Map<String, dynamic> toJson() => _$ImageResponseToJson(this);
 }
+
+enum ImageType {
+  animal("ANIMAL"),
+  shelter("SHELTER"),
+  user("USER");
+
+  const ImageType(this.value);
+  final String value;
+
+  @override
+  String toString() => value;
+}

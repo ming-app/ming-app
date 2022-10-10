@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:log/log.dart';
+import 'package:ming_api/entities/image.dart';
 import 'package:ming_api/ming_api.dart';
 
 part 'album_event.dart';
@@ -13,34 +14,33 @@ class AlbumBloc extends Bloc<AlbumEvent, AlbumState> {
 
   AlbumBloc(this._api) : super(AlbumUninitialized()) {
     on<AlbumEvent>((event, emit) async {
-      if (event is FetchShelterImages) {
-        await onFetchShelterImages(event, emit);
-      } else if (event is FetchAnimalImages) {
-        // todo: add animal image fetching.
+      if (event is FetchImages) {
+        await onFetchImages(event, emit);
       }
     });
   }
 
-  Future<void> onFetchShelterImages(
-      FetchShelterImages event, Emitter<AlbumState> emit) async {
+  Future<void> onFetchImages(
+      FetchImages event, Emitter<AlbumState> emit) async {
     var idx = 0;
 
     if (state is ImageLoaded) {
-      if ((state as ImageLoaded).maxReached) {
-        return;
-      }
       idx = (state as ImageLoaded).images.length;
     }
 
     List<String> imageList;
 
     try {
-      var result = await _api.client.getSheltersImage(event.shelterId);
+      emit(ImageOnLoading());
+      var result = await _api.client.getImages(
+        type: event.type.value,
+        id: event.id,
+      );
       idx = result.result?.number ?? 0;
-      imageList =
-          result.result?.content.map((e) => e.thumbnailUrl).toList() ?? [];
+      imageList = result.result?.content.map((e) => e.url).toList() ?? [];
     } catch (e) {
       Log.e("Error on fetching image list from api.", e);
+      emit(AlbumError());
       return;
     }
 
@@ -56,14 +56,14 @@ class AlbumBloc extends Bloc<AlbumEvent, AlbumState> {
         .whereType<Image>()
         .toList();
 
-    if (state is! ImageLoaded) {
-      emit(ImageLoaded(event.shelterId, true, images, false));
+    if (state is! ImageLoaded || event.initialize) {
+      emit(ImageLoaded(event.id, event.type, images, false));
       return;
     }
 
     emit(images.isEmpty
         ? (state as ImageLoaded).copyWith(maxReached: true)
-        : ImageLoaded(event.shelterId, true,
+        : ImageLoaded(event.id, event.type,
             (state as ImageLoaded).images + images, false));
   }
 }
