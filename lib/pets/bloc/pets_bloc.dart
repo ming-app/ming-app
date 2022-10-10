@@ -23,8 +23,8 @@ class PetsBloc extends Bloc<PetsEvent, PetsState> {
     try {
       var response = await _api.client.getAnimalInShelter(
         event.shelterId,
-        pageNumber: event.pageNumber,
-        pageSize: event.pageSize,
+        page: event.pageNumber,
+        size: event.pageSize,
       );
 
       if (response.result == null) throw Exception("Null on response.result.");
