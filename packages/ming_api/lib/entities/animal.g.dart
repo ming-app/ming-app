@@ -53,6 +53,8 @@ AnimalDetailResponse _$AnimalDetailResponseFromJson(
       ShelterInfoResponse.fromJson(json['shelter'] as Map<String, dynamic>),
       UserListOverviewResponse.fromJson(
           json['volunteerOverview'] as Map<String, dynamic>),
+      $enumDecode(_$AnimalGenderEnumMap, json['gender']),
+      json['introduction'] as String,
     );
 
 Map<String, dynamic> _$AnimalDetailResponseToJson(
@@ -62,11 +64,13 @@ Map<String, dynamic> _$AnimalDetailResponseToJson(
       'name': instance.name,
       'type': _$AnimalTypeEnumMap[instance.type]!,
       'kind': instance.kind,
+      'gender': _$AnimalGenderEnumMap[instance.gender]!,
       'foundLocation': instance.foundLocation,
       'birthDay': instance.birthDay,
       'relatedAgency': instance.relatedAgency,
       'takeOverDate': instance.takeOverDate,
       'inShelterDays': instance.inShelterDays,
+      'introduction': instance.introduction,
       'neutering': instance.neutering,
       'weightKg': instance.weightKg,
       'shelter': instance.shelter,

@@ -187,7 +187,9 @@ final router = GoRouter(
               child: RootLayout(
                 key: _scaffoldKey,
                 currentIndex: MingNavigator.shelters.offset(),
-                child: const PetProfilePage(),
+                child: PetProfilePage(
+                  petId: id ?? "",
+                ),
               ),
             );
           },

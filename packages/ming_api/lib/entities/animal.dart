@@ -36,11 +36,13 @@ class AnimalDetailResponse {
   final String name;
   final AnimalType type;
   final String kind;
+  final AnimalGender gender;
   final String foundLocation;
   final String birthDay;
   final String relatedAgency;
   final String takeOverDate;
   final int inShelterDays;
+  final String introduction;
   final bool neutering;
   final int weightKg;
   final ShelterInfoResponse shelter;
@@ -60,6 +62,8 @@ class AnimalDetailResponse {
     this.weightKg,
     this.shelter,
     this.volunteerOverview,
+    this.gender,
+    this.introduction,
   );
 
   factory AnimalDetailResponse.fromJson(Map<String, dynamic> json) =>

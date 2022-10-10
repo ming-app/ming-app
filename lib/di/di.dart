@@ -3,6 +3,7 @@ import 'package:ming/album/bloc/album_bloc.dart';
 
 import 'package:ming/home/cubit/home_cubit.dart';
 import 'package:ming/login/cubit/login_cubit.dart';
+import 'package:ming/pet_profile/bloc/pet_profile_bloc.dart';
 import 'package:ming/pets/bloc/pets_bloc.dart';
 import 'package:ming/shelter_profile/bloc/shelter_profile_bloc.dart';
 import 'package:ming_api/ming_api.dart';
@@ -39,6 +40,11 @@ List<BlocProvider> blocProviders = [
   ),
   BlocProvider<ShelterProfileBloc>(
     create: (context) => ShelterProfileBloc(
+      context.read<MingApiRepository>(),
+    ),
+  ),
+  BlocProvider<PetProfileBloc>(
+    create: (context) => PetProfileBloc(
       context.read<MingApiRepository>(),
     ),
   ),

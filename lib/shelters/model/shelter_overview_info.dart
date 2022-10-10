@@ -21,7 +21,7 @@ class ShelterOverviewInfo {
     required this.phoneNumber,
   });
 
-  factory ShelterOverviewInfo.fromShelterOverviewResponse(
+  factory ShelterOverviewInfo.fromShelterInfoResponse(
       ShelterInfoResponse response) {
     return ShelterOverviewInfo(
       id: response.id,
