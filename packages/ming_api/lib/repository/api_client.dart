@@ -97,7 +97,7 @@ abstract class MingApiClient {
     @Query("redirectUrl") String redirectUrl,
   );
 
-  @GET("")
+  @GET("/api/v1/users/token/refresh")
   Future<AuthToken> refreshToken(
     @Header("refreshToken") String token,
     @Header("loginType") String loginType,
