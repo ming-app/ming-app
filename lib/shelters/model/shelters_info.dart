@@ -29,7 +29,7 @@ class SheltersInfo {
       response.adoptedAnimalCount,
       response.volunteerOverview.count,
       shelterResponse
-          .map((e) => ShelterOverviewInfo.fromShelterOverviewResponse(e))
+          .map((e) => ShelterOverviewInfo.fromShelterInfoResponse(e))
           .toList(),
     );
   }
@@ -46,7 +46,7 @@ class SheltersInfo {
       response.fold(
           0, (prev, element) => prev + element.volunteerOverview.count),
       shelterResponse
-          .map((e) => ShelterOverviewInfo.fromShelterOverviewResponse(e))
+          .map((e) => ShelterOverviewInfo.fromShelterInfoResponse(e))
           .toList(),
     );
   }

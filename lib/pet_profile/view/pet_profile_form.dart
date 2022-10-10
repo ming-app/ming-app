@@ -94,6 +94,7 @@ class PetDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final strings = S.of(context);
+    final birth = DateTime.parse(pet.birth);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,7 +165,7 @@ class PetDescription extends StatelessWidget {
               ),
               Tuple2<IconData, String>(
                 MingIcons.favorite,
-                "${pet.birth} 생",
+                "${birth.year}년 ${birth.month}월 생",
               ),
             ]
                 .map(
