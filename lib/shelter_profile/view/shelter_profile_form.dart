@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:ming/album/view/album_view.dart';
 import 'package:ming/common/snackbar_service.dart';
 import 'package:ming/pets/view/pets_view.dart';
+import 'package:ming_api/entities/image.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -25,7 +26,7 @@ class ShelterProfileForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AlbumView(shelter.id, true),
+            AlbumView(shelter.id, ImageType.shelter),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(

@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  retrofit: ^3.0.1+1
+  retrofit: ^3.3.1
   dio: ^4.0.6
   json_annotation: ^4.6.0
   copy_with_extension: ^4.0.2
@@ -21,8 +21,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   json_serializable: ^6.3.1
-  build_runner: ^2.2.0
-  retrofit_generator: ^4.0.3
+  build_runner: '>=2.2.0 <4.0.0'
+  retrofit_generator: '>=4.2.0 <5.0.0'
   mockito: ^5.3.0
   mock_web_server: 5.0.0-nullsafety.1
   copy_with_extension_gen: ^4.0.2

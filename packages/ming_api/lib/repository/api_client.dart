@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ming_api/common/api_response.dart';
+import 'package:ming_api/entities/image.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../common/pagination.dart';
@@ -76,6 +77,15 @@ abstract class MingApiClient {
     @Header("Authorization") String token,
     @Body() VolunteerRequest request, {
     @Header("loginType") String type = "KAKAO_TALK",
+  });
+
+  // images
+  @GET("/api/v1/images")
+  Future<ApiResponse<Page<ImageResponse>>> getImages({
+    @Query("type") String? type,
+    @Query("id") String? id,
+    @Query("size") int? size,
+    @Query("page") int? page,
   });
 
   // User

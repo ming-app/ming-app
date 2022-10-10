@@ -6,6 +6,7 @@ import 'package:ming/common/ui/contact_to_shelter_card.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/model/pet_profile.dart';
 import 'package:ming/shelters/model/shelter_overview_info.dart';
+import 'package:ming_api/entities/image.dart';
 import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -28,7 +29,7 @@ class PetProfileForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AlbumView(pet.id, false),
+            AlbumView(pet.id, ImageType.animal),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(

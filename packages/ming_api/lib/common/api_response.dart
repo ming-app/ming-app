@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../entities/entities.dart';
+import '../entities/image.dart';
 import 'pagination.dart';
 import 'utils.dart';
 
@@ -71,6 +72,8 @@ class _Converter<T> implements JsonConverter<T?, Object?> {
     } else if (typesEqual<T, Page<AnimalJournalResponse>?>()) {
       return Page<AnimalJournalResponse>.fromJson(json as Map<String, dynamic>)
           as T;
+    } else if (typesEqual<T, Page<ImageResponse>?>()) {
+      return Page<ImageResponse>.fromJson(json as Map<String, dynamic>) as T;
     }
 
     // note : currently dart does not support generic type checking without explicit definition of generic type.
