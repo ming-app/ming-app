@@ -20,7 +20,7 @@ class ShelterOverviewInfo {
   });
 
   factory ShelterOverviewInfo.fromShelterOverviewResponse(
-      ShelterOverviewResponse response) {
+      ShelterInfoResponse response) {
     return ShelterOverviewInfo(
       id: response.id,
       name: response.name,

@@ -43,7 +43,7 @@ class AnimalDetailResponse {
   final int inShelterDays;
   final bool neutering;
   final int weightKg;
-  final ShelterOverviewResponse shelter;
+  final ShelterInfoResponse shelter;
   final UserListOverviewResponse volunteerOverview;
 
   AnimalDetailResponse(

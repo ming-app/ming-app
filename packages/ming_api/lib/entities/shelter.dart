@@ -7,36 +7,6 @@ import 'entities.dart';
 part 'shelter.g.dart';
 
 @JsonSerializable()
-class ShelterOverviewResponse {
-  final String id;
-  final String name;
-  final String adminName;
-  final String introduction;
-  final String phoneNumber;
-  final String location;
-  final ImageResponse image;
-  final UserListOverviewResponse volunteerOverview;
-  @ListConverter<AnimalInShelterOverview>()
-  final List<AnimalInShelterOverview> animalOverview;
-
-  ShelterOverviewResponse(
-    this.id,
-    this.name,
-    this.adminName,
-    this.introduction,
-    this.phoneNumber,
-    this.location,
-    this.image,
-    this.volunteerOverview,
-    this.animalOverview,
-  );
-
-  factory ShelterOverviewResponse.fromJson(Map<String, dynamic> json) =>
-      _$ShelterOverviewResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$ShelterOverviewResponseToJson(this);
-}
-
-@JsonSerializable()
 class AnimalInShelterOverview {
   final int count;
   final AnimalType type;
@@ -82,7 +52,7 @@ class ShelterImagesResponse {
 }
 
 @JsonSerializable()
-class ShelterDetailResponse {
+class ShelterInfoResponse {
   final String id;
   final String name;
   final String introduction;
@@ -96,7 +66,7 @@ class ShelterDetailResponse {
   final List<AnimalInShelterOverview> animalOverview;
   final RegionResponse region;
 
-  ShelterDetailResponse(
+  ShelterInfoResponse(
     this.id,
     this.name,
     this.introduction,
@@ -110,7 +80,7 @@ class ShelterDetailResponse {
     this.region,
   );
 
-  factory ShelterDetailResponse.fromJson(Map<String, dynamic> json) =>
-      _$ShelterDetailResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$ShelterDetailResponseToJson(this);
+  factory ShelterInfoResponse.fromJson(Map<String, dynamic> json) =>
+      _$ShelterInfoResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ShelterInfoResponseToJson(this);
 }

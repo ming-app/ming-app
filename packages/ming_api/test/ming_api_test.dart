@@ -39,13 +39,13 @@ void main() {
     });
 
     test("GET v1/shelters, Positive", () async {
-      var result = await repository.client.getSheltersOverview();
+      var result = await repository.client.getShelters();
 
       expect(result.result!.content.isNotEmpty, true);
     });
 
     test("GET v1/shelters/{id}", () async {
-      var result = await repository.client.getShelterDetail("1");
+      var result = await repository.client.getShelter("1");
 
       expect(result.result != null, true);
     });

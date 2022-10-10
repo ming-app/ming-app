@@ -50,7 +50,7 @@ AnimalDetailResponse _$AnimalDetailResponseFromJson(
       json['inShelterDays'] as int,
       json['neutering'] as bool,
       json['weightKg'] as int,
-      ShelterOverviewResponse.fromJson(json['shelter'] as Map<String, dynamic>),
+      ShelterInfoResponse.fromJson(json['shelter'] as Map<String, dynamic>),
       UserListOverviewResponse.fromJson(
           json['volunteerOverview'] as Map<String, dynamic>),
     );

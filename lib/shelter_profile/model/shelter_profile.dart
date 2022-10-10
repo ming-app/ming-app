@@ -30,7 +30,7 @@ class ShelterProfile {
   });
 
   factory ShelterProfile.fromShelterDetailResponse(
-      ShelterDetailResponse response) {
+      ShelterInfoResponse response) {
     return ShelterProfile(
       id: response.id,
       name: response.name,
