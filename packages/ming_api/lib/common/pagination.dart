@@ -47,8 +47,8 @@ class _Converter<T> implements JsonConverter<T?, Map<String, dynamic>> {
 
     if (typesEqual<T, ShelterReviewResponse>()) {
       return ShelterReviewResponse.fromJson(json) as T;
-    } else if (typesEqual<T, ShelterOverviewResponse>()) {
-      return ShelterOverviewResponse.fromJson(json) as T;
+    } else if (typesEqual<T, ShelterInfoResponse>()) {
+      return ShelterInfoResponse.fromJson(json) as T;
     } else if (typesEqual<T, ShelterImagesResponse>()) {
       return ShelterImagesResponse.fromJson(json) as T;
     } else if (typesEqual<T, AnimalOverviewResponse>()) {

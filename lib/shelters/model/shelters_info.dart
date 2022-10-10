@@ -20,7 +20,7 @@ class SheltersInfo {
 
   factory SheltersInfo.fromShelterByRegionRespnose(
     ShelterByRegionResponse response,
-    List<ShelterOverviewResponse> shelterResponse,
+    List<ShelterInfoResponse> shelterResponse,
   ) {
     return SheltersInfo(
       response.region.fullName,
@@ -36,7 +36,7 @@ class SheltersInfo {
 
   factory SheltersInfo.fromOverallResponse(
     List<ShelterByRegionResponse> response,
-    List<ShelterOverviewResponse> shelterResponse,
+    List<ShelterInfoResponse> shelterResponse,
   ) {
     return SheltersInfo(
       "전체",

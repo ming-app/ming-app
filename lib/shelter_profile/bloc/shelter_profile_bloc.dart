@@ -23,7 +23,7 @@ class ShelterProfileBloc
     emit(ShelterProfileOnLoading());
 
     try {
-      var response = await _api.client.getShelterDetail(event.shelterId);
+      var response = await _api.client.getShelter(event.shelterId);
 
       emit(
         ShelterProfileFetched(

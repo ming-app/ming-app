@@ -24,11 +24,10 @@ class SheltersBloc extends Bloc<SheltersEvent, SheltersState> {
       late SheltersInfo info;
 
       var regions = (await _api.client.getSheltersRegionalInfo()).result!;
-      var shelters =
-          (await _api.client.getSheltersOverview(regionId: event.regionId))
-                  .result
-                  ?.content ??
-              [];
+      var shelters = (await _api.client.getShelters(regionId: event.regionId))
+              .result
+              ?.content ??
+          [];
 
       if (event.regionId != null) {
         var region = regions

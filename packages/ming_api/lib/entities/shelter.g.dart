@@ -6,38 +6,6 @@ part of 'shelter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ShelterOverviewResponse _$ShelterOverviewResponseFromJson(
-        Map<String, dynamic> json) =>
-    ShelterOverviewResponse(
-      json['id'] as String,
-      json['name'] as String,
-      json['adminName'] as String,
-      json['introduction'] as String,
-      json['phoneNumber'] as String,
-      json['location'] as String,
-      ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
-      UserListOverviewResponse.fromJson(
-          json['volunteerOverview'] as Map<String, dynamic>),
-      (json['animalOverview'] as List<dynamic>)
-          .map((e) =>
-              AnimalInShelterOverview.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$ShelterOverviewResponseToJson(
-        ShelterOverviewResponse instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'adminName': instance.adminName,
-      'introduction': instance.introduction,
-      'phoneNumber': instance.phoneNumber,
-      'location': instance.location,
-      'image': instance.image,
-      'volunteerOverview': instance.volunteerOverview,
-      'animalOverview': instance.animalOverview,
-    };
-
 AnimalInShelterOverview _$AnimalInShelterOverviewFromJson(
         Map<String, dynamic> json) =>
     AnimalInShelterOverview(
@@ -92,9 +60,8 @@ Map<String, dynamic> _$ShelterImagesResponseToJson(
       'thumbnailUrl': instance.thumbnailUrl,
     };
 
-ShelterDetailResponse _$ShelterDetailResponseFromJson(
-        Map<String, dynamic> json) =>
-    ShelterDetailResponse(
+ShelterInfoResponse _$ShelterInfoResponseFromJson(Map<String, dynamic> json) =>
+    ShelterInfoResponse(
       json['id'] as String,
       json['name'] as String,
       json['introduction'] as String,
@@ -112,8 +79,8 @@ ShelterDetailResponse _$ShelterDetailResponseFromJson(
       RegionResponse.fromJson(json['region'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ShelterDetailResponseToJson(
-        ShelterDetailResponse instance) =>
+Map<String, dynamic> _$ShelterInfoResponseToJson(
+        ShelterInfoResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

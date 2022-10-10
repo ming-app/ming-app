@@ -43,8 +43,8 @@ class _Converter<T> implements JsonConverter<T?, Object?> {
       return UserDetailInfoResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, RegionResponse?>()) {
       return RegionResponse.fromJson(json as Map<String, dynamic>) as T;
-    } else if (typesEqual<T, ShelterDetailResponse?>()) {
-      return ShelterDetailResponse.fromJson(json as Map<String, dynamic>) as T;
+    } else if (typesEqual<T, ShelterInfoResponse?>()) {
+      return ShelterInfoResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, AnimalDetailResponse?>()) {
       return AnimalDetailResponse.fromJson(json as Map<String, dynamic>) as T;
     } else if (typesEqual<T, List<RegionResponse>?>()) {
@@ -62,9 +62,9 @@ class _Converter<T> implements JsonConverter<T?, Object?> {
     } else if (typesEqual<T, Page<ShelterImagesResponse>?>()) {
       return Page<ShelterImagesResponse>.fromJson(json as Map<String, dynamic>)
           as T;
-    } else if (typesEqual<T, Page<ShelterOverviewResponse>?>()) {
-      return Page<ShelterOverviewResponse>.fromJson(
-          json as Map<String, dynamic>) as T;
+    } else if (typesEqual<T, Page<ShelterInfoResponse>?>()) {
+      return Page<ShelterInfoResponse>.fromJson(json as Map<String, dynamic>)
+          as T;
     } else if (typesEqual<T, Page<ShelterReviewResponse>?>()) {
       return Page<ShelterReviewResponse>.fromJson(json as Map<String, dynamic>)
           as T;

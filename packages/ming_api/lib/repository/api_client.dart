@@ -33,14 +33,14 @@ abstract class MingApiClient {
   Future<ApiResponse<List<ShelterByRegionResponse>>> getSheltersRegionalInfo();
 
   @GET("api/v1/shelters")
-  Future<ApiResponse<Page<ShelterOverviewResponse>>> getSheltersOverview({
+  Future<ApiResponse<Page<ShelterInfoResponse>>> getShelters({
     @Query("regionId") String? regionId,
     @Query("size") int? size,
     @Query("page") int? page,
   });
 
   @GET("api/v1/shelters/{id}")
-  Future<ApiResponse<ShelterDetailResponse>> getShelterDetail(
+  Future<ApiResponse<ShelterInfoResponse>> getShelter(
     @Path() String id,
   );
 
