@@ -13,6 +13,7 @@ final mockShelters = [
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
+    phoneNumber: "010-0000-0000",
   ),
   ShelterOverviewInfo(
     id: "2",
@@ -23,6 +24,7 @@ final mockShelters = [
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
+    phoneNumber: "010-0000-0000",
   ),
   ShelterOverviewInfo(
     id: "3",
@@ -32,6 +34,7 @@ final mockShelters = [
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWFul4wWrovO6LIbImiVNfovHIUc_jMcoU8A&usqp=CAU",
     region: "서울특별시 강남구",
+    phoneNumber: "010-0000-0000",
   ),
 ];
 

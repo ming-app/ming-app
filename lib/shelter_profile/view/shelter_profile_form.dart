@@ -8,10 +8,9 @@ import 'package:ming/pets/view/pets_view.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../common/ui/contact_to_shelter_card.dart';
 import '../../common/ui/thumbnail.dart';
 import '../../generated/l10n.dart';
-import '../../pets/view/pets_form.dart';
-import '../mock/mock.dart';
 import '../model/shelter_profile.dart';
 
 class ShelterProfileForm extends StatelessWidget {
@@ -75,59 +74,6 @@ class ShelterProfileForm extends StatelessWidget {
               height: 100,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ContactToShelterButton extends StatelessWidget {
-  final Function()? onClick;
-
-  const ContactToShelterButton({
-    Key? key,
-    this.onClick,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Container(
-        constraints: const BoxConstraints(
-          maxWidth: 300,
-        ),
-        child: Card(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(S.of(context).shelterContact),
-                SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 0),
-                      backgroundColor: Color(0xffda4d2e),
-                      foregroundColor: Colors.white,
-                      textStyle: Theme.of(context).textTheme.bodySmall,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 18,
-                        horizontal: 18,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      )),
-                  onPressed: onClick,
-                  child: Text(
-                    S.of(context).contact,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
@@ -262,7 +208,7 @@ class ShelterDescription extends StatelessWidget {
               style: theme.textTheme.bodySmall,
             ),
             const Spacer(),
-            TextButton.icon(
+            TextButton(
               onPressed: () async {
                 if (kIsWeb) {
                   var url = html.window.location.href;
@@ -273,13 +219,12 @@ class ShelterDescription extends StatelessWidget {
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
-                textStyle: theme.textTheme.bodySmall,
+                textStyle: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
               ),
-              icon: Icon(
-                Icons.launch,
-                size: 18,
-              ),
-              label: Text(
+              child: Text(
                 S.of(context).share,
               ),
             ),
