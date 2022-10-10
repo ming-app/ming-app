@@ -8,6 +8,7 @@ class ShelterOverviewInfo {
   final int? numberOfDogs;
   final int numberOfVolunteers;
   final String imageUrl;
+  final String phoneNumber;
 
   ShelterOverviewInfo({
     required this.id,
@@ -17,6 +18,7 @@ class ShelterOverviewInfo {
     this.numberOfDogs,
     required this.numberOfVolunteers,
     required this.imageUrl,
+    required this.phoneNumber,
   });
 
   factory ShelterOverviewInfo.fromShelterOverviewResponse(
@@ -33,6 +35,7 @@ class ShelterOverviewInfo {
           .count,
       numberOfVolunteers: response.volunteerOverview.count,
       imageUrl: response.image.url,
+      phoneNumber: response.phoneNumber,
     );
   }
 }

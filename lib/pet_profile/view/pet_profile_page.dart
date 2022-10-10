@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ming/pet_profile/mock/mock.dart';
 import 'package:ming/pet_profile/view/pet_profile_form.dart';
+import 'package:ming/shelters/mock/shelters_mock.dart';
 
 class PetProfilePage extends StatelessWidget {
   const PetProfilePage({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class PetProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PetProfileForm(petMock),
+      body: PetProfileForm(mockShelters.first, petMock),
     );
   }
 }

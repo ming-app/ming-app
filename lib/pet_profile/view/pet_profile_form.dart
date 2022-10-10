@@ -1,22 +1,24 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:ming/album/view/album_view.dart';
-import 'package:ming/album/view/photo_preview.dart';
+import 'package:ming/common/ming_icons.dart';
+import 'package:ming/common/ui/contact_to_shelter_card.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/model/pet_profile.dart';
-import 'package:ming/shelter_profile/shelter_profile.dart';
-import 'package:ming/shelters/mock/shelters_mock.dart';
 import 'package:ming/shelters/model/shelter_overview_info.dart';
-import 'package:ming_api/ming_api.dart';
 import 'package:tuple/tuple.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../common/ui/thumbnail.dart';
 import '../../generated/l10n.dart';
-import '../../home/mock/mock.dart';
 
 class PetProfileForm extends StatelessWidget {
+  final ShelterOverviewInfo shelter;
   final PetProfile pet;
-  const PetProfileForm(this.pet, {Key? key}) : super(key: key);
+  const PetProfileForm(
+    this.shelter,
+    this.pet, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,46 +39,26 @@ class PetProfileForm extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PetDescription(pet),
-                        _shelterProfileCard(context, mockShelters.first),
+                        _shelterProfileCard(context, shelter),
                       ],
                     ),
                     flex: 2,
                   ),
-                  const Expanded(
-                    child: AdoptRequestCard(),
-                    flex: 1,
+                  SizedBox(
+                    width: 50,
+                  ),
+                  ContactToShelterButton(
+                    onClick: () =>
+                        launchUrlString("tel:${shelter.phoneNumber}"),
                   ),
                 ],
               ),
             ),
-            const Divider(),
-            // todo: 보호일지 view
-            _journalListView(context),
             SizedBox(
               height: 100,
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _journalListView(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "보호 일지",
-            style: theme.textTheme.titleMedium,
-          ),
-          Text(
-            "WiP",
-            style: theme.textTheme.titleMedium,
-          ),
-        ],
       ),
     );
   }
@@ -116,25 +98,23 @@ class PetDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          pet.name,
-          style: theme.textTheme.titleMedium,
-        ),
         Row(
           children: [
             Text(
-              // todo: fill this with actual value
-              "보호 일지 20개",
-              style: theme.textTheme.caption,
+              pet.name,
+              style: theme.textTheme.displayMedium,
             ),
             const Spacer(),
-            TextButton.icon(
+            TextButton(
               onPressed: () {},
-              icon: const Icon(
-                Icons.share,
-                size: 15,
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black,
+                textStyle: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
               ),
-              label: Text(
+              child: Text(
                 strings.share,
               ),
             ),
@@ -145,29 +125,7 @@ class PetDescription extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Row(
             children: [
-              Row(
-                children: userThumbnails
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 2,
-                          ),
-                          child: ThumbnailImage(e),
-                        ))
-                    .toList(),
-              ),
-              Text(
-                "${pet.numberOfVolunteer}" +
-                    strings.volunteerNumberSentenceString,
-              ),
-            ],
-          ),
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            children: [
-              const Icon(Icons.calendar_today_outlined),
+              const Icon(MingIcons.calender),
               const SizedBox(
                 width: 10,
               ),
@@ -185,28 +143,28 @@ class PetDescription extends StatelessWidget {
             runSpacing: 20,
             children: [
               Tuple2<IconData, String>(
-                Icons.calendar_today_outlined,
+                MingIcons.favorite,
                 pet.isDog ? strings.dog : strings.cat,
               ),
               Tuple2<IconData, String>(
-                Icons.home_outlined,
+                MingIcons.favorite,
                 pet.breed,
               ),
               Tuple2<IconData, String>(
-                Icons.calendar_today_outlined,
+                pet.isFemale ? MingIcons.female : MingIcons.male,
                 pet.isFemale ? strings.femaleString : strings.maleString,
               ),
               Tuple2<IconData, String>(
-                Icons.calendar_today_outlined,
+                MingIcons.favorite,
                 pet.isNeutralized ? "중성화 수술 함" : "중성화 수술 안함",
               ),
               Tuple2<IconData, String>(
-                Icons.monitor_weight,
+                MingIcons.favorite,
                 "${pet.weight}kg",
               ),
               Tuple2<IconData, String>(
-                Icons.baby_changing_station,
-                pet.birth,
+                MingIcons.favorite,
+                "${pet.birth} 생",
               ),
             ]
                 .map(
@@ -233,11 +191,11 @@ class PetDescription extends StatelessWidget {
         Column(
           children: [
             Tuple3<IconData, String, String>(
-                Icons.abc_outlined, pet.registeredAt, "접수 일시"),
+                MingIcons.document, pet.registeredAt, "접수 일시"),
             Tuple3<IconData, String, String>(
-                Icons.abc_outlined, pet.foundAt, "발생 장소"),
+                MingIcons.location, pet.foundAt, "발생 장소"),
             Tuple3<IconData, String, String>(
-                Icons.abc_outlined, pet.managingRegion, "관할 지역"),
+                MingIcons.directionBoard, pet.managingRegion, "관할 지역"),
           ].map((e) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
