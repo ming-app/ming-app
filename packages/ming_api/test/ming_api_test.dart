@@ -29,7 +29,7 @@ void main() {
       var result = await repository.client.getAnimalJournals("1");
 
       expect(result.result!.numberOfElements > 0, true);
-    });
+    }, skip: true);
   });
 
   group("Shelter API Test", () {
@@ -67,7 +67,7 @@ void main() {
       var result = await repository.client.getReviews("1");
 
       expect(result.result!.content.isNotEmpty, true);
-    });
+    }, skip: true);
   });
 
   group("Volunteer API Test", () {

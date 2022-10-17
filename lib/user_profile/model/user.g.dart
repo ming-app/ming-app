@@ -132,9 +132,9 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
           ? _value.snsUrl
           // ignore: cast_nullable_to_non_nullable
           : snsUrl as String?,
-      thumbnailUrl:
+      imageUrl:
           thumbnailUrl == const $CopyWithPlaceholder() || thumbnailUrl == null
-              ? _value.thumbnailUrl
+              ? _value.imageUrl
               // ignore: cast_nullable_to_non_nullable
               : thumbnailUrl as String,
     );

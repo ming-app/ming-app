@@ -49,7 +49,7 @@ class UserProfileContents extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 36,
-              backgroundImage: NetworkImage(user.thumbnailUrl),
+              backgroundImage: NetworkImage(user.imageUrl),
             ),
             SizedBox(height: 32),
             Row(

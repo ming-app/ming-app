@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:ming_api/entities/image.dart';
 
 part 'user.g.dart';
 
@@ -6,9 +7,9 @@ part 'user.g.dart';
 class UserInfoResponse {
   final String id;
   final String name;
-  final String thumbnailUrl;
+  final ImageResponse image;
 
-  UserInfoResponse(this.id, this.name, this.thumbnailUrl);
+  UserInfoResponse(this.id, this.name, this.image);
 
   factory UserInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$UserInfoResponseFromJson(json);
@@ -19,7 +20,7 @@ class UserInfoResponse {
 class UserDetailInfoResponse {
   final String id;
   final String name;
-  final String thumbnailUrl;
+  final ImageResponse image;
   final String email;
   final bool isOfferedIdentification;
   final String? phoneNumber;
@@ -32,7 +33,7 @@ class UserDetailInfoResponse {
   UserDetailInfoResponse(
     this.id,
     this.name,
-    this.thumbnailUrl,
+    this.image,
     this.email,
     this.isOfferedIdentification, {
     this.phoneNumber,
