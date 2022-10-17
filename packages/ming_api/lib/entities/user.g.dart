@@ -10,14 +10,14 @@ UserInfoResponse _$UserInfoResponseFromJson(Map<String, dynamic> json) =>
     UserInfoResponse(
       json['id'] as String,
       json['name'] as String,
-      json['thumbnailUrl'] as String,
+      ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserInfoResponseToJson(UserInfoResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'thumbnailUrl': instance.thumbnailUrl,
+      'image': instance.image,
     };
 
 UserDetailInfoResponse _$UserDetailInfoResponseFromJson(
@@ -25,7 +25,7 @@ UserDetailInfoResponse _$UserDetailInfoResponseFromJson(
     UserDetailInfoResponse(
       json['id'] as String,
       json['name'] as String,
-      json['thumbnailUrl'] as String,
+      ImageResponse.fromJson(json['image'] as Map<String, dynamic>),
       json['email'] as String,
       json['isOfferedIdentification'] as bool,
       phoneNumber: json['phoneNumber'] as String?,
@@ -41,7 +41,7 @@ Map<String, dynamic> _$UserDetailInfoResponseToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'thumbnailUrl': instance.thumbnailUrl,
+      'image': instance.image,
       'email': instance.email,
       'isOfferedIdentification': instance.isOfferedIdentification,
       'phoneNumber': instance.phoneNumber,

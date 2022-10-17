@@ -6,7 +6,7 @@ part 'user.g.dart';
 @CopyWith()
 class UserProfile {
   final String name;
-  final String thumbnailUrl;
+  final String imageUrl;
   final String email;
   final String? phoneNumber;
   final String? snsUrl;
@@ -17,7 +17,7 @@ class UserProfile {
 
   UserProfile({
     required this.name,
-    required this.thumbnailUrl,
+    required this.imageUrl,
     required this.email,
     this.phoneNumber,
     this.snsUrl,
@@ -28,14 +28,14 @@ class UserProfile {
   });
 
   factory UserProfile.empty() {
-    return UserProfile(name: "", thumbnailUrl: "", email: "");
+    return UserProfile(name: "", imageUrl: "", email: "");
   }
 
   factory UserProfile.fromUserDetailInfoResponse(
       UserDetailInfoResponse response) {
     return UserProfile(
       name: response.name,
-      thumbnailUrl: response.thumbnailUrl,
+      imageUrl: response.image.url,
       email: response.email,
       phoneNumber: response.phoneNumber,
       snsUrl: response.snsUrl,

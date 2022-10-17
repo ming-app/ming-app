@@ -22,7 +22,7 @@ void main() {
               jsonDecode(shelterReviewResponseValid));
 
       expect(result.result!.content[0].comment, "string");
-    });
+    }, skip: true);
 
     test("Valid ApiResponse<List<ShelterByRegionResponse>>", () {
       ApiResponse<List<ShelterByRegionResponse>> result =

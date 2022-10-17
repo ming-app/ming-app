@@ -3,7 +3,7 @@ import 'package:ming_api/ming_api.dart';
 class UserInfo {
   final String id;
   final String name;
-  final String thumbnailUrl;
+  final String imageUrl;
   final String email;
   final bool isOfferedIdentification;
   final String? phoneNumber;
@@ -16,7 +16,7 @@ class UserInfo {
   UserInfo(
     this.id,
     this.name,
-    this.thumbnailUrl,
+    this.imageUrl,
     this.email,
     this.isOfferedIdentification, {
     this.phoneNumber,
@@ -31,7 +31,7 @@ class UserInfo {
     return UserInfo(
       response.id,
       response.name,
-      response.thumbnailUrl,
+      response.image.url,
       response.email,
       response.isOfferedIdentification,
       phoneNumber: response.phoneNumber,
