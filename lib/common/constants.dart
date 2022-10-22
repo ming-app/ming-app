@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'theme.dart';
+
 const mingServerUrl = "https://ming-server.herokuapp.com/";
 const kakaoNativeAppKey =
     String.fromEnvironment('KAKAO_NATIVE_APP_KEY', defaultValue: 'none');
@@ -14,3 +16,9 @@ const spinLoader = Center(
     color: Colors.white,
   ),
 );
+
+extension CustomThemeExtension on ThemeData {
+  MingCustomTheme? mingCustomTheme() {
+    return extension<MingCustomTheme>();
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ming/common/constants.dart';
 
 import '../../generated/l10n.dart';
 
@@ -50,6 +51,7 @@ class _EditableTextFieldState extends State<EditableTextField> {
         },
       );
   Widget get getPostEditableWidget => PostEditablePlainTextField(
+        initialText: widget.content,
         title: widget.title,
         desc: widget.desc,
         fieldTitle: widget.fieldTitle,
@@ -136,10 +138,12 @@ class PostEditablePlainTextField extends StatelessWidget {
   final String desc;
   final String fieldTitle;
   final String? initialText;
+  final Color outlineColor;
   final void Function()? onCancel;
   final FormFieldSetter? onSaved;
   final FormFieldValidator? validator;
   final void Function()? onSave;
+  final void Function(String)? onChanged;
 
   const PostEditablePlainTextField({
     Key? key,
@@ -151,6 +155,8 @@ class PostEditablePlainTextField extends StatelessWidget {
     this.onSaved,
     this.validator,
     this.onSave,
+    this.onChanged,
+    this.outlineColor = const Color(0xffaaaaaa),
   }) : super(key: key);
 
   @override
@@ -187,34 +193,42 @@ class PostEditablePlainTextField extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                color: Color(0xffaaaaaa),
-                width: 1,
+        TextFormField(
+          autovalidateMode: AutovalidateMode.always,
+          style: theme.textTheme.bodyText2,
+          onSaved: onSaved,
+          onChanged: onChanged,
+          validator: validator,
+          initialValue: initialText,
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            floatingLabelAlignment: FloatingLabelAlignment.start,
+            labelText: fieldTitle,
+            labelStyle: theme.textTheme.bodySmall,
+            contentPadding: EdgeInsets.all(5),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: outlineColor, width: 1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: validator == null
+                    ? outlineColor
+                    : theme.mingCustomTheme()?.inputBlue ?? Colors.blue,
               ),
-              borderRadius: BorderRadius.circular(8)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  fieldTitle,
-                  style: theme.textTheme.labelSmall,
-                ),
-                TextFormField(
-                  style: theme.textTheme.bodyText2,
-                  onSaved: onSaved,
-                  validator: validator,
-                  initialValue: initialText,
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(5),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: theme.mingCustomTheme()?.inputRed ?? Colors.red,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: theme.mingCustomTheme()?.inputRed ?? Colors.red,
+              ),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
         ),

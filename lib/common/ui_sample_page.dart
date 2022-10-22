@@ -29,118 +29,123 @@ class _UiSamplePageState extends State<UiSamplePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          // PreEditable Text default
-          Text("PreEditableTextField"),
-          PreEditableTextField(
-            title: "닉네임",
-            content: "컨텐츠",
-            onEdit: () {},
-          ),
-          Divider(),
-          // PreEditable Text grayed
-          Text("PreEditableTextField, grayed: true"),
-          PreEditableTextField(
-            title: "닉네임",
-            content: "컨텐츠",
-            grayed: true,
-            onEdit: () {},
-          ),
-          Divider(),
-          // PostEditablePlainTextField
-          Text("PostEditableTestField"),
-          Form(
-            key: postEditableFormKey,
-            child: PostEditablePlainTextField(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            // PreEditable Text default
+            Text("PreEditableTextField"),
+            PreEditableTextField(
               title: "닉네임",
-              desc: "불리고 싶은 이름을 입력해주세요.",
-              fieldTitle: "닉네임",
-              onSaved: (newValue) {
-                SnackbarService(context)
-                    .showPlainTextSnackbar("value saved, $newValue");
-              },
-              validator: (value) {
-                return null;
-              },
-              onSave: () async {
-                if (postEditableFormKey.currentState?.validate() ?? false) {
-                  postEditableFormKey.currentState?.save();
-                }
-              },
+              content: "컨텐츠",
+              onEdit: () {},
             ),
-          ),
-          Divider(),
-          Text("EditableTextField"),
-          Form(
-            child: EditableTextField(
+            Divider(),
+            // PreEditable Text grayed
+            Text("PreEditableTextField, grayed: true"),
+            PreEditableTextField(
               title: "닉네임",
-              content: editableTextContent,
-              desc: "불리고 싶은 이름을 입력해주세요.",
-              fieldTitle: "닉네임",
-              onEditStateChange: (editState) {
-                SnackbarService(context)
-                    .showPlainTextSnackbar("edit state changed, $editState");
-              },
-              onSaved: (newValue) {
-                SnackbarService(context)
-                    .showPlainTextSnackbar("value saved, $newValue");
+              content: "컨텐츠",
+              grayed: true,
+              onEdit: () {},
+            ),
+            Divider(),
+            // PostEditablePlainTextField
+            Text("PostEditableTestField"),
+            Form(
+              key: postEditableFormKey,
+              child: PostEditablePlainTextField(
+                title: "닉네임",
+                desc: "불리고 싶은 이름을 입력해주세요.",
+                fieldTitle: "닉네임",
+                onSaved: (newValue) {
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("value saved, $newValue");
+                },
+                validator: (value) {
+                  if (value == null || value == "") return "닉네임을 입력해주세요.";
+                  return null;
+                },
+                onSave: () async {
+                  if (postEditableFormKey.currentState?.validate() ?? false) {
+                    postEditableFormKey.currentState?.save();
+                  }
+                },
+              ),
+            ),
+            Divider(),
+            Text("EditableTextField"),
+            Form(
+              child: EditableTextField(
+                title: "닉네임",
+                content: editableTextContent,
+                desc: "불리고 싶은 이름을 입력해주세요.",
+                fieldTitle: "닉네임",
+                onEditStateChange: (editState) {
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("edit state changed, $editState");
+                },
+                onSaved: (newValue) {
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("value saved, $newValue");
+                  setState(() {
+                    editableTextContent = newValue;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value == "") return "닉네임을 입력해주세요.";
+                  return null;
+                },
+                onSave: () async {
+                  if (editableFormKey.currentState?.validate() ?? false) {
+                    editableFormKey.currentState?.save();
+                  }
+                },
+              ),
+              key: editableFormKey,
+            ),
+            Divider(),
+            Text("Card default format"),
+            MingImageCard(
+              onTap: () {},
+            ),
+
+            Divider(),
+            Text("Shelter Profile Card GUI"),
+            ShelterCardContent(mockShelters.first),
+            Divider(),
+            Text("Pet Profile Card GUI"),
+            PetCardContent(
+              PetOverviewInfo.mock(),
+            ),
+            Divider(),
+            Text("Pagination GUI with large pages"),
+            PaginationBar(
+              pageNumber: largePagesNumber,
+              totalPageNumber: 20,
+              onPageChanged: (page) {
                 setState(() {
-                  editableTextContent = newValue;
+                  largePagesNumber = page;
                 });
               },
-              validator: (value) {
-                return null;
-              },
-              onSave: () async {
-                if (editableFormKey.currentState?.validate() ?? false) {
-                  editableFormKey.currentState?.save();
-                }
+            ),
+            Divider(),
+            Text("Pagination GUI with small pages"),
+            PaginationBar(
+              pageNumber: smallPagesNumber,
+              totalPageNumber: 6,
+              onPageChanged: (page) {
+                setState(() {
+                  smallPagesNumber = page;
+                });
               },
             ),
-            key: editableFormKey,
-          ),
-          Divider(),
-          Text("Card default format"),
-          MingImageCard(
-            onTap: () {},
-          ),
 
-          Divider(),
-          Text("Shelter Profile Card GUI"),
-          ShelterCardContent(mockShelters.first),
-          Divider(),
-          Text("Pet Profile Card GUI"),
-          PetCardContent(
-            PetOverviewInfo.mock(),
-          ),
-          Divider(),
-          Text("Pagination GUI with large pages"),
-          PaginationBar(
-            pageNumber: largePagesNumber,
-            totalPageNumber: 20,
-            onPageChanged: (page) {
-              setState(() {
-                largePagesNumber = page;
-              });
-            },
-          ),
-          Divider(),
-          Text("Pagination GUI with small pages"),
-          PaginationBar(
-            pageNumber: smallPagesNumber,
-            totalPageNumber: 6,
-            onPageChanged: (page) {
-              setState(() {
-                smallPagesNumber = page;
-              });
-            },
-          ),
-
-          SizedBox(
-            height: 200,
-          )
-        ],
+            SizedBox(
+              height: 200,
+            )
+          ],
+        ),
       ),
     );
   }
