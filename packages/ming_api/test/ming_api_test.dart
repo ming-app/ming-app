@@ -15,7 +15,7 @@ void main() {
       var result = await repository.client.getRegionInfos();
 
       expect(result.result!.isNotEmpty, true);
-    });
+    }, skip: true); // todo: re-enable after refinement of region APIs.
   });
 
   group("Animal API Test", () {
