@@ -43,7 +43,7 @@ class _ShelterCardContentState extends State<ShelterCardContent> {
             children: [
               // todo: fill this with actual region
               Text(
-                "서울특별시 강남구",
+                widget.shelter.region,
                 style: theme.textTheme.labelSmall,
               ),
               const SizedBox(
