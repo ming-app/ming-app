@@ -28,7 +28,6 @@ Future<void> main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
     Log.i("Hello Ming App!");
-    usePathUrlStrategy();
     runApp(const Ming());
   }, (error, stack) {
     if (!kIsWeb) {
