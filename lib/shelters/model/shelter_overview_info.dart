@@ -26,7 +26,7 @@ class ShelterOverviewInfo {
     return ShelterOverviewInfo(
       id: response.id,
       name: response.name,
-      region: response.location,
+      region: response.region.fullName,
       numberOfCats: response.animalOverview
           .firstWhere((element) => element.type == AnimalType.cat)
           .count,
