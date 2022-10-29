@@ -9,7 +9,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  firebase_crashlytics: ^2.8.0
+  firebase_crashlytics: ^3.0.4
   flutter:
     sdk: flutter
   loggy: ^2.0.1+1

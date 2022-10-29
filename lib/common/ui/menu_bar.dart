@@ -29,7 +29,7 @@ class MenuBar extends StatelessWidget implements PreferredSizeWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: InkWell(
-                  onTap: () => context.go(MingRoutingAddress.home.address),
+                  onTap: () => context.go(MingRoutingAddress.root.address),
                   child: Text(
                     S.of(context).appTitle,
                     style: Theme.of(context).textTheme.displayMedium,
