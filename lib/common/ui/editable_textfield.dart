@@ -254,3 +254,12 @@ class PostEditablePlainTextField extends StatelessWidget {
     );
   }
 }
+
+class EditableDropDownField extends StatelessWidget {
+  const EditableDropDownField({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

@@ -22,6 +22,7 @@ const _scaffoldKey = ValueKey('_scaffoldKey');
 /// Routing address summary
 /// In case of param address, it should be start with ':'
 enum MingRoutingAddress {
+  root('/'),
   home('/home'),
 
   // Shelter
@@ -55,7 +56,6 @@ enum MingRoutingAddress {
 }
 
 enum MingNavigator {
-  home(MingRoutingAddress.home, "홈", Icon(Icons.home_filled)),
   shelters(MingRoutingAddress.shelters, "보호소", Icon(Icons.night_shelter)),
   ;
 
@@ -72,18 +72,25 @@ enum MingNavigator {
 }
 
 final router = GoRouter(
-  initialLocation: MingRoutingAddress.home.address,
+  initialLocation: MingRoutingAddress.shelters.address,
   errorPageBuilder: (BuildContext context, GoRouterState state) =>
       MaterialPage<void>(
     key: _pageKey,
     child: RootLayout(
       key: _scaffoldKey,
-      currentIndex: MingNavigator.home.offset(),
+      currentIndex: MingNavigator.shelters.offset(),
       child: ErrorPage(message: state.error.toString()),
     ),
   ),
   routes: [
+    // root page
+    GoRoute(
+      path: MingRoutingAddress.root.address,
+      redirect: (context, state) => MingRoutingAddress.shelters.address,
+    ),
+
     // Home Page
+    // todo: re-enable homepage after phase 2.
     GoRoute(
         path: MingRoutingAddress.home.address,
         pageBuilder: (context, state) {
@@ -92,7 +99,7 @@ final router = GoRouter(
             key: _pageKey,
             child: RootLayout(
               key: _scaffoldKey,
-              currentIndex: MingNavigator.home.offset(),
+              currentIndex: -1,
               child: const HomePage(),
             ),
           );
@@ -205,7 +212,7 @@ final router = GoRouter(
           key: _pageKey,
           child: RootLayout(
             key: _scaffoldKey,
-            currentIndex: MingNavigator.home.offset(),
+            currentIndex: -1,
             child: const UiSamplePage(),
           ),
         );
