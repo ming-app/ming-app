@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ming/common/ui/custom_editable_field.dart';
-import 'package:ming/common/ui/ming_card_form.dart';
-import 'package:ming_api/entities/entities.dart';
 
 import '../../generated/l10n.dart';
 import '../model/user.dart';
@@ -160,6 +158,24 @@ class UserProfileContents extends StatelessWidget {
               content: user.snsUrl ?? "없음",
               desc: "인스타그램을 입력해 주세요.",
               fieldTitle: S.of(context).instagram,
+            ),
+            SizedBox(height: 32),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[200],
+                foregroundColor: Colors.black,
+                fixedSize: Size(167, 44),
+                textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: (() {
+                context.read<UserProfileCubit>().logout();
+              }),
+              child: Text("로그아웃"),
             ),
             SizedBox(height: 200),
           ],

@@ -61,41 +61,14 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     }
   }
 
-  void nameChanged(String value) {
-    UserProfile original;
-
-    if (state is UserProfileEditing) {
-      original = (state as UserProfileEditing).original;
-    } else {
-      original = state.user;
+  Future<void> logout() async {
+    try {
+      await _auth.logout();
+    } catch (e) {
+      Log.e("User logout failed", e);
+      emit(UserProfileError("$e"));
     }
 
-    emit(UserProfileEditing(
-      state.key,
-      original,
-      state.user.copyWith(name: value),
-    ));
-  }
-
-  void snsUrlChanged(String value) {
-    UserProfile original;
-
-    if (state is UserProfileEditing) {
-      original = (state as UserProfileEditing).original;
-    } else {
-      original = state.user;
-    }
-
-    emit(UserProfileEditing(
-      state.key,
-      original,
-      state.user.copyWith(snsUrl: value),
-    ));
-  }
-
-  void cancelEditing() {
-    if (state is UserProfileEditing) {
-      emit(UserProfileFetched((state as UserProfileEditing).original));
-    }
+    emit(UserProfileNotLoggedIn());
   }
 }
