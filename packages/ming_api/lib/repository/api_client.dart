@@ -101,6 +101,13 @@ abstract class MingApiClient {
     @Header("loginType") String type = "KAKAO_TALK",
   });
 
+  @POST("api/v1/users/detail-info")
+  Future<void> updateUserDetailInfo(
+    @Header("Authorization") String token,
+    @Body() UpdateUserRequest request, {
+    @Header("loginType") String type = "KAKAO_TALK",
+  });
+
   @GET("api/v1/users/token")
   Future<ApiResponse<AuthToken>> getAccessTokenFromKakaoCode(
     @Query("code") String code,

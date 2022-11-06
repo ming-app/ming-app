@@ -57,6 +57,22 @@ const _$UserGenderEnumMap = {
   UserGender.male: 'MALE',
 };
 
+UpdateUserRequest _$UpdateUserRequestFromJson(Map<String, dynamic> json) =>
+    UpdateUserRequest(
+      address: json['address'] as String?,
+      imageId: json['imageId'] as String?,
+      introduction: json['introduction'] as String?,
+      snsUrl: json['snsUrl'] as String?,
+    );
+
+Map<String, dynamic> _$UpdateUserRequestToJson(UpdateUserRequest instance) =>
+    <String, dynamic>{
+      'address': instance.address,
+      'imageId': instance.imageId,
+      'introduction': instance.introduction,
+      'snsUrl': instance.snsUrl,
+    };
+
 UserListOverviewResponse _$UserListOverviewResponseFromJson(
         Map<String, dynamic> json) =>
     UserListOverviewResponse(
