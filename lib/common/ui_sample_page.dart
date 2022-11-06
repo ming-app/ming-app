@@ -7,9 +7,7 @@ import 'package:ming/common/ui/ming_card_form.dart';
 import 'package:ming/common/ui/pagination_bar.dart';
 import 'package:ming/common/ui/pet_card_content.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
-import 'package:ming/pet_profile/mock/mock.dart';
 import 'package:ming/pets/model/pet_overview_info.dart';
-import 'package:ming/shelter_profile/mock/mock.dart';
 import 'package:ming/shelters/mock/shelters_mock.dart';
 
 class UiSamplePage extends StatefulWidget {
@@ -20,8 +18,6 @@ class UiSamplePage extends StatefulWidget {
 }
 
 class _UiSamplePageState extends State<UiSamplePage> {
-  final postEditableFormKey = GlobalKey<FormState>();
-  final editableFormKey = GlobalKey<FormState>();
   var editableTextContent = "컨텐츠";
   var currentDate = DateTime.now();
   int largePagesNumber = 0;
@@ -53,66 +49,48 @@ class _UiSamplePageState extends State<UiSamplePage> {
             Divider(),
             // PostEditablePlainTextField
             Text("PostEditableTestField"),
-            Form(
-              key: postEditableFormKey,
-              child: PostEditablePlainTextField(
-                title: "닉네임",
-                desc: "불리고 싶은 이름을 입력해주세요.",
-                fieldTitle: "닉네임",
-                onSaved: (newValue) {
-                  SnackbarService(context)
-                      .showPlainTextSnackbar("value saved, $newValue");
-                },
-                validator: (value) {
-                  if (value == null || value == "") return "닉네임을 입력해주세요.";
-                  return null;
-                },
-                onSaveButtonClick: () async {
-                  if (postEditableFormKey.currentState?.validate() ?? false) {
-                    postEditableFormKey.currentState?.save();
-                  }
-                },
-              ),
+            PostEditablePlainTextField(
+              title: "닉네임",
+              desc: "불리고 싶은 이름을 입력해주세요.",
+              fieldTitle: "닉네임",
+              onSaved: (newValue) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("value saved, $newValue");
+              },
+              validator: (value) {
+                if (value == null || value == "") return "닉네임을 입력해주세요.";
+                return null;
+              },
             ),
             Divider(),
             Text("EditableTextField"),
-            Form(
-              child: CustomEditableField(
-                title: "닉네임",
-                content: editableTextContent,
-                desc: "불리고 싶은 이름을 입력해주세요.",
-                fieldTitle: "닉네임",
-                onEditStateChange: (editState) {
-                  SnackbarService(context)
-                      .showPlainTextSnackbar("edit state changed, $editState");
-                },
-                onSaved: (newValue) {
-                  SnackbarService(context)
-                      .showPlainTextSnackbar("value saved, $newValue");
-                  setState(() {
-                    editableTextContent = newValue;
-                  });
-                },
-                validator: (value) {
-                  if (value == null || value == "") return "닉네임을 입력해주세요.";
-                  return null;
-                },
-                onSaveButtonClick: () async {
-                  if (editableFormKey.currentState?.validate() ?? false) {
-                    editableFormKey.currentState?.save();
-                  }
-                },
-              ),
-              key: editableFormKey,
+            CustomEditableField(
+              title: "닉네임",
+              content: editableTextContent,
+              desc: "불리고 싶은 이름을 입력해주세요.",
+              fieldTitle: "닉네임",
+              onEditStateChange: (editState) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("edit state changed, $editState");
+              },
+              onSaved: (newValue) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("value saved, $newValue");
+                setState(() {
+                  editableTextContent = newValue;
+                });
+              },
+              validator: (value) {
+                if (value == null || value == "") return "닉네임을 입력해주세요.";
+                return null;
+              },
             ),
             Divider(),
             Text("PostEditableDateField"),
-            Form(
-              child: PostEditableDateField(
-                title: "생년월일",
-                desc: "정확한 생년월일을 입력해주세요.",
-                outlineColor: Colors.black,
-              ),
+            PostEditableDateField(
+              title: "생년월일",
+              desc: "정확한 생년월일을 입력해주세요.",
+              outlineColor: Colors.black,
             ),
             Divider(),
             Text("EditableDateField"),

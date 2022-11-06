@@ -48,11 +48,38 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     }
   }
 
-  Future<void> updateUserProfile(UserProfile user) async {
+  void onEditStateChange(UserProfileEditingType type) {
+    emit(UserProfileEditing(type, state.user));
+  }
+
+  Future<void> updateUserProfile({
+    String? address,
+    String? imageId,
+    String? introduction,
+    String? snsUrl,
+  }) async {
+    if (address == null &&
+        imageId == null &&
+        introduction == null &&
+        snsUrl == null) {
+      Log.w("There are no update, skipping");
+      return;
+    }
+
     emit(UserProfileUpdating());
+
+    var request = UpdateUserRequest(
+      address: address ?? state.user.address,
+      imageId: imageId ?? state.user.imageUrl,
+      introduction: introduction ?? state.user.introduction,
+      snsUrl: snsUrl ?? state.user.snsUrl,
+    );
 
     try {
       // todo: handle user profile update
+      final token = await _auth.token;
+      await _api.client.updateUserDetailInfo(withBearer(token), request);
+
       Log.d('User profile updated');
       getUserProfile();
     } catch (e) {

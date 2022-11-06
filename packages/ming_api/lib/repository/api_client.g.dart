@@ -419,6 +419,36 @@ class _MingApiClient implements MingApiClient {
   }
 
   @override
+  Future<void> updateUserDetailInfo(
+    token,
+    request, {
+    type = "KAKAO_TALK",
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'loginType': type,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/users/detail-info',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
   Future<ApiResponse<AuthToken>> getAccessTokenFromKakaoCode(
     code,
     redirectUrl,

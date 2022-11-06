@@ -50,6 +50,25 @@ class UserDetailInfoResponse {
 }
 
 @JsonSerializable()
+class UpdateUserRequest {
+  final String? address;
+  final String? imageId;
+  final String? introduction;
+  final String? snsUrl;
+
+  UpdateUserRequest({
+    this.address,
+    this.imageId,
+    this.introduction,
+    this.snsUrl,
+  });
+
+  factory UpdateUserRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$UpdateUserRequestToJson(this);
+}
+
+@JsonSerializable()
 class UserListOverviewResponse {
   final int count;
   final List<String> thumbnailUrl;

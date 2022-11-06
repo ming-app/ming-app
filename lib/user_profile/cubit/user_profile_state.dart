@@ -55,6 +55,14 @@ class UserProfileFetched extends UserProfileState {
   UserProfileFetched(this.user, {this.message});
 }
 
+enum UserProfileEditingType {
+  address,
+  snsUrl,
+  image,
+  introduction,
+  none,
+}
+
 class UserProfileEditing extends UserProfileState {
   @override
   final UserProfile user;
@@ -62,12 +70,12 @@ class UserProfileEditing extends UserProfileState {
   @override
   final String? message;
 
-  final UserProfile original;
-
   @override
-  final String? key;
+  final String? key = null;
 
-  UserProfileEditing(this.key, this.original, this.user, {this.message});
+  final UserProfileEditingType type;
+
+  UserProfileEditing(this.type, this.user, {this.message});
 }
 
 class UserProfileError extends UserProfileState {

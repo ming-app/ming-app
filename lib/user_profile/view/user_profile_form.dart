@@ -15,12 +15,18 @@ class UserProfileForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileCubit, UserProfileState>(
         builder: (context, state) {
+      UserProfileEditingType type = UserProfileEditingType.none;
+
+      if (state is UserProfileEditing) {
+        type = state.type;
+      }
+
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UserProfileContents(user),
+            UserProfileContents(user, type),
             SizedBox(
               width: 50,
             ),
@@ -33,9 +39,11 @@ class UserProfileForm extends StatelessWidget {
 }
 
 class UserProfileContents extends StatelessWidget {
+  final UserProfileEditingType editingType;
   final UserProfile user;
 
-  const UserProfileContents(this.user, {Key? key}) : super(key: key);
+  const UserProfileContents(this.user, this.editingType, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +103,7 @@ class UserProfileContents extends StatelessWidget {
               content: user.name,
               desc: S.of(context).nicknameDesc,
               fieldTitle: S.of(context).nickName,
+              greyed: editingType != UserProfileEditingType.none,
             ),
             SizedBox(height: 20),
             Divider(),
@@ -104,6 +113,7 @@ class UserProfileContents extends StatelessWidget {
               content: user.gender?.toString() ?? "없음",
               desc: "정확한 성별을 입력해 주세요.",
               fieldTitle: S.of(context).gender,
+              greyed: editingType != UserProfileEditingType.none, // todo
             ),
             SizedBox(height: 20),
             Divider(),
@@ -113,6 +123,7 @@ class UserProfileContents extends StatelessWidget {
               content: user.birthday ?? "없음",
               desc: "정확한 생년월일을 입력해 주세요.",
               fieldTitle: S.of(context).birthday,
+              greyed: editingType != UserProfileEditingType.none, // todo
             ),
             SizedBox(height: 20),
             Divider(),
@@ -122,6 +133,7 @@ class UserProfileContents extends StatelessWidget {
               content: user.email,
               desc: "이메일을 정확히 입력해 주세요.",
               fieldTitle: S.of(context).email,
+              greyed: editingType != UserProfileEditingType.none,
             ),
             SizedBox(height: 20),
             Divider(),
@@ -131,6 +143,7 @@ class UserProfileContents extends StatelessWidget {
               content: user.phoneNumber ?? "없음",
               desc: "전화번호를 정확히 기입해 주세요.",
               fieldTitle: S.of(context).phoneNumber,
+              greyed: editingType != UserProfileEditingType.none, // todo
             ),
             SizedBox(height: 20),
             Divider(),
@@ -140,6 +153,20 @@ class UserProfileContents extends StatelessWidget {
               content: user.introduction ?? "없음",
               desc: "자유롭게 자기소개를 작성해 주세요.",
               fieldTitle: S.of(context).selfIntroduction,
+              onEditStateChange: (editState) {
+                context.read<UserProfileCubit>().onEditStateChange(
+                      editState
+                          ? UserProfileEditingType.introduction
+                          : UserProfileEditingType.none,
+                    );
+              },
+              onSaved: (newValue) {
+                context.read<UserProfileCubit>().updateUserProfile(
+                      introduction: newValue,
+                    );
+              },
+              greyed: editingType != UserProfileEditingType.none &&
+                  editingType != UserProfileEditingType.introduction,
             ),
             SizedBox(height: 20),
             Divider(),
@@ -149,6 +176,20 @@ class UserProfileContents extends StatelessWidget {
               content: user.address ?? "없음",
               desc: "주소를 입력해 주세요.",
               fieldTitle: S.of(context).address,
+              onEditStateChange: (editState) {
+                context.read<UserProfileCubit>().onEditStateChange(
+                      editState
+                          ? UserProfileEditingType.address
+                          : UserProfileEditingType.none,
+                    );
+              },
+              onSaved: (newValue) {
+                context.read<UserProfileCubit>().updateUserProfile(
+                      address: newValue,
+                    );
+              },
+              greyed: editingType != UserProfileEditingType.none &&
+                  editingType != UserProfileEditingType.address,
             ),
             SizedBox(height: 20),
             Divider(),
@@ -158,6 +199,20 @@ class UserProfileContents extends StatelessWidget {
               content: user.snsUrl ?? "없음",
               desc: "인스타그램을 입력해 주세요.",
               fieldTitle: S.of(context).instagram,
+              onEditStateChange: (editState) {
+                context.read<UserProfileCubit>().onEditStateChange(
+                      editState
+                          ? UserProfileEditingType.snsUrl
+                          : UserProfileEditingType.none,
+                    );
+              },
+              onSaved: (newValue) {
+                context.read<UserProfileCubit>().updateUserProfile(
+                      snsUrl: newValue,
+                    );
+              },
+              greyed: editingType != UserProfileEditingType.none &&
+                  editingType != UserProfileEditingType.snsUrl,
             ),
             SizedBox(height: 32),
             ElevatedButton(

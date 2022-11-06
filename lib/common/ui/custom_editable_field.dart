@@ -18,11 +18,10 @@ class CustomEditableField<T> extends StatefulWidget {
   final T content;
   final String desc;
   final String fieldTitle;
-  final bool isEditDisabled;
+  final bool greyed;
   final void Function(bool editState)? onEditStateChange;
   final FormFieldSetter? onSaved;
   final FormFieldValidator? validator;
-  final void Function()? onSaveButtonClick;
 
   const CustomEditableField({
     Key? key,
@@ -31,11 +30,10 @@ class CustomEditableField<T> extends StatefulWidget {
     required this.desc,
     required this.fieldTitle,
     this.type = CustomEditableFieldType.text,
-    this.isEditDisabled = false,
+    this.greyed = false,
     this.onEditStateChange,
     this.onSaved,
     this.validator,
-    this.onSaveButtonClick,
   })  : assert(type == CustomEditableFieldType.text && content is String ||
             type == CustomEditableFieldType.date && content is DateTime),
         super(key: key);
@@ -57,7 +55,7 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
   }
 
   Widget get getFieldWidget {
-    if (widget.isEditDisabled) return getPreEditableWidget;
+    if (widget.greyed) return getPreEditableWidget;
 
     if (!editState) {
       return getPreEditableWidget;
@@ -74,13 +72,15 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
   Widget get getPreEditableWidget => PreEditableTextField(
         title: widget.title,
         content: contentString,
-        grayed: widget.isEditDisabled,
-        onEdit: () {
-          widget.onEditStateChange?.call(true);
-          setState(() {
-            editState = true;
-          });
-        },
+        grayed: widget.greyed,
+        onEdit: widget.onSaved != null
+            ? () {
+                widget.onEditStateChange?.call(true);
+                setState(() {
+                  editState = true;
+                });
+              }
+            : null,
       );
   Widget get getPostEditableTextWidget => PostEditablePlainTextField(
         initialText: widget.content,
@@ -100,7 +100,6 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
           });
           // no need to call onSaved for plain text, it will be called by globalkey.
         }),
-        onSaveButtonClick: widget.onSaveButtonClick,
         validator: widget.validator,
       );
 
@@ -120,7 +119,6 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
           });
           widget.onSaved?.call(date);
         },
-        onSaveButtonClick: widget.onSaveButtonClick,
       );
 
   @override
@@ -162,15 +160,16 @@ class PreEditableTextField extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
               const Spacer(),
-              TextButton(
-                onPressed: grayed ? null : onEdit,
-                child: Text(
-                  S.of(context).edit,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    decoration: TextDecoration.underline,
+              if (onEdit != null)
+                TextButton(
+                  onPressed: grayed ? null : onEdit,
+                  child: Text(
+                    S.of(context).edit,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
           Text(
@@ -300,7 +299,7 @@ class PostEditableContainer extends StatelessWidget {
   }
 }
 
-class PostEditablePlainTextField extends StatelessWidget {
+class PostEditablePlainTextField extends StatefulWidget {
   final String title;
   final String desc;
   final String fieldTitle;
@@ -309,7 +308,6 @@ class PostEditablePlainTextField extends StatelessWidget {
   final void Function()? onCancel;
   final FormFieldSetter? onSaved;
   final FormFieldValidator? validator;
-  final void Function()? onSaveButtonClick;
   final void Function(String)? onChanged;
 
   const PostEditablePlainTextField({
@@ -321,32 +319,47 @@ class PostEditablePlainTextField extends StatelessWidget {
     this.onCancel,
     this.onSaved,
     this.validator,
-    this.onSaveButtonClick,
     this.onChanged,
     this.outlineColor = const Color(0xffaaaaaa),
   }) : super(key: key);
+
+  @override
+  State<PostEditablePlainTextField> createState() =>
+      _PostEditablePlainTextFieldState();
+}
+
+class _PostEditablePlainTextFieldState
+    extends State<PostEditablePlainTextField> {
+  final postEditableFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return PostEditableContainer(
-      title: title,
-      desc: desc,
-      onCancel: onCancel,
-      onSaveButtonClick: onSaveButtonClick,
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.always,
-        style: theme.textTheme.bodyMedium,
-        onSaved: onSaved,
-        onChanged: onChanged,
-        validator: validator,
-        initialValue: initialText,
-        decoration: _getFormFieldInputDecoration(
-          context: context,
-          labeText: fieldTitle,
-          outlineColor: outlineColor,
-          hasValidator: validator != null,
+      title: widget.title,
+      desc: widget.desc,
+      onCancel: widget.onCancel,
+      onSaveButtonClick: () {
+        if (postEditableFormKey.currentState?.validate() ?? false) {
+          postEditableFormKey.currentState?.save();
+        }
+      },
+      child: Form(
+        key: postEditableFormKey,
+        child: TextFormField(
+          autovalidateMode: AutovalidateMode.always,
+          style: theme.textTheme.bodyMedium,
+          onSaved: widget.onSaved,
+          onChanged: widget.onChanged,
+          validator: widget.validator,
+          initialValue: widget.initialText,
+          decoration: _getFormFieldInputDecoration(
+            context: context,
+            labeText: widget.fieldTitle,
+            outlineColor: widget.outlineColor,
+            hasValidator: widget.validator != null,
+          ),
         ),
       ),
     );
@@ -361,7 +374,6 @@ class PostEditableDateField extends StatefulWidget {
   final Color outlineColor;
   final void Function()? onCancel;
   final void Function(DateTime date)? onSaved;
-  final void Function()? onSaveButtonClick;
   final void Function(String)? onChanged;
 
   const PostEditableDateField({
@@ -372,7 +384,6 @@ class PostEditableDateField extends StatefulWidget {
     this.outlineColor = const Color(0xffaaaaaa),
     this.onCancel,
     this.onSaved,
-    this.onSaveButtonClick,
     this.onChanged,
   }) : super(key: key);
 
@@ -397,7 +408,6 @@ class _PostEditableDateFieldState extends State<PostEditableDateField> {
       title: widget.title,
       desc: widget.desc,
       onSaveButtonClick: () {
-        widget.onSaveButtonClick?.call();
         widget.onSaved?.call(date);
       },
       onCancel: widget.onCancel,
