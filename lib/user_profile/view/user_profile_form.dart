@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ming/common/ui/editable_textfield.dart';
+import 'package:ming/common/ui/custom_editable_field.dart';
 import 'package:ming/common/ui/ming_card_form.dart';
 import 'package:ming_api/entities/entities.dart';
 
@@ -92,7 +92,7 @@ class UserProfileContents extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).nickName,
               content: user.name,
               desc: S.of(context).nicknameDesc,
@@ -101,7 +101,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).gender,
               content: user.gender?.toString() ?? "없음",
               desc: "정확한 성별을 입력해 주세요.",
@@ -110,7 +110,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).birthday,
               content: user.birthday ?? "없음",
               desc: "정확한 생년월일을 입력해 주세요.",
@@ -119,7 +119,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).email,
               content: user.email,
               desc: "이메일을 정확히 입력해 주세요.",
@@ -128,7 +128,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).phoneNumber,
               content: user.phoneNumber ?? "없음",
               desc: "전화번호를 정확히 기입해 주세요.",
@@ -137,7 +137,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).selfIntroduction,
               content: user.introduction ?? "없음",
               desc: "자유롭게 자기소개를 작성해 주세요.",
@@ -146,7 +146,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).address,
               content: user.address ?? "없음",
               desc: "주소를 입력해 주세요.",
@@ -155,7 +155,7 @@ class UserProfileContents extends StatelessWidget {
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
-            EditableTextField(
+            CustomEditableField(
               title: S.of(context).instagram,
               content: user.snsUrl ?? "없음",
               desc: "인스타그램을 입력해 주세요.",

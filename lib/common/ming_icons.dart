@@ -45,6 +45,10 @@ class MingIcons {
       IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData document =
       IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData downArrow =
+      IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData upArrow =
+      IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData upload =
       IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData female =

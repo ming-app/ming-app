@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact": MessageLookupByLibrary.simpleMessage("연락하기"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("주소 복사"),
         "date": MessageLookupByLibrary.simpleMessage("날짜"),
+        "day": MessageLookupByLibrary.simpleMessage("일"),
         "doCall": MessageLookupByLibrary.simpleMessage("연락하기"),
         "dog": MessageLookupByLibrary.simpleMessage("강아지"),
         "edit": MessageLookupByLibrary.simpleMessage("수정"),
@@ -67,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maleString": MessageLookupByLibrary.simpleMessage("수컷"),
         "managerTitle": MessageLookupByLibrary.simpleMessage("보호소 정보 및 담당자"),
         "ming": MessageLookupByLibrary.simpleMessage("Ming"),
+        "month": MessageLookupByLibrary.simpleMessage("월"),
         "nickName": MessageLookupByLibrary.simpleMessage("닉네임"),
         "nicknameDesc":
             MessageLookupByLibrary.simpleMessage("불리고 싶은 이름을 입력해주세요."),
@@ -109,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "volunteer": MessageLookupByLibrary.simpleMessage("봉사자"),
         "volunteerNumberSentenceString":
             MessageLookupByLibrary.simpleMessage("명의 봉사자들이 함께 하고 있어요."),
-        "volunteerSchedule": MessageLookupByLibrary.simpleMessage("봉사 스케쥴")
+        "volunteerSchedule": MessageLookupByLibrary.simpleMessage("봉사 스케쥴"),
+        "year": MessageLookupByLibrary.simpleMessage("연도")
       };
 }
