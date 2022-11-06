@@ -72,5 +72,8 @@
   "address": "주소",
   "instagram": "인스타그램",
   "contact": "연락하기",
-  "shelterContact": "보호소 연락처"
+  "shelterContact": "보호소 연락처",
+  "year": "연도",
+  "month": "월",
+  "day": "일"
 }

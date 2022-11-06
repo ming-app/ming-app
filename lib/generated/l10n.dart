@@ -789,6 +789,36 @@ class S {
       args: [],
     );
   }
+
+  /// `연도`
+  String get year {
+    return Intl.message(
+      '연도',
+      name: 'year',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `월`
+  String get month {
+    return Intl.message(
+      '월',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `일`
+  String get day {
+    return Intl.message(
+      '일',
+      name: 'day',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

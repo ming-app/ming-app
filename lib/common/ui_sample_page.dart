@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:ming/common/snackbar_service.dart';
-import 'package:ming/common/ui/editable_textfield.dart';
+import 'package:ming/common/ui/custom_editable_field.dart';
 import 'package:ming/common/ui/ming_card_form.dart';
 import 'package:ming/common/ui/pagination_bar.dart';
 import 'package:ming/common/ui/pet_card_content.dart';
@@ -23,6 +23,7 @@ class _UiSamplePageState extends State<UiSamplePage> {
   final postEditableFormKey = GlobalKey<FormState>();
   final editableFormKey = GlobalKey<FormState>();
   var editableTextContent = "컨텐츠";
+  var currentDate = DateTime.now();
   int largePagesNumber = 0;
   int smallPagesNumber = 0;
 
@@ -66,7 +67,7 @@ class _UiSamplePageState extends State<UiSamplePage> {
                   if (value == null || value == "") return "닉네임을 입력해주세요.";
                   return null;
                 },
-                onSave: () async {
+                onSaveButtonClick: () async {
                   if (postEditableFormKey.currentState?.validate() ?? false) {
                     postEditableFormKey.currentState?.save();
                   }
@@ -76,7 +77,7 @@ class _UiSamplePageState extends State<UiSamplePage> {
             Divider(),
             Text("EditableTextField"),
             Form(
-              child: EditableTextField(
+              child: CustomEditableField(
                 title: "닉네임",
                 content: editableTextContent,
                 desc: "불리고 싶은 이름을 입력해주세요.",
@@ -96,13 +97,42 @@ class _UiSamplePageState extends State<UiSamplePage> {
                   if (value == null || value == "") return "닉네임을 입력해주세요.";
                   return null;
                 },
-                onSave: () async {
+                onSaveButtonClick: () async {
                   if (editableFormKey.currentState?.validate() ?? false) {
                     editableFormKey.currentState?.save();
                   }
                 },
               ),
               key: editableFormKey,
+            ),
+            Divider(),
+            Text("PostEditableDateField"),
+            Form(
+              child: PostEditableDateField(
+                title: "생년월일",
+                desc: "정확한 생년월일을 입력해주세요.",
+                outlineColor: Colors.black,
+              ),
+            ),
+            Divider(),
+            Text("EditableDateField"),
+            CustomEditableField(
+              title: "생년월일",
+              content: currentDate,
+              desc: "정확한 생년월일을 입력해주세요.",
+              fieldTitle: "생년월일",
+              type: CustomEditableFieldType.date,
+              onEditStateChange: (editState) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("edit state changed, $editState");
+              },
+              onSaved: (newValue) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("value saved, $newValue");
+                setState(() {
+                  currentDate = newValue;
+                });
+              },
             ),
             Divider(),
             Text("Card default format"),
