@@ -75,5 +75,6 @@
   "shelterContact": "보호소 연락처",
   "year": "연도",
   "month": "월",
-  "day": "일"
+  "day": "일",
+  "switchToAdmin": "보호소 계정으로 전환하기"
 }
