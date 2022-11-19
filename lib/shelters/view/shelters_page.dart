@@ -15,7 +15,6 @@ class SheltersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // todo: change mock into real one.
       body: BlocBuilder<SheltersBloc, SheltersState>(
         builder: (context, state) {
           var info = SheltersInfo.empty();
