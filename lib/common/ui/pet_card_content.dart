@@ -20,7 +20,7 @@ class PetCardContent extends StatelessWidget {
     final descriptionStyle = theme.textTheme.subtitle1!;
     return MingImageCard(
       onTap: () {
-        context.go(MingRoutingAddress.pets.address + "/${pet.id}");
+        context.push(MingRoutingAddress.pets.address + "/${pet.id}");
       },
       image: NetworkImage(pet.imageUrl),
       child: Padding(

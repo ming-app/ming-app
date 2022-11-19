@@ -1,6 +1,10 @@
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ming/album/view/album_view.dart';
+import 'package:ming/common/adaptive_builder.dart';
 import 'package:ming/common/ming_icons.dart';
 import 'package:ming/common/ui/contact_to_shelter_card.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
@@ -9,7 +13,9 @@ import 'package:ming/shelters/model/shelter_overview_info.dart';
 import 'package:ming_api/entities/image.dart';
 import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:universal_html/html.dart' as html;
 
+import '../../common/snackbar_service.dart';
 import '../../generated/l10n.dart';
 
 class PetProfileForm extends StatelessWidget {
@@ -23,6 +29,146 @@ class PetProfileForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return AdaptiveBuilder(
+      mobile: PetProfileMobileForm(pet: pet, shelter: shelter),
+      desktop: PetProfileDesktopForm(pet: pet, shelter: shelter),
+    );
+  }
+}
+
+class PetProfileMobileForm extends StatelessWidget {
+  const PetProfileMobileForm({
+    Key? key,
+    required this.pet,
+    required this.shelter,
+  }) : super(key: key);
+
+  final PetProfile pet;
+  final ShelterOverviewInfo shelter;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AlbumView(pet.id, ImageType.animal),
+                SizedBox(
+                  height: 24,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PetDescription(
+                        pet,
+                        hideShareButton: true,
+                      ),
+                      ShelterProfileView(
+                        theme: theme,
+                        shelter: shelter,
+                        isMobile: true,
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 14,
+          left: 16,
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: IconButton(
+              iconSize: 24,
+              onPressed: () {
+                context.pop();
+              },
+              icon: Icon(MingIcons.leftArrow),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 14,
+          right: 16,
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: IconButton(
+              iconSize: 24,
+              onPressed: () async {
+                if (kIsWeb) {
+                  var url = html.window.location.href;
+                  await Clipboard.setData(ClipboardData(text: url));
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("주소가 클립보드에 복사되었습니다.");
+                }
+              },
+              icon: Icon(MingIcons.upload),
+            ),
+          ),
+        ),
+        Positioned(
+          left: 16,
+          right: 16,
+          bottom: 5,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 0),
+                backgroundColor: Color(0xffda4d2e),
+                foregroundColor: Colors.white,
+                textStyle: Theme.of(context).textTheme.bodySmall,
+                padding: EdgeInsets.symmetric(
+                  vertical: 18,
+                  horizontal: 18,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                )),
+            onPressed: shelter.phoneNumber == null
+                ? null
+                : () => launchUrlString("tel:${shelter.phoneNumber}"),
+            child: Text(
+              S.of(context).contact,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PetProfileDesktopForm extends StatelessWidget {
+  const PetProfileDesktopForm({
+    Key? key,
+    required this.pet,
+    required this.shelter,
+  }) : super(key: key);
+
+  final PetProfile pet;
+  final ShelterOverviewInfo shelter;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: SingleChildScrollView(
@@ -40,7 +186,7 @@ class PetProfileForm extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PetDescription(pet),
-                        _shelterProfileCard(context, shelter),
+                        ShelterProfileView(theme: theme, shelter: shelter),
                       ],
                     ),
                     flex: 2,
@@ -63,11 +209,22 @@ class PetProfileForm extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _shelterProfileCard(
-      BuildContext context, ShelterOverviewInfo shelter) {
-    final theme = Theme.of(context);
-    final strings = S.of(context);
+class ShelterProfileView extends StatelessWidget {
+  const ShelterProfileView({
+    Key? key,
+    required this.theme,
+    required this.shelter,
+    this.isMobile = false,
+  }) : super(key: key);
+
+  final ThemeData theme;
+  final ShelterOverviewInfo shelter;
+  final bool isMobile;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -77,7 +234,10 @@ class PetProfileForm extends StatelessWidget {
             "보호소",
             style: theme.textTheme.titleMedium,
           ),
-          ShelterCardContent(shelter),
+          ShelterCardContent(
+            shelter,
+            isMobile: isMobile,
+          ),
         ],
       ),
     );
@@ -86,7 +246,12 @@ class PetProfileForm extends StatelessWidget {
 
 class PetDescription extends StatelessWidget {
   final PetProfile pet;
-  const PetDescription(this.pet, {Key? key}) : super(key: key);
+  final bool hideShareButton;
+  const PetDescription(
+    this.pet, {
+    Key? key,
+    this.hideShareButton = false,
+  }) : super(key: key);
 
   DateTime get registeredDate => DateTime.parse(pet.registeredAt);
   int get _protectedDate => DateTime.now().difference(registeredDate).inDays;
@@ -107,19 +272,21 @@ class PetDescription extends StatelessWidget {
               style: theme.textTheme.displayMedium,
             ),
             const Spacer(),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                textStyle: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-              child: Text(
-                strings.share,
-              ),
-            ),
+            hideShareButton
+                ? Container()
+                : TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      textStyle: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    child: Text(
+                      strings.share,
+                    ),
+                  ),
           ],
         ),
         const Divider(),
