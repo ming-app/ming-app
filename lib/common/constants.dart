@@ -11,6 +11,8 @@ const kakaoRestApiAppKey =
 const authSecureHiveKey =
     String.fromEnvironment('AUTH_SECURE_HIVE_KEY', defaultValue: 'none');
 
+const mobileMaximumWidth = 600;
+
 const spinLoader = Center(
   child: SpinKitWave(
     color: Colors.white,
