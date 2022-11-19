@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ming/common/adaptive_builder.dart';
 import 'package:ming/common/ming_icons.dart';
 
 import '../../generated/l10n.dart';
@@ -7,6 +8,47 @@ class PhotoPreview extends StatelessWidget {
   final List<Image> photos;
 
   const PhotoPreview(this.photos, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AdaptiveBuilder(
+      mobile: PhotoMobilePreview(
+        photos: photos,
+      ),
+      desktop: PhotoDesktopPreview(photos: photos),
+    );
+  }
+}
+
+class PhotoMobilePreview extends StatelessWidget {
+  const PhotoMobilePreview({
+    Key? key,
+    required this.photos,
+  }) : super(key: key);
+
+  final List<Image> photos;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 281,
+      width: double.infinity,
+      child: FittedBox(
+        fit: BoxFit.cover,
+        clipBehavior: Clip.hardEdge,
+        child: photos.first,
+      ),
+    );
+  }
+}
+
+class PhotoDesktopPreview extends StatelessWidget {
+  const PhotoDesktopPreview({
+    Key? key,
+    required this.photos,
+  }) : super(key: key);
+
+  final List<Image> photos;
 
   @override
   Widget build(BuildContext context) {
