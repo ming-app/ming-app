@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:log/log.dart';
+import 'package:ming/common/ming_icons.dart';
 import 'package:ming/common/ui/on_the_construction.dart';
 import 'package:ming/common/ui_sample_page.dart';
 import 'package:ming/pet_profile/view/pet_profile_page.dart';
@@ -56,7 +57,7 @@ enum MingRoutingAddress {
 }
 
 enum MingNavigator {
-  shelters(MingRoutingAddress.shelters, "보호소", Icon(Icons.night_shelter)),
+  shelters(MingRoutingAddress.shelters, "보호소", Icon(MingIcons.locationPin)),
   ;
 
   final MingRoutingAddress routes;
@@ -113,11 +114,11 @@ final router = GoRouter(
 
         context.read<UserProfileCubit>().initialize();
 
-        return const MaterialPage<void>(
+        return MaterialPage<void>(
           key: _pageKey,
           child: RootLayout(
             key: _scaffoldKey,
-            currentIndex: -1,
+            currentIndex: MingNavigator.values.length,
             child: UserProfilePage(),
           ),
         );
