@@ -56,6 +56,8 @@ class PetCardContent extends StatelessWidget {
                 pet.introduction,
                 style: theme.textTheme.labelSmall,
                 softWrap: true,
+                maxLines: 2,
+                overflow: TextOverflow.fade,
               ),
               const SizedBox(
                 height: 10,
