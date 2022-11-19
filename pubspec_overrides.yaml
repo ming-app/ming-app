@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: auth,log,ming_api,signin_form
+dependency_overrides:
+  auth:
+    path: packages/auth
+  log:
+    path: packages/log
+  ming_api:
+    path: packages/ming_api
+  signin_form:
+    path: packages/signin_form

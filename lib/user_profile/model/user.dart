@@ -7,6 +7,7 @@ part 'user.g.dart';
 class UserProfile {
   final String name;
   final String imageUrl;
+  final String imageId;
   final String email;
   final String? phoneNumber;
   final String? snsUrl;
@@ -18,6 +19,7 @@ class UserProfile {
   UserProfile({
     required this.name,
     required this.imageUrl,
+    required this.imageId,
     required this.email,
     this.phoneNumber,
     this.snsUrl,
@@ -28,13 +30,14 @@ class UserProfile {
   });
 
   factory UserProfile.empty() {
-    return UserProfile(name: "", imageUrl: "", email: "");
+    return UserProfile(name: "", imageUrl: "", imageId: "0", email: "");
   }
 
   factory UserProfile.fromUserDetailInfoResponse(
       UserDetailInfoResponse response) {
     return UserProfile(
       name: response.name,
+      imageId: response.image.id,
       imageUrl: response.image.url,
       email: response.email,
       phoneNumber: response.phoneNumber,
