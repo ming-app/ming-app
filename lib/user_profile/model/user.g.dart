@@ -15,6 +15,10 @@ abstract class _$UserProfileCWProxy {
 
   UserProfile gender(UserGender? gender);
 
+  UserProfile imageId(String imageId);
+
+  UserProfile imageUrl(String imageUrl);
+
   UserProfile introduction(String? introduction);
 
   UserProfile name(String name);
@@ -22,8 +26,6 @@ abstract class _$UserProfileCWProxy {
   UserProfile phoneNumber(String? phoneNumber);
 
   UserProfile snsUrl(String? snsUrl);
-
-  UserProfile thumbnailUrl(String thumbnailUrl);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `UserProfile(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -36,11 +38,12 @@ abstract class _$UserProfileCWProxy {
     String? birthday,
     String? email,
     UserGender? gender,
+    String? imageId,
+    String? imageUrl,
     String? introduction,
     String? name,
     String? phoneNumber,
     String? snsUrl,
-    String? thumbnailUrl,
   });
 }
 
@@ -63,6 +66,12 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
   UserProfile gender(UserGender? gender) => this(gender: gender);
 
   @override
+  UserProfile imageId(String imageId) => this(imageId: imageId);
+
+  @override
+  UserProfile imageUrl(String imageUrl) => this(imageUrl: imageUrl);
+
+  @override
   UserProfile introduction(String? introduction) =>
       this(introduction: introduction);
 
@@ -77,10 +86,6 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
   UserProfile snsUrl(String? snsUrl) => this(snsUrl: snsUrl);
 
   @override
-  UserProfile thumbnailUrl(String thumbnailUrl) =>
-      this(thumbnailUrl: thumbnailUrl);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `UserProfile(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -93,11 +98,12 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
     Object? birthday = const $CopyWithPlaceholder(),
     Object? email = const $CopyWithPlaceholder(),
     Object? gender = const $CopyWithPlaceholder(),
+    Object? imageId = const $CopyWithPlaceholder(),
+    Object? imageUrl = const $CopyWithPlaceholder(),
     Object? introduction = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? phoneNumber = const $CopyWithPlaceholder(),
     Object? snsUrl = const $CopyWithPlaceholder(),
-    Object? thumbnailUrl = const $CopyWithPlaceholder(),
   }) {
     return UserProfile(
       address: address == const $CopyWithPlaceholder()
@@ -116,6 +122,14 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
           ? _value.gender
           // ignore: cast_nullable_to_non_nullable
           : gender as UserGender?,
+      imageId: imageId == const $CopyWithPlaceholder() || imageId == null
+          ? _value.imageId
+          // ignore: cast_nullable_to_non_nullable
+          : imageId as String,
+      imageUrl: imageUrl == const $CopyWithPlaceholder() || imageUrl == null
+          ? _value.imageUrl
+          // ignore: cast_nullable_to_non_nullable
+          : imageUrl as String,
       introduction: introduction == const $CopyWithPlaceholder()
           ? _value.introduction
           // ignore: cast_nullable_to_non_nullable
@@ -132,16 +146,12 @@ class _$UserProfileCWProxyImpl implements _$UserProfileCWProxy {
           ? _value.snsUrl
           // ignore: cast_nullable_to_non_nullable
           : snsUrl as String?,
-      imageUrl:
-          thumbnailUrl == const $CopyWithPlaceholder() || thumbnailUrl == null
-              ? _value.imageUrl
-              // ignore: cast_nullable_to_non_nullable
-              : thumbnailUrl as String,
     );
   }
 }
 
 extension $UserProfileCopyWith on UserProfile {
   /// Returns a callable class that can be used as follows: `instanceOfUserProfile.copyWith(...)` or like so:`instanceOfUserProfile.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$UserProfileCWProxy get copyWith => _$UserProfileCWProxyImpl(this);
 }

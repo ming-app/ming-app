@@ -70,7 +70,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
     var request = UpdateUserRequest(
       address: address ?? state.user.address,
-      imageId: imageId ?? state.user.imageUrl,
+      imageId: imageId ?? state.user.imageId,
       introduction: introduction ?? state.user.introduction,
       snsUrl: snsUrl ?? state.user.snsUrl,
     );

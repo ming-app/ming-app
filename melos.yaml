@@ -3,6 +3,7 @@ name: Ming
 packages:
   - packages/**
   - ./**
+  - "**"
 
 command:
   bootstrap:
