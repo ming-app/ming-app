@@ -2,7 +2,10 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ming/album/view/album_view.dart';
+import 'package:ming/common/adaptive_builder.dart';
+import 'package:ming/common/ming_icons.dart';
 import 'package:ming/common/snackbar_service.dart';
 import 'package:ming/pets/view/pets_view.dart';
 import 'package:ming_api/entities/image.dart';
@@ -17,6 +20,150 @@ import '../model/shelter_profile.dart';
 class ShelterProfileForm extends StatelessWidget {
   final ShelterProfile shelter;
   const ShelterProfileForm(this.shelter, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AdaptiveBuilder(
+      mobile: ShelterProfileMobileForm(shelter: shelter),
+      desktop: ShelterProfileDesktopForm(shelter: shelter),
+    );
+  }
+}
+
+class ShelterProfileMobileForm extends StatelessWidget {
+  final ShelterProfile shelter;
+  const ShelterProfileMobileForm({Key? key, required this.shelter})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AlbumView(shelter.id, ImageType.shelter),
+                SizedBox(
+                  height: 24,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ShelterDescription(
+                        shelter,
+                        hideShareButton: true,
+                      ),
+                      ShelterManagerView(
+                        shelter.manager.name,
+                        shelter.manager.imageUrl,
+                        shelter.manager.phoneNumber,
+                        shelter.region,
+                      ),
+                      Divider(),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 32,
+                          bottom: 32,
+                        ),
+                        child: Text(
+                          S.of(context).protectingPets,
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                      ),
+                      PetsView(shelter.id),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 14,
+          left: 16,
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: IconButton(
+              iconSize: 24,
+              onPressed: () {
+                context.pop();
+              },
+              icon: Icon(MingIcons.leftArrow),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 14,
+          right: 16,
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: IconButton(
+              iconSize: 24,
+              onPressed: () async {
+                if (kIsWeb) {
+                  var url = html.window.location.href;
+                  await Clipboard.setData(ClipboardData(text: url));
+                  SnackbarService(context)
+                      .showPlainTextSnackbar("주소가 클립보드에 복사되었습니다.");
+                }
+              },
+              icon: Icon(MingIcons.upload),
+            ),
+          ),
+        ),
+        Positioned(
+          left: 16,
+          right: 16,
+          bottom: 5,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 0),
+                backgroundColor: Color(0xffda4d2e),
+                foregroundColor: Colors.white,
+                textStyle: Theme.of(context).textTheme.bodySmall,
+                padding: EdgeInsets.symmetric(
+                  vertical: 18,
+                  horizontal: 18,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                )),
+            onPressed: shelter.manager.phoneNumber == null
+                ? null
+                : () => launchUrlString("tel:${shelter.manager.phoneNumber}"),
+            child: Text(
+              S.of(context).contact,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ShelterProfileDesktopForm extends StatelessWidget {
+  const ShelterProfileDesktopForm({
+    Key? key,
+    required this.shelter,
+  }) : super(key: key);
+
+  final ShelterProfile shelter;
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +262,13 @@ class ShelterManagerView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               if (photoUrl != null)
-                ThumbnailImage(
-                  Image.network(photoUrl!),
-                  size: Size(56, 56),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: ThumbnailImage(
+                    Image.network(photoUrl!),
+                    size: Size(56, 56),
+                  ),
                 ),
-              const SizedBox(
-                width: 10,
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -179,7 +326,12 @@ class ShelterManagerView extends StatelessWidget {
 
 class ShelterDescription extends StatelessWidget {
   final ShelterProfile shelter;
-  const ShelterDescription(this.shelter, {Key? key}) : super(key: key);
+  final bool hideShareButton;
+  const ShelterDescription(
+    this.shelter, {
+    Key? key,
+    this.hideShareButton = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -209,26 +361,28 @@ class ShelterDescription extends StatelessWidget {
               style: theme.textTheme.bodySmall,
             ),
             const Spacer(),
-            TextButton(
-              onPressed: () async {
-                if (kIsWeb) {
-                  var url = html.window.location.href;
-                  await Clipboard.setData(ClipboardData(text: url));
-                  SnackbarService(context)
-                      .showPlainTextSnackbar("주소가 클립보드에 복사되었습니다.");
-                }
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                textStyle: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-              child: Text(
-                S.of(context).share,
-              ),
-            ),
+            hideShareButton
+                ? Container()
+                : TextButton(
+                    onPressed: () async {
+                      if (kIsWeb) {
+                        var url = html.window.location.href;
+                        await Clipboard.setData(ClipboardData(text: url));
+                        SnackbarService(context)
+                            .showPlainTextSnackbar("주소가 클립보드에 복사되었습니다.");
+                      }
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      textStyle: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    child: Text(
+                      S.of(context).share,
+                    ),
+                  ),
           ],
         ),
         const Divider(),

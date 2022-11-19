@@ -16,7 +16,9 @@ class AdaptiveBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: ((context, dimens) {
-        if (dimens.maxWidth < mobileMaximumWidth) {
+        var width = MediaQuery.of(context).size.width;
+
+        if (width < mobileMaximumWidth) {
           return mobile;
         }
         return desktop;
