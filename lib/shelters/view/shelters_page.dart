@@ -16,27 +16,24 @@ class SheltersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // todo: change mock into real one.
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: BlocBuilder<SheltersBloc, SheltersState>(
-          builder: (context, state) {
-            var info = SheltersInfo.empty();
+      body: BlocBuilder<SheltersBloc, SheltersState>(
+        builder: (context, state) {
+          var info = SheltersInfo.empty();
 
-            context.loaderOverlay.hide();
+          context.loaderOverlay.hide();
 
-            if (state is SheltersUninitialized) {
-              context.read<SheltersBloc>().add(SheltersFetch());
-            } else if (state is SheltersLoaded) {
-              info = state.shelters;
-            } else if (state is SheltersOnLoading) {
-              context.loaderOverlay.show();
-            } else if (state is SheltersError) {
-              return const ErrorPage(message: "보호소 데이터를 가져오지 못했습니다.");
-            }
+          if (state is SheltersUninitialized) {
+            context.read<SheltersBloc>().add(SheltersFetch());
+          } else if (state is SheltersLoaded) {
+            info = state.shelters;
+          } else if (state is SheltersOnLoading) {
+            context.loaderOverlay.show();
+          } else if (state is SheltersError) {
+            return const ErrorPage(message: "보호소 데이터를 가져오지 못했습니다.");
+          }
 
-            return SheltersForm(info);
-          },
-        ),
+          return SheltersForm(info);
+        },
       ),
     );
   }

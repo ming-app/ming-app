@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ming/common/ui/ming_card_form.dart';
-import 'package:ming/shelter_profile/model/shelter_profile.dart';
 import 'package:ming/shelters/model/shelter_overview_info.dart';
 
 import '../../generated/l10n.dart';
 import '../routes.dart';
 
-class ShelterCardContent extends StatefulWidget {
-  const ShelterCardContent(this.shelter, {Key? key}) : super(key: key);
+class ShelterCardContent extends StatelessWidget {
+  const ShelterCardContent(
+    this.shelter, {
+    this.isMobile = false,
+    Key? key,
+  }) : super(key: key);
 
   final ShelterOverviewInfo shelter;
-
-  @override
-  State<ShelterCardContent> createState() => _ShelterCardContentState();
-}
-
-class _ShelterCardContentState extends State<ShelterCardContent> {
-  bool isHover = false;
+  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +22,13 @@ class _ShelterCardContentState extends State<ShelterCardContent> {
     final descriptionStyle = theme.textTheme.subtitle1!;
 
     return MingImageCard(
+      isMobile: isMobile,
       onTap: () {
         context.go(
-          MingRoutingAddress.shelters.address + "/${widget.shelter.id}",
+          MingRoutingAddress.shelters.address + "/${shelter.id}",
         );
       },
-      image: NetworkImage(widget.shelter.imageUrl),
+      image: NetworkImage(shelter.imageUrl),
       child: // Description and share/explore buttons.
           Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -41,23 +39,22 @@ class _ShelterCardContentState extends State<ShelterCardContent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // todo: fill this with actual region
               Text(
-                widget.shelter.region,
+                shelter.region,
                 style: theme.textTheme.labelSmall,
               ),
               const SizedBox(
                 height: 8,
               ),
               Text(
-                widget.shelter.name,
+                shelter.name,
                 style: theme.textTheme.titleMedium,
               ),
               Text(
                 "유기견 "
-                        "${widget.shelter.numberOfDogs}" +
+                        "${shelter.numberOfDogs}" +
                     S.of(context).unitStringOfPet +
-                    " · " "유기묘" "${widget.shelter.numberOfCats}" +
+                    " · " "유기묘" "${shelter.numberOfCats}" +
                     S.of(context).unitStringOfPet,
                 style: theme.textTheme.bodySmall,
                 softWrap: true,
@@ -65,7 +62,6 @@ class _ShelterCardContentState extends State<ShelterCardContent> {
               const SizedBox(
                 height: 10,
               ),
-
               const SizedBox(
                 height: 15,
               ),
