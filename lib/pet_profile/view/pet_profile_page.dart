@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:ming/pet_profile/bloc/pet_profile_bloc.dart';
-import 'package:ming/pet_profile/mock/mock.dart';
 import 'package:ming/pet_profile/view/pet_profile_form.dart';
-import 'package:ming/shelters/mock/shelters_mock.dart';
 
 import '../../common/ui/error_page.dart';
 
