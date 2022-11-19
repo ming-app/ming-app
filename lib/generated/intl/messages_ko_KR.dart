@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Show all photos"),
         "showLess": MessageLookupByLibrary.simpleMessage("show less >"),
         "showMore": MessageLookupByLibrary.simpleMessage("show more >"),
+        "switchToAdmin": MessageLookupByLibrary.simpleMessage("보호소 계정으로 전환하기"),
         "test": MessageLookupByLibrary.simpleMessage("Flutter Demo Home Page"),
         "time": MessageLookupByLibrary.simpleMessage("시간"),
         "transform": MessageLookupByLibrary.simpleMessage("전환"),

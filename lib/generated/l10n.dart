@@ -819,6 +819,16 @@ class S {
       args: [],
     );
   }
+
+  /// `보호소 계정으로 전환하기`
+  String get switchToAdmin {
+    return Intl.message(
+      '보호소 계정으로 전환하기',
+      name: 'switchToAdmin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

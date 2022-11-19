@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ming/common/constants.dart';
+import 'package:ming/common/adaptive_builder.dart';
 import 'package:ming/common/ui/mobile_adaptive_navigation.dart';
 import '../routes.dart';
 
@@ -21,24 +21,19 @@ class RootLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, dimens) {
-      if (dimens.maxWidth < mobileMaximumWidth) {
-        return MobileAdaptiveNavigation(
-          selectedIndex: currentIndex,
-          child: child,
-        );
-      }
-
-      void onSelected(int index) {
-        final destination = MingNavigator.values[index];
-        GoRouter.of(context).go(destination.routes.address);
-      }
-
-      return AdaptiveNavigation(
+    return AdaptiveBuilder(
+      mobile: MobileAdaptiveNavigation(
+        selectedIndex: currentIndex,
+        child: child,
+      ),
+      desktop: AdaptiveNavigation(
         key: _navigationRailKey,
         destinations: MingNavigator.values,
         selectedIndex: currentIndex,
-        onDestinationSelected: onSelected,
+        onDestinationSelected: ((index) {
+          final destination = MingNavigator.values[index];
+          GoRouter.of(context).go(destination.routes.address);
+        }),
         child: Column(
           children: [
             Expanded(
@@ -49,8 +44,8 @@ class RootLayout extends StatelessWidget {
             ),
           ],
         ),
-      );
-    });
+      ),
+    );
   }
 }
 
