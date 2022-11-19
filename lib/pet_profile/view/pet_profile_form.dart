@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ming/album/view/album_view.dart';
 import 'package:ming/common/adaptive_builder.dart';
 import 'package:ming/common/ming_icons.dart';
+import 'package:ming/common/routes.dart';
 import 'package:ming/common/ui/contact_to_shelter_card.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pet_profile/model/pet_profile.dart';
@@ -96,7 +97,8 @@ class PetProfileMobileForm extends StatelessWidget {
             child: IconButton(
               iconSize: 24,
               onPressed: () {
-                context.pop();
+                context
+                    .go(MingRoutingAddress.shelters.address + "/${shelter.id}");
               },
               icon: Icon(MingIcons.leftArrow),
             ),
