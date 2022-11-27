@@ -22,6 +22,7 @@ class ShelterCardContent extends StatelessWidget {
     final descriptionStyle = theme.textTheme.subtitle1!;
 
     return MingImageCard(
+      imageHeight: 258,
       isMobile: isMobile,
       onTap: () {
         context.go(

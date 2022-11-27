@@ -9,9 +9,12 @@ import '../routes.dart';
 
 class PetCardContent extends StatelessWidget {
   final PetOverviewInfo pet;
+  final bool isMobile;
+
   const PetCardContent(
     this.pet, {
     Key? key,
+    this.isMobile = false,
   }) : super(key: key);
 
   @override
@@ -19,6 +22,8 @@ class PetCardContent extends StatelessWidget {
     final theme = Theme.of(context);
     final descriptionStyle = theme.textTheme.subtitle1!;
     return MingImageCard(
+      isMobile: isMobile,
+      imageHeight: isMobile ? 124 : null,
       onTap: () {
         context.go(MingRoutingAddress.pets.address + "/${pet.id}");
       },

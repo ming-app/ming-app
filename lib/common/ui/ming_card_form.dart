@@ -5,6 +5,7 @@ class MingImageCard extends StatelessWidget {
   final Function()? onTap;
   final Widget? child;
   final bool isMobile;
+  final double imageHeight;
 
   const MingImageCard({
     Key? key,
@@ -12,12 +13,15 @@ class MingImageCard extends StatelessWidget {
     this.image,
     this.child,
     this.isMobile = false,
-  }) : super(key: key);
+    double? imageHeight,
+  })  : this.imageHeight = imageHeight ?? 197,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return isMobile
         ? MingMobileImageCard(
+            imageHeight: imageHeight,
             onTap: onTap,
             image: image,
             child: child,
@@ -28,7 +32,7 @@ class MingImageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 197,
+                  height: imageHeight,
                   child: Stack(
                     children: [
                       Positioned.fill(
@@ -111,13 +115,16 @@ class MingMobileImageCard extends StatefulWidget {
   final ImageProvider<Object>? image;
   final Function()? onTap;
   final Widget? child;
+  final double imageHeight;
 
   const MingMobileImageCard({
     Key? key,
     this.onTap,
     this.image,
     this.child,
-  }) : super(key: key);
+    double? imageHeight,
+  })  : this.imageHeight = imageHeight ?? 258,
+        super(key: key);
 
   @override
   State<MingMobileImageCard> createState() => _MingMobileImageCardState();
@@ -157,7 +164,7 @@ class _MingMobileImageCardState extends State<MingMobileImageCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 258,
+              height: widget.imageHeight,
               child: Stack(
                 children: [
                   Positioned.fill(
