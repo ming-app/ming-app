@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ming/common/adaptive_builder.dart';
 import 'package:ming/common/ui/pagination_bar.dart';
 import 'package:ming/common/ui/selectable_text.dart';
 import 'package:ming/pets/bloc/pets_bloc.dart';
@@ -56,16 +57,50 @@ class _PetsFormState extends State<PetsForm> {
             }).toList(),
           ),
         ),
-        Wrap(
-          spacing: 5,
-          children: widget.pets
-              .where((e) {
-                return filter.checkType(e.type);
-              })
-              .map((e) => PetCardContent(
-                    e,
-                  ))
-              .toList(),
+        AdaptiveBuilder(
+          mobile: Column(
+            children: List.generate(
+              (widget.pets.length / 2).ceil(),
+              (index) => widget.pets.sublist(
+                  index * 2,
+                  (index * 2 + 2) > widget.pets.length
+                      ? widget.pets.length
+                      : index * 2 + 2),
+            )
+                .map((rowEntity) => Padding(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: Row(
+                        children: rowEntity
+                            .map((entity) => Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      right: rowEntity.indexOf(entity) % 2 == 0
+                                          ? 12
+                                          : 0,
+                                    ),
+                                    child: PetCardContent(
+                                      entity,
+                                      isMobile: true,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                    ))
+                .toList(),
+          ),
+          desktop: Wrap(
+            spacing: 5,
+            children: widget.pets
+                .where((e) {
+                  return filter.checkType(e.type);
+                })
+                .map((e) => PetCardContent(
+                      e,
+                      isMobile: false,
+                    ))
+                .toList(),
+          ),
         ),
         SizedBox(
           height: 40,
