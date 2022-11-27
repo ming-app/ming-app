@@ -57,22 +57,30 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     String? imageId,
     String? introduction,
     String? snsUrl,
+    String? birthday,
+    UserGender? gender,
   }) async {
     if (address == null &&
         imageId == null &&
         introduction == null &&
-        snsUrl == null) {
+        snsUrl == null &&
+        birthday == null &&
+        gender == null) {
       Log.w("There are no update, skipping");
       return;
     }
 
+    var user = state.user;
+
     emit(UserProfileUpdating());
 
     var request = UpdateUserRequest(
-      address: address ?? state.user.address,
-      imageId: imageId ?? state.user.imageId,
-      introduction: introduction ?? state.user.introduction,
-      snsUrl: snsUrl ?? state.user.snsUrl,
+      address: address ?? user.address,
+      imageId: imageId ?? user.imageId,
+      introduction: introduction ?? user.introduction,
+      snsUrl: snsUrl ?? user.snsUrl,
+      birthday: birthday ?? user.birthday,
+      gender: gender ?? user.gender,
     );
 
     try {

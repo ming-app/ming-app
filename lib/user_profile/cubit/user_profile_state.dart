@@ -60,6 +60,8 @@ enum UserProfileEditingType {
   snsUrl,
   image,
   introduction,
+  birthday,
+  gender,
   none,
 }
 
