@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'theme.dart';
 
-const mingServerUrl = "https://ming-server.herokuapp.com/";
+const mingServerUrl = "https://ming.fly.dev/";
 const kakaoNativeAppKey =
     String.fromEnvironment('KAKAO_NATIVE_APP_KEY', defaultValue: 'none');
 const kakaoRestApiAppKey =
