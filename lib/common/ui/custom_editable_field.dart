@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ming/common/constants.dart';
 import 'package:ming/common/ming_icons.dart';
+import 'package:ming_api/entities/user.dart';
 
 import '../../generated/l10n.dart';
 
@@ -10,6 +11,7 @@ final _dateFormat = DateFormat("y년 M월 d일");
 enum CustomEditableFieldType {
   text,
   date,
+  gender,
 }
 
 class CustomEditableField<T> extends StatefulWidget {
@@ -34,8 +36,9 @@ class CustomEditableField<T> extends StatefulWidget {
     this.onEditStateChange,
     this.onSaved,
     this.validator,
-  })  : assert(type == CustomEditableFieldType.text && content is String ||
-            type == CustomEditableFieldType.date && content is DateTime),
+  })  : assert((type == CustomEditableFieldType.text && content is String?) ||
+            (type == CustomEditableFieldType.date && content is DateTime?) ||
+            (type == CustomEditableFieldType.gender && content is UserGender?)),
         super(key: key);
 
   @override
@@ -50,7 +53,11 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
       case CustomEditableFieldType.text:
         return widget.content;
       case CustomEditableFieldType.date:
-        return _dateFormat.format(widget.content);
+        return widget.content != null
+            ? _dateFormat.format(widget.content)
+            : "없음";
+      case CustomEditableFieldType.gender:
+        return widget.content?.toString() ?? "없음";
     }
   }
 
@@ -66,6 +73,8 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
         return getPostEditableTextWidget;
       case CustomEditableFieldType.date:
         return getPostEditableDateWidget;
+      case CustomEditableFieldType.gender:
+        return getPostEditableGenderWidget;
     }
   }
 
@@ -101,6 +110,24 @@ class _CustomEditableFieldState extends State<CustomEditableField> {
           // no need to call onSaved for plain text, it will be called by globalkey.
         }),
         validator: widget.validator,
+      );
+
+  Widget get getPostEditableGenderWidget => PostEditableGenderField(
+        title: widget.title,
+        desc: widget.desc,
+        initialGender: widget.content,
+        onCancel: () {
+          widget.onEditStateChange?.call(false);
+          setState(() {
+            editState = false;
+          });
+        },
+        onSaved: (date) {
+          setState(() {
+            editState = false;
+          });
+          widget.onSaved?.call(date);
+        },
       );
 
   Widget get getPostEditableDateWidget => PostEditableDateField(
@@ -295,6 +322,84 @@ class PostEditableContainer extends StatelessWidget {
           child: Text(S.of(context).save),
         ),
       ],
+    );
+  }
+}
+
+class PostEditableGenderField extends StatefulWidget {
+  final String title;
+  final String desc;
+  final UserGender? initialGender;
+  final Color outlineColor;
+  final void Function()? onCancel;
+  final void Function(UserGender date)? onSaved;
+  final void Function(String)? onChanged;
+
+  const PostEditableGenderField({
+    Key? key,
+    required this.title,
+    required this.desc,
+    this.initialGender,
+    this.outlineColor = const Color(0xffaaaaaa),
+    this.onCancel,
+    this.onSaved,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  State<PostEditableGenderField> createState() =>
+      _PostEditableGenderFieldState();
+}
+
+class _PostEditableGenderFieldState extends State<PostEditableGenderField> {
+  late UserGender? gender;
+
+  @override
+  void initState() {
+    gender = widget.initialGender;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const double menuMaxheight = 200;
+    return PostEditableContainer(
+      title: widget.title,
+      desc: widget.desc,
+      onSaveButtonClick: () {
+        widget.onSaved?.call(gender!);
+      },
+      onCancel: widget.onCancel,
+      child: DropdownButtonFormField<UserGender>(
+        value: gender,
+        icon: const Icon(MingIcons.downArrow),
+        iconEnabledColor: Colors.black,
+        items: UserGender.values
+            .map(
+              (e) => DropdownMenuItem(
+                child: Text(
+                  "$e",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+                value: e,
+              ),
+            )
+            .toList(),
+        menuMaxHeight: menuMaxheight,
+        focusColor: Colors.transparent,
+        decoration: _getFormFieldInputDecoration(
+          context: context,
+          labeText: S.of(context).gender,
+          outlineColor: widget.outlineColor,
+          hasValidator: false,
+        ),
+        onChanged: ((value) {
+          setState(() {
+            gender = value;
+          });
+        }),
+      ),
     );
   }
 }

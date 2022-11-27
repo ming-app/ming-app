@@ -9,6 +9,7 @@ import 'package:ming/common/ui/pet_card_content.dart';
 import 'package:ming/common/ui/shelter_card_content.dart';
 import 'package:ming/pets/model/pet_overview_info.dart';
 import 'package:ming/shelters/mock/shelters_mock.dart';
+import 'package:ming_api/ming_api.dart';
 
 class UiSamplePage extends StatefulWidget {
   const UiSamplePage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class UiSamplePage extends StatefulWidget {
 class _UiSamplePageState extends State<UiSamplePage> {
   var editableTextContent = "컨텐츠";
   var currentDate = DateTime.now();
+  var userGender = UserGender.female;
   int largePagesNumber = 0;
   int smallPagesNumber = 0;
 
@@ -109,6 +111,34 @@ class _UiSamplePageState extends State<UiSamplePage> {
                     .showPlainTextSnackbar("value saved, $newValue");
                 setState(() {
                   currentDate = newValue;
+                });
+              },
+            ),
+            Divider(),
+            Text("PostEditableGenderField"),
+
+            PostEditableGenderField(
+              title: "성별",
+              desc: "정확한 성별을 입력해주세요.",
+              outlineColor: Colors.black,
+            ),
+            Divider(),
+            Text("EditableGenderField"),
+            CustomEditableField(
+              title: "성별",
+              content: userGender,
+              desc: "정확한 성별을 입력해주세요.",
+              fieldTitle: "성별",
+              type: CustomEditableFieldType.gender,
+              onEditStateChange: (editState) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("edit state changed, $editState");
+              },
+              onSaved: (newValue) {
+                SnackbarService(context)
+                    .showPlainTextSnackbar("value saved, $newValue");
+                setState(() {
+                  userGender = newValue;
                 });
               },
             ),

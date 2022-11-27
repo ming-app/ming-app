@@ -54,6 +54,8 @@ class UpdateUserRequest {
   final String? address;
   final String? imageId;
   final String? introduction;
+  final String? birthday;
+  final UserGender? gender;
   final String? snsUrl;
 
   UpdateUserRequest({
@@ -61,6 +63,8 @@ class UpdateUserRequest {
     this.imageId,
     this.introduction,
     this.snsUrl,
+    this.birthday,
+    this.gender,
   });
 
   factory UpdateUserRequest.fromJson(Map<String, dynamic> json) =>

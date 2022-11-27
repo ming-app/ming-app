@@ -213,7 +213,7 @@ final router = GoRouter(
           key: _pageKey,
           child: RootLayout(
             key: _scaffoldKey,
-            currentIndex: -1,
+            currentIndex: 0,
             child: const UiSamplePage(),
           ),
         );

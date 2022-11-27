@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:ming/common/adaptive_builder.dart';
 import 'package:ming/common/ming_icons.dart';
 import 'package:ming/common/ui/custom_editable_field.dart';
@@ -266,20 +267,49 @@ class UserProfileContents extends StatelessWidget {
         SizedBox(height: 20),
         CustomEditableField(
           title: S.of(context).gender,
-          content: user.gender?.toString() ?? "없음",
+          content: user.gender,
           desc: "정확한 성별을 입력해 주세요.",
           fieldTitle: S.of(context).gender,
-          greyed: editingType != UserProfileEditingType.none, // todo
+          type: CustomEditableFieldType.gender,
+          onEditStateChange: (editState) {
+            context.read<UserProfileCubit>().onEditStateChange(
+                  editState
+                      ? UserProfileEditingType.gender
+                      : UserProfileEditingType.none,
+                );
+          },
+          onSaved: (newValue) {
+            context.read<UserProfileCubit>().updateUserProfile(
+                  gender: newValue,
+                );
+          },
+          greyed: editingType != UserProfileEditingType.none &&
+              editingType != UserProfileEditingType.gender,
         ),
         SizedBox(height: 20),
         Divider(),
         SizedBox(height: 20),
         CustomEditableField(
           title: S.of(context).birthday,
-          content: user.birthday ?? "없음",
+          content:
+              user.birthday != null ? DateTime.parse(user.birthday!) : null,
           desc: "정확한 생년월일을 입력해 주세요.",
           fieldTitle: S.of(context).birthday,
-          greyed: editingType != UserProfileEditingType.none, // todo
+          type: CustomEditableFieldType.date,
+          onEditStateChange: (editState) {
+            context.read<UserProfileCubit>().onEditStateChange(
+                  editState
+                      ? UserProfileEditingType.birthday
+                      : UserProfileEditingType.none,
+                );
+          },
+          onSaved: (newValue) {
+            context.read<UserProfileCubit>().updateUserProfile(
+                  birthday: DateFormat("yyyy-MM-dd").format(newValue),
+                );
+          },
+          greyed: editingType != UserProfileEditingType.none &&
+              editingType != UserProfileEditingType.birthday,
         ),
         SizedBox(height: 20),
         Divider(),

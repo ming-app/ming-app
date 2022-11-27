@@ -63,6 +63,8 @@ UpdateUserRequest _$UpdateUserRequestFromJson(Map<String, dynamic> json) =>
       imageId: json['imageId'] as String?,
       introduction: json['introduction'] as String?,
       snsUrl: json['snsUrl'] as String?,
+      birthday: json['birthday'] as String?,
+      gender: $enumDecodeNullable(_$UserGenderEnumMap, json['gender']),
     );
 
 Map<String, dynamic> _$UpdateUserRequestToJson(UpdateUserRequest instance) =>
@@ -70,6 +72,8 @@ Map<String, dynamic> _$UpdateUserRequestToJson(UpdateUserRequest instance) =>
       'address': instance.address,
       'imageId': instance.imageId,
       'introduction': instance.introduction,
+      'birthday': instance.birthday,
+      'gender': _$UserGenderEnumMap[instance.gender],
       'snsUrl': instance.snsUrl,
     };
 
